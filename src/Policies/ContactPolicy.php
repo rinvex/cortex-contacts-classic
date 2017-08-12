@@ -1,0 +1,68 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Cortex\Contacts\Policies;
+
+use Cortex\Fort\Models\User;
+use Cortex\Contacts\Models\Contact;
+use Illuminate\Auth\Access\HandlesAuthorization;
+
+class ContactPolicy
+{
+    use HandlesAuthorization;
+
+    /**
+     * Determine whether the user can list contacts.
+     *
+     * @param string                   $ability
+     * @param \Cortex\Fort\Models\User $user
+     *
+     * @return bool
+     */
+    public function list($ability, User $user)
+    {
+        return $user->allAbilities->pluck('slug')->contains($ability);
+    }
+
+    /**
+     * Determine whether the user can create contacts.
+     *
+     * @param string                   $ability
+     * @param \Cortex\Fort\Models\User $user
+     *
+     * @return bool
+     */
+    public function create($ability, User $user)
+    {
+        return $user->allAbilities->pluck('slug')->contains($ability);
+    }
+
+    /**
+     * Determine whether the user can update the contact.
+     *
+     * @param string                                $ability
+     * @param \Cortex\Fort\Models\User              $user
+     * @param \Cortex\Contacts\Models\Contact $resource
+     *
+     * @return bool
+     */
+    public function update($ability, User $user, Contact $resource)
+    {
+        return $user->allAbilities->pluck('slug')->contains($ability);   // User can update contacts
+    }
+
+    /**
+     * Determine whether the user can delete the contact.
+     *
+     * @param string                                $ability
+     * @param \Cortex\Fort\Models\User              $user
+     * @param \Cortex\Contacts\Models\Contact $resource
+     *
+     * @return bool
+     */
+    public function delete($ability, User $user, Contact $resource)
+    {
+        return $user->allAbilities->pluck('slug')->contains($ability);   // User can delete contacts
+    }
+}
