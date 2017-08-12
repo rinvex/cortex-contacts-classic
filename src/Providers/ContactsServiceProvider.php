@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Cortex\Contacts\Providers;
 
 use Illuminate\Routing\Router;
-use Cortex\Contacts\Models\Contact;
 use Illuminate\Support\ServiceProvider;
 
 class ContactsServiceProvider extends ServiceProvider

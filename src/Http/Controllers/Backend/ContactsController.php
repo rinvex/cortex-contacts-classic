@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\Http\Controllers\Backend;
 
-use Cortex\Fort\Models\User;
 use Illuminate\Http\Request;
 use Cortex\Contacts\Models\Contact;
 use Cortex\Foundation\DataTables\LogsDataTable;
@@ -110,7 +109,7 @@ class ContactsController extends AuthorizedController
     /**
      * Process the form for store/update of the given resource.
      *
-     * @param \Illuminate\Http\Request         $request
+     * @param \Illuminate\Http\Request        $request
      * @param \Cortex\Contacts\Models\Contact $contact
      *
      * @return \Illuminate\Http\Response

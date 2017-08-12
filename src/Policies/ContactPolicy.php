@@ -41,8 +41,8 @@ class ContactPolicy
     /**
      * Determine whether the user can update the contact.
      *
-     * @param string                                $ability
-     * @param \Cortex\Fort\Models\User              $user
+     * @param string                          $ability
+     * @param \Cortex\Fort\Models\User        $user
      * @param \Cortex\Contacts\Models\Contact $resource
      *
      * @return bool
@@ -55,8 +55,8 @@ class ContactPolicy
     /**
      * Determine whether the user can delete the contact.
      *
-     * @param string                                $ability
-     * @param \Cortex\Fort\Models\User              $user
+     * @param string                          $ability
+     * @param \Cortex\Fort\Models\User        $user
      * @param \Cortex\Contacts\Models\Contact $resource
      *
      * @return bool
