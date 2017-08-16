@@ -6,6 +6,8 @@ namespace Cortex\Contacts\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Cortex\Contacts\Console\Commands\SeedCommand;
+use Cortex\Contacts\Console\Commands\MigrateCommand;
 
 class ContactsServiceProvider extends ServiceProvider
 {
@@ -36,6 +38,7 @@ class ContactsServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'cortex/contacts');
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'cortex/contacts');
         ! $this->app->runningInConsole() || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+        $this->commands([SeedCommand::class, MigrateCommand::class]);
         $this->app->afterResolving('blade.compiler', function () {
             require __DIR__.'/../../routes/menus.php';
         });
