@@ -66,6 +66,6 @@ class SeedCommand extends Command
     protected function hasContactsTables()
     {
         return Schema::hasTable(config('rinvex.contacts.tables.contacts'))
-               && Schema::hasTable(config('rinvex.contacts.tables.contactss'));
+               && Schema::hasTable(config('rinvex.contacts.tables.contact_relations'));
     }
 }
