@@ -12,6 +12,16 @@ use Cortex\Contacts\Console\Commands\MigrateCommand;
 class ContactsServiceProvider extends ServiceProvider
 {
     /**
+     * The commands to be registered.
+     *
+     * @var array
+     */
+    protected $commands = [
+        MigrateCommand::class => 'command.cortex.contacts.migrate',
+        SeedCommand::class => 'command.cortex.contacts.seed',
+    ];
+
+    /**
      * Register any application services.
      *
      * This service provider is a great spot to register your various container
@@ -22,7 +32,14 @@ class ContactsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Register artisan commands
+        foreach ($this->commands as $key => $value) {
+            $this->app->singleton($value, function ($app) use ($key) {
+                return new $key();
+            });
+        }
+
+        $this->commands(array_values($this->commands));
     }
 
     /**
@@ -38,7 +55,6 @@ class ContactsServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'cortex/contacts');
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'cortex/contacts');
         ! $this->app->runningInConsole() || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
-        $this->commands([SeedCommand::class, MigrateCommand::class]);
         $this->app->afterResolving('blade.compiler', function () {
             require __DIR__.'/../../routes/menus.php';
         });
