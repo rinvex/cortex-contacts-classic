@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\Models;
 
-use Rinvex\Contacts\Contact as BaseContact;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Rinvex\Contacts\Models\Contact as BaseContact;
 
 class Contact extends BaseContact
 {
