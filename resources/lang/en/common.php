@@ -9,6 +9,8 @@ return [
     'last_name' => 'Last Name',
     'email' => 'Email',
     'phone' => 'Phone',
+    'male' => 'Male',
+    'female' => 'Female',
     'fax' => 'Fax',
     'birthday' => 'Birthday',
     'country' => 'Country',
