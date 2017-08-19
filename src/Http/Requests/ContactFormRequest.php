@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\Http\Requests\Backend;
 
-use Cortex\Contacts\Models\Contact;
 use Rinvex\Support\Http\Requests\FormRequest;
 
 class ContactFormRequest extends FormRequest
@@ -41,7 +40,7 @@ class ContactFormRequest extends FormRequest
      */
     public function rules()
     {
-        $contact = $this->route('contact') ?? new Contact();
+        $contact = $this->route('contact') ?? app('rinvex.contacts.contact');
         $contact->updateRulesUniques();
 
         return $contact->getRules();

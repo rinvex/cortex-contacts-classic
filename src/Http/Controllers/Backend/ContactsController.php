@@ -55,7 +55,7 @@ class ContactsController extends AuthorizedController
      */
     public function store(ContactFormRequest $request)
     {
-        return $this->process($request, new Contact());
+        return $this->process($request, app('rinvex.contacts.contact'));
     }
 
     /**
