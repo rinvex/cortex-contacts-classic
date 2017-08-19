@@ -99,8 +99,8 @@ class ContactsController extends AuthorizedController
     {
         $countries = countries();
         $languages = collect(languages())->pluck('name', 'iso_639_1');
-        $sources = Contact::distinct()->get(['source'])->pluck('source', 'source')->toArray();
-        $methods = Contact::distinct()->get(['method'])->pluck('method', 'method')->toArray();
+        $sources = app('rinvex.contacts.contact')->distinct()->get(['source'])->pluck('source', 'source')->toArray();
+        $methods = app('rinvex.contacts.contact')->distinct()->get(['method'])->pluck('method', 'method')->toArray();
         $genders = ['m' => trans('cortex/contacts::common.male'), 'f' => trans('cortex/contacts::common.female')];
 
         return view('cortex/contacts::backend.forms.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods'));
