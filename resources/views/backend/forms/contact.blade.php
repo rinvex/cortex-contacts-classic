@@ -3,7 +3,7 @@
 
 {{-- Page Title --}}
 @section('title')
-    {{ config('app.name') }} » {{ trans('cortex/foundation::common.backend') }} » {{ trans('cortex/contacts::common.contacts') }} » {{ $contact->exists ? $contact->slug : trans('cortex/contacts::common.create_contact') }}
+    {{ config('app.name') }} » {{ trans('cortex/foundation::common.backend') }} » {{ trans('cortex/contacts::common.contacts') }} » {{ $contact->exists ? $contact->name : trans('cortex/contacts::common.create_contact') }}
 @stop
 
 @push('scripts')
@@ -52,7 +52,7 @@
 
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>{{ $contact->exists ? $contact->slug : trans('cortex/contacts::common.create_contact') }}</h1>
+            <h1>{{ $contact->exists ? $contact->name : trans('cortex/contacts::common.create_contact') }}</h1>
             <!-- Breadcrumbs -->
             {{ Breadcrumbs::render() }}
         </section>
