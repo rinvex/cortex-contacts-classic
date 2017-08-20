@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cortex\Contacts\Providers;
 
 use Illuminate\Routing\Router;
+use Cortex\Contacts\Models\Contact;
 use Illuminate\Support\ServiceProvider;
 use Cortex\Contacts\Console\Commands\SeedCommand;
 use Cortex\Contacts\Console\Commands\MigrateCommand;
@@ -32,6 +33,9 @@ class ContactsServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // Bind eloquent models to IoC container
+        $this->app->alias('rinvex.contacts.contact', Contact::class);
+
         // Register artisan commands
         foreach ($this->commands as $key => $value) {
             $this->app->singleton($value, function ($app) use ($key) {
