@@ -64,7 +64,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#details-tab" data-toggle="tab">{{ trans('cortex/contacts::common.details') }}</a></li>
                     @if($contact->exists) <li><a href="{{ route('backend.contacts.logs', ['contact' => $contact]) }}">{{ trans('cortex/contacts::common.logs') }}</a></li> @endif
-                    @if($contact->exists && $currentUser->can('delete-contacts', $contact)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-item-href="{{ route('backend.contacts.delete', ['contact' => $contact]) }}" data-item-name="{{ $contact->slug }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
+                    @if($contact->exists && $currentUser->can('delete-contacts', $contact)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-item-href="{{ route('backend.contacts.delete', ['contact' => $contact]) }}" data-item-name="{{ str_slug($contact->name) }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
                 </ul>
 
                 <div class="tab-content">
@@ -84,7 +84,7 @@
                                     {{-- First Name --}}
                                     <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                                         {{ Form::label('first_name', trans('cortex/contacts::common.first_name'), ['class' => 'control-label']) }}
-                                        {{ Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.first_name'), 'data-slugify' => '#slug', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                        {{ Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.first_name'), 'required' => 'required', 'autofocus' => 'autofocus']) }}
 
                                         @if ($errors->has('first_name'))
                                             <span class="help-block">{{ $errors->first('first_name') }}</span>
@@ -98,7 +98,7 @@
                                     {{-- Middle Name --}}
                                     <div class="form-group{{ $errors->has('middle_name') ? ' has-error' : '' }}">
                                         {{ Form::label('middle_name', trans('cortex/contacts::common.middle_name'), ['class' => 'control-label']) }}
-                                        {{ Form::text('middle_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.middle_name'), 'data-slugify' => '#slug', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                        {{ Form::text('middle_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.middle_name'), 'required' => 'required']) }}
 
                                         @if ($errors->has('middle_name'))
                                             <span class="help-block">{{ $errors->first('middle_name') }}</span>
@@ -112,7 +112,7 @@
                                     {{-- Last Name --}}
                                     <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                                         {{ Form::label('last_name', trans('cortex/contacts::common.last_name'), ['class' => 'control-label']) }}
-                                        {{ Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.last_name'), 'data-slugify' => '#slug', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                        {{ Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.last_name'), 'required' => 'required']) }}
 
                                         @if ($errors->has('last_name'))
                                             <span class="help-block">{{ $errors->first('last_name') }}</span>
