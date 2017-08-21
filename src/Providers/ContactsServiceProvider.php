@@ -8,6 +8,8 @@ use Illuminate\Routing\Router;
 use Cortex\Contacts\Models\Contact;
 use Illuminate\Support\ServiceProvider;
 use Cortex\Contacts\Console\Commands\SeedCommand;
+use Cortex\Contacts\Console\Commands\InstallCommand;
+use Cortex\Contacts\Console\Commands\PublishCommand;
 use Cortex\Contacts\Console\Commands\MigrateCommand;
 
 class ContactsServiceProvider extends ServiceProvider
@@ -19,6 +21,8 @@ class ContactsServiceProvider extends ServiceProvider
      */
     protected $commands = [
         MigrateCommand::class => 'command.cortex.contacts.migrate',
+        PublishCommand::class => 'command.cortex.contacts.publish',
+        InstallCommand::class => 'command.cortex.contacts.install',
         SeedCommand::class => 'command.cortex.contacts.seed',
     ];
 
