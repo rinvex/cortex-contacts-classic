@@ -9,8 +9,8 @@ use Cortex\Contacts\Models\Contact;
 use Illuminate\Support\ServiceProvider;
 use Cortex\Contacts\Console\Commands\SeedCommand;
 use Cortex\Contacts\Console\Commands\InstallCommand;
-use Cortex\Contacts\Console\Commands\PublishCommand;
 use Cortex\Contacts\Console\Commands\MigrateCommand;
+use Cortex\Contacts\Console\Commands\PublishCommand;
 
 class ContactsServiceProvider extends ServiceProvider
 {
