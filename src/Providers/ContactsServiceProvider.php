@@ -36,14 +36,8 @@ class ContactsServiceProvider extends ServiceProvider
         // Bind eloquent models to IoC container
         $this->app->alias('rinvex.contacts.contact', Contact::class);
 
-        // Register artisan commands
-        foreach ($this->commands as $key => $value) {
-            $this->app->singleton($value, function ($app) use ($key) {
-                return new $key();
-            });
-        }
-
-        $this->commands(array_values($this->commands));
+        // Register console commands
+        ! $this->app->runningInConsole() || $this->registerCommands();
     }
 
     /**
@@ -74,7 +68,24 @@ class ContactsServiceProvider extends ServiceProvider
      */
     protected function publishResources()
     {
-        $this->publishes([realpath(__DIR__.'/../../resources/lang') => resource_path('lang/vendor/cortex/contacts')], 'lang');
-        $this->publishes([realpath(__DIR__.'/../../resources/views') => resource_path('views/vendor/cortex/contacts')], 'views');
+        $this->publishes([realpath(__DIR__.'/../../resources/lang') => resource_path('lang/vendor/cortex/contacts')], 'cortex-contacts-lang');
+        $this->publishes([realpath(__DIR__.'/../../resources/views') => resource_path('views/vendor/cortex/contacts')], 'cortex-contacts-views');
+    }
+
+    /**
+     * Register console commands.
+     *
+     * @return void
+     */
+    protected function registerCommands()
+    {
+        // Register artisan commands
+        foreach ($this->commands as $key => $value) {
+            $this->app->singleton($value, function ($app) use ($key) {
+                return new $key();
+            });
+        }
+
+        $this->commands(array_values($this->commands));
     }
 }
