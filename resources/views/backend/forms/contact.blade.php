@@ -47,7 +47,7 @@
 @section('content')
 
     @if($contact->exists)
-        @include('cortex/foundation::backend.partials.confirm-deletion', ['type' => 'contact'])
+        @include('cortex/foundation::common.partials.confirm-deletion', ['type' => 'contact'])
     @endif
 
     <div class="content-wrapper">

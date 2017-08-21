@@ -28,7 +28,7 @@ class ContactsController extends AuthorizedController
         return app(ContactsDataTable::class)->with([
             'id' => 'cortex-contacts',
             'phrase' => trans('cortex/contacts::common.contacts'),
-        ])->render('cortex/foundation::backend.partials.datatable');
+        ])->render('cortex/foundation::backend.pages.datatable');
     }
 
     /**
@@ -43,7 +43,7 @@ class ContactsController extends AuthorizedController
             'resource' => $contact,
             'id' => 'cortex-contacts-logs',
             'phrase' => trans('cortex/contacts::common.contacts'),
-        ])->render('cortex/foundation::backend.partials.datatable-logs');
+        ])->render('cortex/foundation::backend.pages.datatable-logs');
     }
 
     /**
