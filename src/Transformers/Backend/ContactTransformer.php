@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\Transformers\Backend;
 
-use Rinvex\Contacts\Contracts\ContactContract;
 use League\Fractal\TransformerAbstract;
+use Rinvex\Contacts\Contracts\ContactContract;
 
 class ContactTransformer extends TransformerAbstract
 {
