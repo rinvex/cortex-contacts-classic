@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Cortex\Contacts\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use Cortex\Contacts\Models\Contact;
+use Rinvex\Contacts\Contracts\ContactContract;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Contacts\DataTables\Backend\ContactsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
@@ -36,7 +36,7 @@ class ContactsController extends AuthorizedController
      *
      * @return \Illuminate\Http\Response
      */
-    public function logs(Contact $contact)
+    public function logs(ContactContract $contact)
     {
         return app(LogsDataTable::class)->with([
             'type' => 'contacts',
@@ -62,11 +62,11 @@ class ContactsController extends AuthorizedController
      * Update the given resource in storage.
      *
      * @param \Cortex\Contacts\Http\Requests\Backend\ContactFormRequest $request
-     * @param \Cortex\Contacts\Models\Contact                           $contact
+     * @param \Rinvex\Contacts\Contracts\ContactContract                           $contact
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(ContactFormRequest $request, Contact $contact)
+    public function update(ContactFormRequest $request, ContactContract $contact)
     {
         return $this->process($request, $contact);
     }
@@ -74,11 +74,11 @@ class ContactsController extends AuthorizedController
     /**
      * Delete the given resource from storage.
      *
-     * @param \Cortex\Contacts\Models\Contact $contact
+     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
      *
      * @return \Illuminate\Http\Response
      */
-    public function delete(Contact $contact)
+    public function delete(ContactContract $contact)
     {
         $contact->delete();
 
@@ -91,11 +91,11 @@ class ContactsController extends AuthorizedController
     /**
      * Show the form for create/update of the given resource.
      *
-     * @param \Cortex\Contacts\Models\Contact $contact
+     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
      *
      * @return \Illuminate\Http\Response
      */
-    public function form(Contact $contact)
+    public function form(ContactContract $contact)
     {
         $countries = countries();
         $languages = collect(languages())->pluck('name', 'iso_639_1');
@@ -110,11 +110,11 @@ class ContactsController extends AuthorizedController
      * Process the form for store/update of the given resource.
      *
      * @param \Illuminate\Http\Request        $request
-     * @param \Cortex\Contacts\Models\Contact $contact
+     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
      *
      * @return \Illuminate\Http\Response
      */
-    protected function process(Request $request, Contact $contact)
+    protected function process(Request $request, ContactContract $contact)
     {
         // Prepare required input fields
         $data = $request->all();

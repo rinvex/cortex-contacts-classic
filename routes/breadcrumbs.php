@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Cortex\Contacts\Models\Contact;
+use Rinvex\Contacts\Contracts\ContactContract;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
 Breadcrumbs::register('backend.contacts.index', function (BreadcrumbsGenerator $breadcrumbs) {
@@ -15,12 +15,12 @@ Breadcrumbs::register('backend.contacts.create', function (BreadcrumbsGenerator 
     $breadcrumbs->push(trans('cortex/contacts::common.create_contact'), route('backend.contacts.create'));
 });
 
-Breadcrumbs::register('backend.contacts.edit', function (BreadcrumbsGenerator $breadcrumbs, Contact $contact) {
+Breadcrumbs::register('backend.contacts.edit', function (BreadcrumbsGenerator $breadcrumbs, ContactContract $contact) {
     $breadcrumbs->parent('backend.contacts.index');
     $breadcrumbs->push($contact->name, route('backend.contacts.edit', ['contact' => $contact]));
 });
 
-Breadcrumbs::register('backend.contacts.logs', function (BreadcrumbsGenerator $breadcrumbs, Contact $contact) {
+Breadcrumbs::register('backend.contacts.logs', function (BreadcrumbsGenerator $breadcrumbs, ContactContract $contact) {
     $breadcrumbs->parent('backend.contacts.index');
     $breadcrumbs->push($contact->name, route('backend.contacts.edit', ['contact' => $contact]));
     $breadcrumbs->push(trans('cortex/contacts::common.logs'), route('backend.contacts.logs', ['contact' => $contact]));

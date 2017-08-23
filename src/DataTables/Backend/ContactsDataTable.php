@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\DataTables\Backend;
 
-use Cortex\Contacts\Models\Contact;
+use Rinvex\Contacts\Contracts\ContactContract;
 use Cortex\Foundation\DataTables\AbstractDataTable;
 use Cortex\Contacts\Transformers\Backend\ContactTransformer;
 
@@ -13,7 +13,7 @@ class ContactsDataTable extends AbstractDataTable
     /**
      * {@inheritdoc}
      */
-    protected $model = Contact::class;
+    protected $model = ContactContract::class;
 
     /**
      * {@inheritdoc}
