@@ -33,7 +33,6 @@ return [
     'yes' => 'Yes',
     'no' => 'No',
     'submit' => 'Submit',
-    'reset' => 'Reset',
     'select_language' => 'Select Language',
     'select_country' => 'Select Country',
     'select_source' => 'Select Source',
