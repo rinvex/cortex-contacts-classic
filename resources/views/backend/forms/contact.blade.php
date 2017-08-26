@@ -172,7 +172,7 @@
                                     {{-- Gender --}}
                                     <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                                         {{ Form::label('gender', trans('cortex/contacts::common.gender'), ['class' => 'control-label']) }}
-                                        {{ Form::hidden('gender', '') }}
+                                        {{ Form::hidden('gender') }}
                                         {{ Form::select('gender', $genders, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_gender'), 'data-allow-clear' => 'true', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('gender'))
@@ -253,7 +253,7 @@
                                     {{-- Language Code --}}
                                     <div class="form-group{{ $errors->has('language_code') ? ' has-error' : '' }}">
                                         {{ Form::label('language_code', trans('cortex/contacts::common.language'), ['class' => 'control-label']) }}
-                                        {{ Form::hidden('language_code', '') }}
+                                        {{ Form::hidden('language_code') }}
                                         {{ Form::select('language_code', $languages, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_language'), 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('language_code'))
@@ -268,7 +268,7 @@
                                     {{-- Country Code --}}
                                     <div class="form-group{{ $errors->has('country_code') ? ' has-error' : '' }}">
                                         {{ Form::label('country_code', trans('cortex/contacts::common.country'), ['class' => 'control-label']) }}
-                                        {{ Form::hidden('country_code', '') }}
+                                        {{ Form::hidden('country_code') }}
                                         {{ Form::select('country_code', [], null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_country'), 'required' => 'required', 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('country_code'))
@@ -361,6 +361,7 @@
                                     {{-- Source --}}
                                     <div class="form-group{{ $errors->has('source') ? ' has-error' : '' }}">
                                         {{ Form::label('source', trans('cortex/contacts::common.source'), ['class' => 'control-label']) }}
+                                        {{ Form::hidden('source') }}
                                         {{ Form::select('source', $sources, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_source'), 'data-tags' => 'true', 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('source'))
@@ -375,6 +376,7 @@
                                     {{-- Method --}}
                                     <div class="form-group{{ $errors->has('method') ? ' has-error' : '' }}">
                                         {{ Form::label('method', trans('cortex/contacts::common.method'), ['class' => 'control-label']) }}
+                                        {{ Form::hidden('method') }}
                                         {{ Form::select('method', $methods, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_method'), 'data-tags' => 'true', 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('method'))
