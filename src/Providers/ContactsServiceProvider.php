@@ -6,6 +6,7 @@ namespace Cortex\Contacts\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Rinvex\Contacts\Contracts\ContactContract;
 use Cortex\Contacts\Console\Commands\SeedCommand;
 use Cortex\Contacts\Console\Commands\InstallCommand;
 use Cortex\Contacts\Console\Commands\MigrateCommand;
@@ -47,6 +48,9 @@ class ContactsServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
+        // Bind models explicitly
+        $router->model('contact', ContactContract::class);
+
         // Load resources
         require __DIR__.'/../../routes/breadcrumbs.php';
         $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');

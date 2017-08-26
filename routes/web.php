@@ -2,10 +2,6 @@
 
 declare(strict_types=1);
 
-use Rinvex\Contacts\Contracts\ContactContract;
-
-Route::model('contact', ContactContract::class);
-
 Route::group(['domain' => domain()], function () {
 
     Route::name('backend.')
