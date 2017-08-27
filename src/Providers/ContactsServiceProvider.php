@@ -48,7 +48,8 @@ class ContactsServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        // Bind models explicitly
+        // Bind route models and constrains
+        $router->pattern('contact', '[a-z0-9-]+');
         $router->model('contact', ContactContract::class);
 
         // Load resources
