@@ -28,7 +28,7 @@ class ContactsDataTable extends AbstractDataTable
     protected function getColumns()
     {
         return [
-            'first_name' => ['title' => trans('cortex/contacts::common.first_name'), 'render' => '"<a href=\""+routes.route(\'backend.contacts.edit\', {contact: full.id})+"\">"+data+"</a>"', 'responsivePriority' => 0],
+            'first_name' => ['title' => trans('cortex/contacts::common.first_name'), 'render' => '"<a href=\""+routes.route(\'backend.contacts.edit\', {contact: full.slug})+"\">"+data+"</a>"', 'responsivePriority' => 0],
             'middle_name' => ['title' => trans('cortex/contacts::common.middle_name')],
             'last_name' => ['title' => trans('cortex/contacts::common.last_name')],
             'email' => ['title' => trans('cortex/contacts::common.email')],
