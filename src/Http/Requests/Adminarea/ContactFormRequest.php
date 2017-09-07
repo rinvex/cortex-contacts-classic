@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Contacts\Http\Requests\Backend;
+namespace Cortex\Contacts\Http\Requests\Adminarea;
 
 use Rinvex\Support\Http\Requests\FormRequest;
 

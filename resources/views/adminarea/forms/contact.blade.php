@@ -1,13 +1,13 @@
 {{-- Master Layout --}}
-@extends('cortex/foundation::backend.layouts.default')
+@extends('cortex/foundation::adminarea.layouts.default')
 
 {{-- Page Title --}}
 @section('title')
-    {{ config('app.name') }} » {{ trans('cortex/foundation::common.backend') }} » {{ trans('cortex/contacts::common.contacts') }} » {{ $contact->exists ? $contact->name : trans('cortex/contacts::common.create_contact') }}
+    {{ config('app.name') }} » {{ trans('cortex/foundation::common.adminarea') }} » {{ trans('cortex/contacts::common.contacts') }} » {{ $contact->exists ? $contact->name : trans('cortex/contacts::common.create_contact') }}
 @stop
 
 @push('scripts')
-    {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Backend\ContactFormRequest::class)->selector('#backend-contacts-save') !!}
+    {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest::class)->selector('#adminarea-contacts-save') !!}
 
     <script>
         (function($) {
@@ -63,8 +63,8 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#details-tab" data-toggle="tab">{{ trans('cortex/contacts::common.details') }}</a></li>
-                    @if($contact->exists) <li><a href="{{ route('backend.contacts.logs', ['contact' => $contact]) }}">{{ trans('cortex/contacts::common.logs') }}</a></li> @endif
-                    @if($contact->exists && $currentUser->can('delete-contacts', $contact)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-item-href="{{ route('backend.contacts.delete', ['contact' => $contact]) }}" data-item-name="{{ str_slug($contact->name) }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
+                    @if($contact->exists) <li><a href="{{ route('adminarea.contacts.logs', ['contact' => $contact]) }}">{{ trans('cortex/contacts::common.logs') }}</a></li> @endif
+                    @if($contact->exists && $currentUser->can('delete-contacts', $contact)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-item-href="{{ route('adminarea.contacts.delete', ['contact' => $contact]) }}" data-item-name="{{ str_slug($contact->name) }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
                 </ul>
 
                 <div class="tab-content">
@@ -72,9 +72,9 @@
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($contact->exists)
-                            {{ Form::model($contact, ['url' => route('backend.contacts.update', ['contact' => $contact]), 'method' => 'put', 'id' => 'backend-contacts-save']) }}
+                            {{ Form::model($contact, ['url' => route('adminarea.contacts.update', ['contact' => $contact]), 'method' => 'put', 'id' => 'adminarea-contacts-save']) }}
                         @else
-                            {{ Form::model($contact, ['url' => route('backend.contacts.store'), 'id' => 'backend-contacts-save']) }}
+                            {{ Form::model($contact, ['url' => route('adminarea.contacts.store'), 'id' => 'adminarea-contacts-save']) }}
                         @endif
 
                             <div class="row">
@@ -395,7 +395,7 @@
                                         {{ Form::button(trans('cortex/contacts::common.submit'), ['class' => 'btn btn-primary btn-flat', 'type' => 'submit']) }}
                                     </div>
 
-                                    @include('cortex/foundation::backend.partials.timestamps', ['model' => $contact])
+                                    @include('cortex/foundation::adminarea.partials.timestamps', ['model' => $contact])
 
                                 </div>
 
