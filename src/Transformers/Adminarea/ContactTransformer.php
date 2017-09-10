@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Contacts\Transformers\Backend;
+namespace Cortex\Contacts\Transformers\Adminarea;
 
-use Cortex\Contacts\Models\Contact;
 use League\Fractal\TransformerAbstract;
+use Rinvex\Contacts\Contracts\ContactContract;
 
 class ContactTransformer extends TransformerAbstract
 {
     /**
      * @return array
      */
-    public function transform(Contact $contact)
+    public function transform(ContactContract $contact)
     {
         return [
             'id' => (int) $contact->id,

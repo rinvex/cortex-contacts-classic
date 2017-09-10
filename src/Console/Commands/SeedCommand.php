@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace Cortex\Contacts\Console\Commands;
 
 use Illuminate\Console\Command;
-use Cortex\Fort\Traits\AbilitySeeder;
-use Cortex\Fort\Traits\BaseFortSeeder;
-use Illuminate\Support\Facades\Schema;
+use Rinvex\Support\Traits\SeederHelper;
 
 class SeedCommand extends Command
 {
-    use AbilitySeeder;
-    use BaseFortSeeder;
+    use SeederHelper;
 
     /**
      * The name and signature of the console command.
@@ -26,7 +23,7 @@ class SeedCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Seed Default Cortex Contacts data.';
+    protected $description = 'Seed Cortex Contacts Data.';
 
     /**
      * Execute the console command.
@@ -35,37 +32,10 @@ class SeedCommand extends Command
      */
     public function handle()
     {
-        if ($this->ensureExistingContactsTables()) {
-            // No seed data at the moment!
+        $this->warn('Seed cortex/contacts:');
+
+        if ($this->ensureExistingDatabaseTables('rinvex/fort')) {
+            $this->seedResources(app('rinvex.fort.ability'), realpath(__DIR__.'/../../../resources/data/abilities.json'), ['name', 'description', 'policy']);
         }
-
-        if ($this->ensureExistingFortTables()) {
-            $this->seedAbilities(realpath(__DIR__.'/../../../resources/data/abilities.json'));
-        }
-    }
-
-    /**
-     * Ensure existing contacts tables.
-     *
-     * @return bool
-     */
-    protected function ensureExistingContactsTables()
-    {
-        if (! $this->hasContactsTables()) {
-            $this->call('cortex:migrate:contacts');
-        }
-
-        return true;
-    }
-
-    /**
-     * Check if all required contacts tables exists.
-     *
-     * @return bool
-     */
-    protected function hasContactsTables()
-    {
-        return Schema::hasTable(config('rinvex.contacts.tables.contacts'))
-               && Schema::hasTable(config('rinvex.contacts.tables.contactss'));
     }
 }

@@ -1,13 +1,13 @@
 {{-- Master Layout --}}
-@extends('cortex/foundation::backend.layouts.default')
+@extends('cortex/foundation::adminarea.layouts.default')
 
 {{-- Page Title --}}
 @section('title')
-    {{ config('app.name') }} » {{ trans('cortex/foundation::common.backend') }} » {{ trans('cortex/contacts::common.contacts') }} » {{ $contact->exists ? $contact->slug : trans('cortex/contacts::common.create_contact') }}
+    {{ config('app.name') }} » {{ trans('cortex/foundation::common.adminarea') }} » {{ trans('cortex/contacts::common.contacts') }} » {{ $contact->exists ? $contact->name : trans('cortex/contacts::common.create_contact') }}
 @stop
 
 @push('scripts')
-    {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Backend\ContactFormRequest::class)->selector('#backend-contacts-save') !!}
+    {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest::class)->selector('#adminarea-contacts-save') !!}
 
     <script>
         (function($) {
@@ -47,12 +47,12 @@
 @section('content')
 
     @if($contact->exists)
-        @include('cortex/foundation::backend.partials.confirm-deletion', ['type' => 'contact'])
+        @include('cortex/foundation::common.partials.confirm-deletion', ['type' => 'contact'])
     @endif
 
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>{{ $contact->exists ? $contact->slug : trans('cortex/contacts::common.create_contact') }}</h1>
+            <h1>{{ $contact->exists ? $contact->name : trans('cortex/contacts::common.create_contact') }}</h1>
             <!-- Breadcrumbs -->
             {{ Breadcrumbs::render() }}
         </section>
@@ -63,8 +63,8 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#details-tab" data-toggle="tab">{{ trans('cortex/contacts::common.details') }}</a></li>
-                    @if($contact->exists) <li><a href="{{ route('backend.contacts.logs', ['contact' => $contact]) }}">{{ trans('cortex/contacts::common.logs') }}</a></li> @endif
-                    @if($contact->exists && $currentUser->can('delete-contacts', $contact)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-item-href="{{ route('backend.contacts.delete', ['contact' => $contact]) }}" data-item-name="{{ $contact->slug }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
+                    @if($contact->exists) <li><a href="{{ route('adminarea.contacts.logs', ['contact' => $contact]) }}">{{ trans('cortex/contacts::common.logs') }}</a></li> @endif
+                    @if($contact->exists && $currentUser->can('delete-contacts', $contact)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-item-href="{{ route('adminarea.contacts.delete', ['contact' => $contact]) }}" data-item-name="{{ str_slug($contact->name) }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
                 </ul>
 
                 <div class="tab-content">
@@ -72,9 +72,9 @@
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($contact->exists)
-                            {{ Form::model($contact, ['url' => route('backend.contacts.update', ['contact' => $contact]), 'method' => 'put', 'id' => 'backend-contacts-save']) }}
+                            {{ Form::model($contact, ['url' => route('adminarea.contacts.update', ['contact' => $contact]), 'method' => 'put', 'id' => 'adminarea-contacts-save']) }}
                         @else
-                            {{ Form::model($contact, ['url' => route('backend.contacts.store'), 'id' => 'backend-contacts-save']) }}
+                            {{ Form::model($contact, ['url' => route('adminarea.contacts.store'), 'id' => 'adminarea-contacts-save']) }}
                         @endif
 
                             <div class="row">
@@ -84,7 +84,7 @@
                                     {{-- First Name --}}
                                     <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                                         {{ Form::label('first_name', trans('cortex/contacts::common.first_name'), ['class' => 'control-label']) }}
-                                        {{ Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.first_name'), 'data-slugify' => '#slug', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                        {{ Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.first_name'), 'required' => 'required', 'autofocus' => 'autofocus']) }}
 
                                         @if ($errors->has('first_name'))
                                             <span class="help-block">{{ $errors->first('first_name') }}</span>
@@ -98,7 +98,7 @@
                                     {{-- Middle Name --}}
                                     <div class="form-group{{ $errors->has('middle_name') ? ' has-error' : '' }}">
                                         {{ Form::label('middle_name', trans('cortex/contacts::common.middle_name'), ['class' => 'control-label']) }}
-                                        {{ Form::text('middle_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.middle_name'), 'data-slugify' => '#slug', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                        {{ Form::text('middle_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.middle_name'), 'required' => 'required']) }}
 
                                         @if ($errors->has('middle_name'))
                                             <span class="help-block">{{ $errors->first('middle_name') }}</span>
@@ -112,7 +112,7 @@
                                     {{-- Last Name --}}
                                     <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                                         {{ Form::label('last_name', trans('cortex/contacts::common.last_name'), ['class' => 'control-label']) }}
-                                        {{ Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.last_name'), 'data-slugify' => '#slug', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                        {{ Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.last_name'), 'required' => 'required']) }}
 
                                         @if ($errors->has('last_name'))
                                             <span class="help-block">{{ $errors->first('last_name') }}</span>
@@ -361,6 +361,7 @@
                                     {{-- Source --}}
                                     <div class="form-group{{ $errors->has('source') ? ' has-error' : '' }}">
                                         {{ Form::label('source', trans('cortex/contacts::common.source'), ['class' => 'control-label']) }}
+                                        {{ Form::hidden('source', '') }}
                                         {{ Form::select('source', $sources, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_source'), 'data-tags' => 'true', 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('source'))
@@ -375,6 +376,7 @@
                                     {{-- Method --}}
                                     <div class="form-group{{ $errors->has('method') ? ' has-error' : '' }}">
                                         {{ Form::label('method', trans('cortex/contacts::common.method'), ['class' => 'control-label']) }}
+                                        {{ Form::hidden('method', '') }}
                                         {{ Form::select('method', $methods, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_method'), 'data-tags' => 'true', 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('method'))
@@ -390,11 +392,10 @@
                                 <div class="col-md-12">
 
                                     <div class="pull-right">
-                                        {{ Form::button(trans('cortex/contacts::common.reset'), ['class' => 'btn btn-default btn-flat', 'type' => 'reset']) }}
                                         {{ Form::button(trans('cortex/contacts::common.submit'), ['class' => 'btn btn-primary btn-flat', 'type' => 'submit']) }}
                                     </div>
 
-                                    @include('cortex/foundation::backend.partials.timestamps', ['model' => $contact])
+                                    @include('cortex/foundation::adminarea.partials.timestamps', ['model' => $contact])
 
                                 </div>
 

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Contacts\Http\Controllers\Backend;
+namespace Cortex\Contacts\Http\Controllers\Adminarea;
 
 use Illuminate\Http\Request;
-use Cortex\Contacts\Models\Contact;
+use Rinvex\Contacts\Contracts\ContactContract;
 use Cortex\Foundation\DataTables\LogsDataTable;
-use Cortex\Contacts\DataTables\Backend\ContactsDataTable;
+use Cortex\Contacts\DataTables\Adminarea\ContactsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
-use Cortex\Contacts\Http\Requests\Backend\ContactFormRequest;
+use Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest;
 
 class ContactsController extends AuthorizedController
 {
@@ -28,7 +28,7 @@ class ContactsController extends AuthorizedController
         return app(ContactsDataTable::class)->with([
             'id' => 'cortex-contacts',
             'phrase' => trans('cortex/contacts::common.contacts'),
-        ])->render('cortex/foundation::backend.partials.datatable');
+        ])->render('cortex/foundation::adminarea.pages.datatable');
     }
 
     /**
@@ -36,37 +36,37 @@ class ContactsController extends AuthorizedController
      *
      * @return \Illuminate\Http\Response
      */
-    public function logs(Contact $contact)
+    public function logs(ContactContract $contact)
     {
         return app(LogsDataTable::class)->with([
             'type' => 'contacts',
             'resource' => $contact,
             'id' => 'cortex-contacts-logs',
             'phrase' => trans('cortex/contacts::common.contacts'),
-        ])->render('cortex/foundation::backend.partials.datatable-logs');
+        ])->render('cortex/foundation::adminarea.pages.datatable-logs');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Cortex\Contacts\Http\Requests\Backend\ContactFormRequest $request
+     * @param \Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest $request
      *
      * @return \Illuminate\Http\Response
      */
     public function store(ContactFormRequest $request)
     {
-        return $this->process($request, new Contact());
+        return $this->process($request, app('rinvex.contacts.contact'));
     }
 
     /**
      * Update the given resource in storage.
      *
-     * @param \Cortex\Contacts\Http\Requests\Backend\ContactFormRequest $request
-     * @param \Cortex\Contacts\Models\Contact                           $contact
+     * @param \Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest $request
+     * @param \Rinvex\Contacts\Contracts\ContactContract                  $contact
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(ContactFormRequest $request, Contact $contact)
+    public function update(ContactFormRequest $request, ContactContract $contact)
     {
         return $this->process($request, $contact);
     }
@@ -74,47 +74,47 @@ class ContactsController extends AuthorizedController
     /**
      * Delete the given resource from storage.
      *
-     * @param \Cortex\Contacts\Models\Contact $contact
+     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
      *
      * @return \Illuminate\Http\Response
      */
-    public function delete(Contact $contact)
+    public function delete(ContactContract $contact)
     {
         $contact->delete();
 
         return intend([
-            'url' => route('backend.contacts.index'),
-            'with' => ['warning' => trans('cortex/contacts::messages.contact.deleted', ['contactId' => $contact->id])],
+            'url' => route('adminarea.contacts.index'),
+            'with' => ['warning' => trans('cortex/contacts::messages.contact.deleted', ['slug' => $contact->slug])],
         ]);
     }
 
     /**
      * Show the form for create/update of the given resource.
      *
-     * @param \Cortex\Contacts\Models\Contact $contact
+     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
      *
      * @return \Illuminate\Http\Response
      */
-    public function form(Contact $contact)
+    public function form(ContactContract $contact)
     {
         $countries = countries();
         $languages = collect(languages())->pluck('name', 'iso_639_1');
-        $sources = Contact::distinct()->get(['source'])->pluck('source', 'source')->toArray();
-        $methods = Contact::distinct()->get(['method'])->pluck('method', 'method')->toArray();
-        $genders = ['m' => trans('cortex/fort::common.male'), 'f' => trans('cortex/fort::common.female')];
+        $sources = app('rinvex.contacts.contact')->distinct()->get(['source'])->pluck('source', 'source')->toArray();
+        $methods = app('rinvex.contacts.contact')->distinct()->get(['method'])->pluck('method', 'method')->toArray();
+        $genders = ['m' => trans('cortex/contacts::common.male'), 'f' => trans('cortex/contacts::common.female')];
 
-        return view('cortex/contacts::backend.forms.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods'));
+        return view('cortex/contacts::adminarea.forms.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods'));
     }
 
     /**
      * Process the form for store/update of the given resource.
      *
-     * @param \Illuminate\Http\Request        $request
-     * @param \Cortex\Contacts\Models\Contact $contact
+     * @param \Illuminate\Http\Request                   $request
+     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
      *
      * @return \Illuminate\Http\Response
      */
-    protected function process(Request $request, Contact $contact)
+    protected function process(Request $request, ContactContract $contact)
     {
         // Prepare required input fields
         $data = $request->all();
@@ -123,8 +123,8 @@ class ContactsController extends AuthorizedController
         $contact->fill($data)->save();
 
         return intend([
-            'url' => route('backend.contacts.index'),
-            'with' => ['success' => trans('cortex/contacts::messages.contact.saved', ['contactId' => $contact->id])],
+            'url' => route('adminarea.contacts.index'),
+            'with' => ['success' => trans('cortex/contacts::messages.contact.saved', ['slug' => $contact->slug])],
         ]);
     }
 }
