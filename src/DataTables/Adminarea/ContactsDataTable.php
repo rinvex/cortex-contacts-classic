@@ -27,8 +27,12 @@ class ContactsDataTable extends AbstractDataTable
      */
     protected function getColumns()
     {
+        $link = config('cortex.foundation.route.locale_prefix')
+            ? '"<a href=\""+routes.route(\'adminarea.contacts.edit\', {contact: full.slug, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
+            : '"<a href=\""+routes.route(\'adminarea.contacts.edit\', {contact: full.slug})+"\">"+data+"</a>"';
+
         return [
-            'first_name' => ['title' => trans('cortex/contacts::common.first_name'), 'render' => '"<a href=\""+routes.route(\'adminarea.contacts.edit\', {contact: full.slug})+"\">"+data+"</a>"', 'responsivePriority' => 0],
+            'first_name' => ['title' => trans('cortex/contacts::common.first_name'), 'render' => $link, 'responsivePriority' => 0],
             'middle_name' => ['title' => trans('cortex/contacts::common.middle_name')],
             'last_name' => ['title' => trans('cortex/contacts::common.last_name')],
             'email' => ['title' => trans('cortex/contacts::common.email')],
