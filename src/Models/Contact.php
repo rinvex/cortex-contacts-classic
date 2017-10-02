@@ -133,4 +133,14 @@ class Contact extends BaseContact
     {
         return 'slug';
     }
+
+    /**
+     * Get the class name for polymorphic relations.
+     *
+     * @return string
+     */
+    public function getMorphClass()
+    {
+        return 'contact';
+    }
 }
