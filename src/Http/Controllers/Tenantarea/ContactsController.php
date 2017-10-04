@@ -62,7 +62,7 @@ class ContactsController extends AuthorizedController
      * Update the given resource in storage.
      *
      * @param \Cortex\Contacts\Http\Requests\Tenantarea\ContactFormRequest $request
-     * @param \Rinvex\Contacts\Contracts\ContactContract                  $contact
+     * @param \Rinvex\Contacts\Contracts\ContactContract                   $contact
      *
      * @return \Illuminate\Http\Response
      */
