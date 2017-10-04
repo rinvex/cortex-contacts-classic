@@ -11,6 +11,7 @@ use Cortex\Contacts\Console\Commands\SeedCommand;
 use Cortex\Contacts\Console\Commands\InstallCommand;
 use Cortex\Contacts\Console\Commands\MigrateCommand;
 use Cortex\Contacts\Console\Commands\PublishCommand;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class ContactsServiceProvider extends ServiceProvider
 {
@@ -51,6 +52,11 @@ class ContactsServiceProvider extends ServiceProvider
         // Bind route models and constrains
         $router->pattern('contact', '[a-z0-9-]+');
         $router->model('contact', ContactContract::class);
+
+        // Map relations
+        Relation::morphMap([
+            'contact' => config('rinvex.contacts.models.contact'),
+        ]);
 
         // Load resources
         require __DIR__.'/../../routes/breadcrumbs.php';
