@@ -39,6 +39,7 @@ class ContactsController extends AuthorizedController
     public function logs(ContactContract $contact)
     {
         return app(LogsDataTable::class)->with([
+            'tab' => 'logs',
             'type' => 'contacts',
             'resource' => $contact,
             'id' => 'cortex-contacts-logs',
