@@ -34,13 +34,14 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @property string                                                                          $language_code
  * @property string                                                                          $birthday
  * @property string                                                                          $gender
- * @property \Carbon\Carbon                                                                  $created_at
- * @property \Carbon\Carbon                                                                  $updated_at
+ * @property \Carbon\Carbon|null                                                             $created_at
+ * @property \Carbon\Carbon|null                                                             $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Foundation\Models\Log[]   $activity
  * @property-read \Illuminate\Database\Eloquent\Collection|\Rinvex\Contacts\Models\Contact[] $backRelatives
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent                              $entity
  * @property-read string                                                                     $name
  * @property-read \Illuminate\Database\Eloquent\Collection|\Rinvex\Contacts\Models\Contact[] $relatives
+ * @property \Illuminate\Database\Eloquent\Collection|\Cortex\Tenants\Models\Tenant[]        $tenants
  *
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact country($countryCode)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact language($languageCode)
@@ -71,6 +72,11 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereSource($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereTwitter($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact withAllTenants($tenants, $group = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact withAnyTenants($tenants, $group = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact withTenants($tenants, $group = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact withoutAnyTenants()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact withoutTenants($tenants, $group = null)
  * @mixin \Eloquent
  */
 class Contact extends BaseContact
