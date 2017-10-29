@@ -37,16 +37,16 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @property \Carbon\Carbon|null                                                             $created_at
  * @property \Carbon\Carbon|null                                                             $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Foundation\Models\Log[]   $activity
- * @property-read \Illuminate\Database\Eloquent\Collection|\Rinvex\Contacts\Models\Contact[] $backRelatives
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Contacts\Models\Contact[] $backRelatives
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent                              $entity
  * @property-read string                                                                     $name
- * @property-read \Illuminate\Database\Eloquent\Collection|\Rinvex\Contacts\Models\Contact[] $relatives
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Contacts\Models\Contact[] $relatives
  * @property \Illuminate\Database\Eloquent\Collection|\Cortex\Tenants\Models\Tenant[]        $tenants
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact country($countryCode)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact language($languageCode)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact method($method)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact source($source)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact country($countryCode)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact language($languageCode)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact method($method)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact source($source)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereBirthday($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereCountryCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereCreatedAt($value)
