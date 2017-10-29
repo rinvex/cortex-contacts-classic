@@ -3,7 +3,6 @@
 **Cortex Contacts** is a frontend layer for the polymorphic contact management system. You can add contacts to any eloquent model with ease.
 
 [![Packagist](https://img.shields.io/packagist/v/cortex/contacts.svg?label=Packagist&style=flat-square)](https://packagist.org/packages/cortex/contacts)
-[![VersionEye Dependencies](https://img.shields.io/versioneye/d/php/cortex:contacts.svg?label=Dependencies&style=flat-square)](https://www.versioneye.com/php/cortex:contacts/)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/cortex/contacts.svg?label=Scrutinizer&style=flat-square)](https://scrutinizer-ci.com/g/cortex/contacts/)
 [![Code Climate](https://img.shields.io/codeclimate/github/cortex/contacts.svg?label=CodeClimate&style=flat-square)](https://codeclimate.com/github/cortex/contacts)
 [![Travis](https://img.shields.io/travis/cortex/contacts.svg?label=TravisCI&style=flat-square)](https://travis-ci.org/cortex/contacts)
