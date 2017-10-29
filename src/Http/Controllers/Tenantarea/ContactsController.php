@@ -122,7 +122,6 @@ class ContactsController extends AuthorizedController
 
         // Save contact
         $contact->fill($data)->save();
-        $contact->attachTenants(config('rinvex.tenants.tenant.active'));
 
         return intend([
             'url' => route('tenantarea.contacts.index'),
