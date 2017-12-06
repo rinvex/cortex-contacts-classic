@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\Http\Requests\Adminarea;
 
-use Rinvex\Support\Http\Requests\FormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
 class ContactFormRequest extends FormRequest
 {
@@ -19,18 +19,18 @@ class ContactFormRequest extends FormRequest
     }
 
     /**
-     * Process given request data before validation.
+     * Prepare the data for validation.
      *
-     * @param array $data
-     *
-     * @return array
+     * @return void
      */
-    public function process($data)
+    protected function prepareForValidation()
     {
+        $data = $this->all();
+
         $data['entity_id'] = $this->user()->id;
         $data['entity_type'] = get_class($this->user());
 
-        return $data;
+        $this->replace($data);
     }
 
     /**
