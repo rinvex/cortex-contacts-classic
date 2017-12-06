@@ -21,11 +21,13 @@ class ContactsController extends AuthorizedController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param \Cortex\Contacts\DataTables\Adminarea\ContactsDataTable $contactsDataTable
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
-    public function index()
+    public function index(ContactsDataTable $contactsDataTable)
     {
-        return app(ContactsDataTable::class)->with([
+        return $contactsDataTable->with([
             'id' => 'cortex-contacts',
             'phrase' => trans('cortex/contacts::common.contacts'),
         ])->render('cortex/foundation::adminarea.pages.datatable');
@@ -34,11 +36,14 @@ class ContactsController extends AuthorizedController
     /**
      * Display a listing of the resource logs.
      *
-     * @return \Illuminate\Http\Response
+     * @param \Rinvex\Contacts\Contracts\ContactContract  $category
+     * @param \Cortex\Foundation\DataTables\LogsDataTable $logsDataTable
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
-    public function logs(ContactContract $contact)
+    public function logs(ContactContract $contact, LogsDataTable $logsDataTable)
     {
-        return app(LogsDataTable::class)->with([
+        return $logsDataTable->with([
             'tab' => 'logs',
             'type' => 'contacts',
             'resource' => $contact,
