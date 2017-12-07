@@ -33,14 +33,14 @@ class ContactsDataTable extends AbstractDataTable
 
         return [
             'first_name' => ['title' => trans('cortex/contacts::common.first_name'), 'render' => $link, 'responsivePriority' => 0],
-            'middle_name' => ['title' => trans('cortex/contacts::common.middle_name')],
+            'middle_name' => ['title' => trans('cortex/contacts::common.middle_name'), 'visible' => false],
             'last_name' => ['title' => trans('cortex/contacts::common.last_name')],
             'email' => ['title' => trans('cortex/contacts::common.email')],
             'phone' => ['title' => trans('cortex/contacts::common.phone')],
             'country_code' => ['title' => trans('cortex/contacts::common.country')],
-            'language_code' => ['title' => trans('cortex/contacts::common.language')],
-            'source' => ['title' => trans('cortex/contacts::common.source')],
-            'method' => ['title' => trans('cortex/contacts::common.method')],
+            'language_code' => ['title' => trans('cortex/contacts::common.language'), 'visible' => false],
+            'source' => ['title' => trans('cortex/contacts::common.source'), 'visible' => false],
+            'method' => ['title' => trans('cortex/contacts::common.method'), 'visible' => false],
             'created_at' => ['title' => trans('cortex/contacts::common.created_at'), 'render' => "moment(data).format('MMM Do, YYYY')"],
             'updated_at' => ['title' => trans('cortex/contacts::common.updated_at'), 'render' => "moment(data).format('MMM Do, YYYY')"],
         ];
