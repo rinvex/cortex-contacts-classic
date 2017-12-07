@@ -7,8 +7,8 @@ namespace Cortex\Contacts\Http\Controllers\Managerarea;
 use Illuminate\Http\Request;
 use Rinvex\Contacts\Contracts\ContactContract;
 use Cortex\Foundation\DataTables\LogsDataTable;
-use Cortex\Contacts\DataTables\Managerarea\ContactsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
+use Cortex\Contacts\DataTables\Managerarea\ContactsDataTable;
 use Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest;
 
 class ContactsController extends AuthorizedController
@@ -68,7 +68,7 @@ class ContactsController extends AuthorizedController
      * Update the given resource in storage.
      *
      * @param \Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest $request
-     * @param \Rinvex\Contacts\Contracts\ContactContract                   $contact
+     * @param \Rinvex\Contacts\Contracts\ContactContract                    $contact
      *
      * @return \Illuminate\Http\Response
      */
