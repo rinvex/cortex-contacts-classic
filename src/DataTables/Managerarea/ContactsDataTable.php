@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Contacts\DataTables\Tenantarea;
+namespace Cortex\Contacts\DataTables\Managerarea;
 
 use Rinvex\Contacts\Contracts\ContactContract;
 use Cortex\Foundation\DataTables\AbstractDataTable;
-use Cortex\Contacts\Transformers\Tenantarea\ContactTransformer;
+use Cortex\Contacts\Transformers\Managerarea\ContactTransformer;
 
 class ContactsDataTable extends AbstractDataTable
 {
@@ -28,8 +28,8 @@ class ContactsDataTable extends AbstractDataTable
     protected function getColumns()
     {
         $link = config('cortex.foundation.route.locale_prefix')
-            ? '"<a href=\""+routes.route(\'tenantarea.contacts.edit\', {contact: full.id, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
-            : '"<a href=\""+routes.route(\'tenantarea.contacts.edit\', {contact: full.id})+"\">"+data+"</a>"';
+            ? '"<a href=\""+routes.route(\'managerarea.contacts.edit\', {contact: full.id, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
+            : '"<a href=\""+routes.route(\'managerarea.contacts.edit\', {contact: full.id})+"\">"+data+"</a>"';
 
         return [
             'first_name' => ['title' => trans('cortex/contacts::common.first_name'), 'render' => $link, 'responsivePriority' => 0],

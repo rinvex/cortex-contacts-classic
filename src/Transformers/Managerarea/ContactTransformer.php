@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Contacts\Transformers\Tenantarea;
+namespace Cortex\Contacts\Transformers\Managerarea;
 
 use League\Fractal\TransformerAbstract;
 use Rinvex\Contacts\Contracts\ContactContract;
