@@ -8,10 +8,11 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Rinvex\Contacts\Contracts\ContactContract;
 use Cortex\Contacts\Console\Commands\SeedCommand;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Cortex\Contacts\Console\Commands\InstallCommand;
 use Cortex\Contacts\Console\Commands\MigrateCommand;
 use Cortex\Contacts\Console\Commands\PublishCommand;
-use Illuminate\Database\Eloquent\Relations\Relation;
+use Cortex\Contacts\Console\Commands\RollbackCommand;
 
 class ContactsServiceProvider extends ServiceProvider
 {
@@ -21,10 +22,11 @@ class ContactsServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
+        SeedCommand::class => 'command.cortex.contacts.seed',
+        InstallCommand::class => 'command.cortex.contacts.install',
         MigrateCommand::class => 'command.cortex.contacts.migrate',
         PublishCommand::class => 'command.cortex.contacts.publish',
-        InstallCommand::class => 'command.cortex.contacts.install',
-        SeedCommand::class => 'command.cortex.contacts.seed',
+        RollbackCommand::class => 'command.cortex.contacts.rollback',
     ];
 
     /**
