@@ -47,6 +47,7 @@ class ContactsController extends AuthorizedController
             'tab' => 'logs',
             'type' => 'contacts',
             'resource' => $contact,
+            'title' => $contact->name,
             'id' => 'cortex-contacts-logs',
             'phrase' => trans('cortex/contacts::common.contacts'),
         ])->render('cortex/tenants::managerarea.pages.datatable-tab');
