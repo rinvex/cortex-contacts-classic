@@ -7,12 +7,12 @@ use Rinvex\Menus\Factories\MenuFactory;
 
 Menu::modify('adminarea.sidebar', function (MenuFactory $menu) {
     $menu->findByTitleOrAdd(trans('cortex/foundation::common.crm'), 50, 'fa fa-briefcase', [], function (MenuItem $dropdown) {
-        $dropdown->route(['adminarea.contacts.index'], trans('cortex/contacts::common.contacts'), 10, 'fa fa-id-card-o')->can('list-contacts');
+        $dropdown->route(['adminarea.contacts.index'], trans('cortex/contacts::common.contacts'), 10, 'fa fa-id-card-o')->ifCan('list-contacts')->activateOnRoute('adminarea.contacts');
     });
 });
 
 Menu::modify('managerarea.sidebar', function (MenuFactory $menu) {
     $menu->findByTitleOrAdd(trans('cortex/foundation::common.crm'), 50, 'fa fa-briefcase', [], function (MenuItem $dropdown) {
-        $dropdown->route(['managerarea.contacts.index'], trans('cortex/contacts::common.contacts'), 10, 'fa fa-id-card-o')->can('list-contacts');
+        $dropdown->route(['managerarea.contacts.index'], trans('cortex/contacts::common.contacts'), 10, 'fa fa-id-card-o')->ifCan('list-contacts')->activateOnRoute('managerarea.contacts');
     });
 });
