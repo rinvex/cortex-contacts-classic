@@ -63,7 +63,7 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#details-tab" data-toggle="tab">{{ trans('cortex/contacts::common.details') }}</a></li>
-                    @if($contact->exists) <li><a href="{{ route('adminarea.contacts.logs', ['contact' => $contact]) }}">{{ trans('cortex/contacts::common.logs') }}</a></li> @endif
+                    @if($contact->exists) <li><a href="#logs-tab" data-toggle="tab">{{ trans('cortex/contacts::common.logs') }}</a></li> @endif
                     @if($contact->exists && $currentUser->can('delete-contacts', $contact)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-item-href="{{ route('adminarea.contacts.delete', ['contact' => $contact]) }}" data-item-name="{{ str_slug($contact->name) }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
                 </ul>
 
@@ -405,6 +405,14 @@
 
                     </div>
 
+                    @if($contact->exists)
+
+                        <div class="tab-pane" id="logs-tab">
+                            {!! $logs->table(['class' => 'table table-striped table-hover responsive dataTableBuilder', 'id' => 'logs-table']) !!}
+                        </div>
+
+                    @endif
+
                 </div>
 
             </div>
@@ -414,3 +422,19 @@
     </div>
 
 @endsection
+
+@if($contact->exists)
+
+    @push('styles')
+        <link href="{{ mix('css/datatables.css', 'assets') }}" rel="stylesheet">
+    @endpush
+
+    @push('scripts-vendor')
+        <script src="{{ mix('js/datatables.js', 'assets') }}" type="text/javascript"></script>
+    @endpush
+
+    @push('scripts')
+        {!! $logs->scripts() !!}
+    @endpush
+
+@endif

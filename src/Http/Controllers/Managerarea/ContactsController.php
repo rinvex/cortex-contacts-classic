@@ -34,23 +34,17 @@ class ContactsController extends AuthorizedController
     }
 
     /**
-     * Display a listing of the resource logs.
+     * Get a listing of the resource logs.
      *
-     * @param \Rinvex\Contacts\Contracts\ContactContract  $category
-     * @param \Cortex\Foundation\DataTables\LogsDataTable $logsDataTable
+     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
      *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    public function logs(ContactContract $contact, LogsDataTable $logsDataTable)
+    public function logs(ContactContract $contact)
     {
-        return $logsDataTable->with([
-            'tab' => 'logs',
-            'type' => 'contacts',
-            'resource' => $contact,
-            'title' => $contact->name,
-            'id' => 'cortex-contacts-logs',
-            'phrase' => trans('cortex/contacts::common.contacts'),
-        ])->render('cortex/tenants::managerarea.pages.datatable-tab');
+        return request()->ajax() && request()->wantsJson()
+            ? app(LogsDataTable::class)->with(['resource' => $contact])->ajax()
+            : intend(['url' => route('adminarea.contacts.edit', ['contact' => $contact]).'#logs-tab']);
     }
 
     /**
@@ -109,8 +103,9 @@ class ContactsController extends AuthorizedController
         $sources = app('rinvex.contacts.contact')->distinct()->get(['source'])->pluck('source', 'source')->toArray();
         $methods = app('rinvex.contacts.contact')->distinct()->get(['method'])->pluck('method', 'method')->toArray();
         $genders = ['m' => trans('cortex/contacts::common.male'), 'f' => trans('cortex/contacts::common.female')];
+        $logs = app(LogsDataTable::class)->with(['id' => 'logs-table'])->html()->minifiedAjax(route('managerarea.contacts.logs', ['contact' => $contact]));
 
-        return view('cortex/contacts::managerarea.pages.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods'));
+        return view('cortex/contacts::managerarea.pages.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods', 'logs'));
     }
 
     /**
