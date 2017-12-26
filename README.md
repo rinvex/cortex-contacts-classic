@@ -3,11 +3,11 @@
 **Cortex Contacts** is a frontend layer for the polymorphic contact management system. You can add contacts to any eloquent model with ease.
 
 [![Packagist](https://img.shields.io/packagist/v/cortex/contacts.svg?label=Packagist&style=flat-square)](https://packagist.org/packages/cortex/contacts)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/cortex/contacts.svg?label=Scrutinizer&style=flat-square)](https://scrutinizer-ci.com/g/cortex/contacts/)
-[![Code Climate](https://img.shields.io/codeclimate/github/cortex/contacts.svg?label=CodeClimate&style=flat-square)](https://codeclimate.com/github/cortex/contacts)
-[![Travis](https://img.shields.io/travis/cortex/contacts.svg?label=TravisCI&style=flat-square)](https://travis-ci.org/cortex/contacts)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/rinvex/cortex-contacts.svg?label=Scrutinizer&style=flat-square)](https://scrutinizer-ci.com/g/rinvex/cortex-contacts/)
+[![Code Climate](https://img.shields.io/codeclimate/github/rinvex/cortex-contacts.svg?label=CodeClimate&style=flat-square)](https://codeclimate.com/github/rinvex/cortex-contacts)
+[![Travis](https://img.shields.io/travis/rinvex/cortex-contacts.svg?label=TravisCI&style=flat-square)](https://travis-ci.org/rinvex/cortex-contacts)
 [![StyleCI](https://styleci.io/repos/100120130/shield)](https://styleci.io/repos/100120130)
-[![License](https://img.shields.io/packagist/l/cortex/contacts.svg?label=License&style=flat-square)](https://github.com/cortex/contacts/blob/develop/LICENSE)
+[![License](https://img.shields.io/packagist/l/cortex/contacts.svg?label=License&style=flat-square)](https://github.com/rinvex/cortex-contacts/blob/develop/LICENSE)
 
 
 ## Installation and Usage
