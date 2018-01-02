@@ -52,9 +52,7 @@
 
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>{{ $contact->exists ? $contact->name : trans('cortex/contacts::common.create_contact') }}</h1>
-            <!-- Breadcrumbs -->
-            {{ Breadcrumbs::render() }}
+            <h1>{{ Breadcrumbs::render() }}</h1>
         </section>
 
         <!-- Main content -->
