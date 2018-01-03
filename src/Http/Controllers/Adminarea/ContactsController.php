@@ -102,7 +102,7 @@ class ContactsController extends AuthorizedController
     protected function process(Request $request, ContactContract $contact)
     {
         // Prepare required input fields
-        $data = $request->all();
+        $data = $request->validated();
 
         // Save contact
         $contact->fill($data)->save();
