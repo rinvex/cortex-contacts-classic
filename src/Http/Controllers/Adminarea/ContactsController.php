@@ -48,6 +48,25 @@ class ContactsController extends AuthorizedController
     }
 
     /**
+     * Show the form for create/update of the given resource.
+     *
+     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function form(ContactContract $contact)
+    {
+        $countries = countries();
+        $languages = collect(languages())->pluck('name', 'iso_639_1');
+        $sources = app('rinvex.contacts.contact')->distinct()->get(['source'])->pluck('source', 'source')->toArray();
+        $methods = app('rinvex.contacts.contact')->distinct()->get(['method'])->pluck('method', 'method')->toArray();
+        $genders = ['m' => trans('cortex/contacts::common.male'), 'f' => trans('cortex/contacts::common.female')];
+        $logs = app(LogsDataTable::class)->with(['id' => 'logs-table'])->html()->minifiedAjax(route('adminarea.contacts.logs', ['contact' => $contact]));
+
+        return view('cortex/contacts::adminarea.pages.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods', 'logs'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param \Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest $request
@@ -73,42 +92,6 @@ class ContactsController extends AuthorizedController
     }
 
     /**
-     * Delete the given resource from storage.
-     *
-     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function delete(ContactContract $contact)
-    {
-        $contact->delete();
-
-        return intend([
-            'url' => route('adminarea.contacts.index'),
-            'with' => ['warning' => trans('cortex/contacts::messages.contact.deleted', ['slug' => $contact->slug])],
-        ]);
-    }
-
-    /**
-     * Show the form for create/update of the given resource.
-     *
-     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function form(ContactContract $contact)
-    {
-        $countries = countries();
-        $languages = collect(languages())->pluck('name', 'iso_639_1');
-        $sources = app('rinvex.contacts.contact')->distinct()->get(['source'])->pluck('source', 'source')->toArray();
-        $methods = app('rinvex.contacts.contact')->distinct()->get(['method'])->pluck('method', 'method')->toArray();
-        $genders = ['m' => trans('cortex/contacts::common.male'), 'f' => trans('cortex/contacts::common.female')];
-        $logs = app(LogsDataTable::class)->with(['id' => 'logs-table'])->html()->minifiedAjax(route('adminarea.contacts.logs', ['contact' => $contact]));
-
-        return view('cortex/contacts::adminarea.pages.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods', 'logs'));
-    }
-
-    /**
      * Process the form for store/update of the given resource.
      *
      * @param \Illuminate\Http\Request                   $request
@@ -127,6 +110,23 @@ class ContactsController extends AuthorizedController
         return intend([
             'url' => route('adminarea.contacts.index'),
             'with' => ['success' => trans('cortex/contacts::messages.contact.saved', ['slug' => $contact->slug])],
+        ]);
+    }
+
+    /**
+     * Delete the given resource from storage.
+     *
+     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(ContactContract $contact)
+    {
+        $contact->delete();
+
+        return intend([
+            'url' => route('adminarea.contacts.index'),
+            'with' => ['warning' => trans('cortex/contacts::messages.contact.deleted', ['slug' => $contact->slug])],
         ]);
     }
 }
