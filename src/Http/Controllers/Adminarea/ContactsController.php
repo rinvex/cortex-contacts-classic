@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\Http\Controllers\Adminarea;
 
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Http\FormRequest;
 use Rinvex\Contacts\Contracts\ContactContract;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Contacts\DataTables\Adminarea\ContactsDataTable;
@@ -94,12 +94,12 @@ class ContactsController extends AuthorizedController
     /**
      * Process the form for store/update of the given resource.
      *
-     * @param \Illuminate\Http\Request                   $request
+     * @param \Illuminate\Foundation\Http\FormRequest    $request
      * @param \Rinvex\Contacts\Contracts\ContactContract $contact
      *
      * @return \Illuminate\Http\Response
      */
-    protected function process(Request $request, ContactContract $contact)
+    protected function process(FormRequest $request, ContactContract $contact)
     {
         // Prepare required input fields
         $data = $request->validated();
