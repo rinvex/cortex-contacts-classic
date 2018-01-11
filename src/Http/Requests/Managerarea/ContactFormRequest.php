@@ -27,7 +27,7 @@ class ContactFormRequest extends FormRequest
     {
         $data = $this->all();
 
-        $data['entity_id'] = $this->user()->id;
+        $data['entity_id'] = $this->user()->getKey();
         $data['entity_type'] = $this->user()->getMorphClass();
 
         $this->replace($data);
