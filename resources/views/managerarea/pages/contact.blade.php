@@ -6,7 +6,7 @@
     {{ config('app.name') }} » {{ trans('cortex/tenants::common.managerarea') }} » {{ trans('cortex/contacts::common.contacts') }} » {{ $contact->exists ? $contact->name : trans('cortex/contacts::common.create_contact') }}
 @stop
 
-@push('scripts')
+@push('inline-scripts')
     {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest::class)->selector("#managerarea-contacts-create-form, #managerarea-contacts-{$contact->getKey()}-update-form") !!}
 
     <script>
@@ -427,11 +427,11 @@
         <link href="{{ mix('css/datatables.css', 'assets') }}" rel="stylesheet">
     @endpush
 
-    @push('scripts-vendor')
+    @push('vendor-scripts')
         <script src="{{ mix('js/datatables.js', 'assets') }}" type="text/javascript"></script>
     @endpush
 
-    @push('scripts')
+    @push('inline-scripts')
         {!! $logs->scripts() !!}
     @endpush
 
