@@ -7,7 +7,7 @@
 @stop
 
 @push('scripts')
-    {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest::class)->selector('#adminarea-contacts-save') !!}
+    {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest::class)->selector("#adminarea-contacts-create-form, #adminarea-contacts-{$contact->getKey()}-update-form") !!}
 
     <script>
         (function($) {
@@ -70,9 +70,9 @@
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($contact->exists)
-                            {{ Form::model($contact, ['url' => route('adminarea.contacts.update', ['contact' => $contact]), 'method' => 'put', 'id' => 'adminarea-contacts-save']) }}
+                            {{ Form::model($contact, ['url' => route('adminarea.contacts.update', ['contact' => $contact]), 'method' => 'put', 'id' => "adminarea-contacts-{$contact->getKey()}-update-form"]) }}
                         @else
-                            {{ Form::model($contact, ['url' => route('adminarea.contacts.store'), 'id' => 'adminarea-contacts-save']) }}
+                            {{ Form::model($contact, ['url' => route('adminarea.contacts.store'), 'id' => 'adminarea-contacts-create-form']) }}
                         @endif
 
                             <div class="row">
@@ -406,7 +406,7 @@
                     @if($contact->exists)
 
                         <div class="tab-pane" id="logs-tab">
-                            {!! $logs->table(['class' => 'table table-striped table-hover responsive dataTableBuilder', 'id' => 'logs-table']) !!}
+                            {!! $logs->table(['class' => 'table table-striped table-hover responsive dataTableBuilder', 'id' => "adminarea-contacts-{$contact->getKey()}-logs-table"]) !!}
                         </div>
 
                     @endif

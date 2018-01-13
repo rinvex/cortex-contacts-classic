@@ -28,7 +28,7 @@ class ContactsController extends AuthorizedController
     public function index(ContactsDataTable $contactsDataTable)
     {
         return $contactsDataTable->with([
-            'id' => 'cortex-contacts',
+            'id' => 'adminarea-contacts-index-table',
             'phrase' => trans('cortex/contacts::common.contacts'),
         ])->render('cortex/foundation::adminarea.pages.datatable');
     }
@@ -61,7 +61,7 @@ class ContactsController extends AuthorizedController
         $sources = app('rinvex.contacts.contact')->distinct()->get(['source'])->pluck('source', 'source')->toArray();
         $methods = app('rinvex.contacts.contact')->distinct()->get(['method'])->pluck('method', 'method')->toArray();
         $genders = ['m' => trans('cortex/contacts::common.male'), 'f' => trans('cortex/contacts::common.female')];
-        $logs = app(LogsDataTable::class)->with(['id' => 'logs-table'])->html()->minifiedAjax(route('adminarea.contacts.logs', ['contact' => $contact]));
+        $logs = app(LogsDataTable::class)->with(['id' => "adminarea-contacts-{$contact->getKey()}-logs-table"])->html()->minifiedAjax(route('adminarea.contacts.logs', ['contact' => $contact]));
 
         return view('cortex/contacts::adminarea.pages.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods', 'logs'));
     }
