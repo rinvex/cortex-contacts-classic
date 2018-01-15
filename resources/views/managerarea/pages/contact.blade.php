@@ -47,7 +47,7 @@
 @section('content')
 
     @if($contact->exists)
-        @include('cortex/foundation::common.partials.confirm-deletion', ['type' => 'contact'])
+        @include('cortex/foundation::common.partials.confirm-deletion')
     @endif
 
     <div class="content-wrapper">
@@ -62,7 +62,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#details-tab" data-toggle="tab">{{ trans('cortex/contacts::common.details') }}</a></li>
                     @if($contact->exists) <li><a href="#logs-tab" data-toggle="tab">{{ trans('cortex/contacts::common.logs') }}</a></li> @endif
-                    @if($contact->exists && $currentUser->can('delete-contacts', $contact)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-item-href="{{ route('managerarea.contacts.delete', ['contact' => $contact]) }}" data-item-name="{{ str_slug($contact->name) }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
+                    @if($contact->exists && $currentUser->can('delete-contacts', $contact)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-modal-action="{{ route('managerarea.contacts.delete', ['contact' => $contact]) }}" data-modal-title="{!! trans('cortex/foundation::messages.delete_confirmation_title') !!}" data-modal-body="{!! trans('cortex/foundation::messages.delete_confirmation_body', ['type' => 'contact', 'name' => $contact->name]) !!}" title="{{ trans('cortex/foundation::common.delete') }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
                 </ul>
 
                 <div class="tab-content">
