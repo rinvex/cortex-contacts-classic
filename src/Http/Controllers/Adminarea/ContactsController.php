@@ -56,7 +56,13 @@ class ContactsController extends AuthorizedController
      */
     public function form(ContactContract $contact)
     {
-        $countries = countries();
+        $countries = collect(countries())->map(function ($country, $code) {
+            return [
+                'id' => $code,
+                'text' => $country['name'],
+                'emoji' => $country['emoji'],
+            ];
+        })->values();
         $languages = collect(languages())->pluck('name', 'iso_639_1');
         $sources = app('rinvex.contacts.contact')->distinct()->get(['source'])->pluck('source', 'source')->toArray();
         $methods = app('rinvex.contacts.contact')->distinct()->get(['method'])->pluck('method', 'method')->toArray();

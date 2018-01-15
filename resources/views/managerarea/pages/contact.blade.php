@@ -10,36 +10,8 @@
     {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest::class)->selector("#managerarea-contacts-create-form, #managerarea-contacts-{$contact->getKey()}-update-form") !!}
 
     <script>
-        (function($) {
-            $(function() {
-                var countries = [
-                        @foreach($countries as $code => $country)
-                    { id: '{{ $code }}', text: '{{ $country['name'] }}', emoji: '{{ $country['emoji'] }}' },
-                    @endforeach
-                ];
-
-                function formatCountry (country) {
-                    if (! country.id) {
-                        return country.text;
-                    }
-
-                    var $country = $(
-                        '<span style="padding-right: 10px">' + country.emoji + '</span>' +
-                        '<span>' + country.text + '</span>'
-                    );
-
-                    return $country;
-                };
-
-                $("select[name='country_code']").select2({
-                    placeholder: "Select a country",
-                    templateSelection: formatCountry,
-                    templateResult: formatCountry,
-                    data: countries
-                }).val('{{ $contact->country_code }}').trigger('change');
-
-            });
-        })(jQuery);
+        window.countries = {!! $countries !!};
+        window.selectedCountry = '{{ old('country_code', $contact->country_code) }}';
     </script>
 @endpush
 
