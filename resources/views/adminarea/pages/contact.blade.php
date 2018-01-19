@@ -4,7 +4,7 @@
 {{-- Page Title --}}
 @section('title')
     {{ config('app.name') }} » {{ trans('cortex/foundation::common.adminarea') }} » {{ trans('cortex/contacts::common.contacts') }} » {{ $contact->exists ? $contact->name : trans('cortex/contacts::common.create_contact') }}
-@stop
+@endsection
 
 @push('inline-scripts')
     {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest::class)->selector("#adminarea-contacts-create-form, #adminarea-contacts-{$contact->getKey()}-update-form") !!}
