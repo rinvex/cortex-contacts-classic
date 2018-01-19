@@ -19,7 +19,7 @@ return [
     'method' => 'Method',
     'name_prefix' => 'Name Prefix',
     'name_suffix' => 'Name Suffix',
-    'job_title' => 'Job Title',
+    'title' => 'Title',
     'skype' => 'Skype',
     'twitter' => 'Twitter',
     'facebook' => 'Facebook',

@@ -21,7 +21,7 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @property string                                                                          $middle_name
  * @property string                                                                          $last_name
  * @property string                                                                          $name_suffix
- * @property string                                                                          $job_title
+ * @property string                                                                          $title
  * @property string                                                                          $email
  * @property string                                                                          $phone
  * @property string                                                                          $fax
@@ -59,7 +59,6 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereGender($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereGooglePlus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereJobTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereLanguageCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereLastName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereLinkedin($value)
@@ -70,6 +69,7 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereSkype($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereSource($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereTwitter($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact withAllTenants($tenants, $group = null)
@@ -106,7 +106,7 @@ class Contact extends BaseContact
         'middle_name',
         'last_name',
         'name_suffix',
-        'job_title',
+        'title',
         'email',
         'phone',
         'fax',
