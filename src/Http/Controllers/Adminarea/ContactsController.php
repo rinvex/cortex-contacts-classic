@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\Http\Controllers\Adminarea;
 
+use Rinvex\Contacts\Models\Contact;
 use Illuminate\Foundation\Http\FormRequest;
-use Rinvex\Contacts\Contracts\ContactContract;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Contacts\DataTables\Adminarea\ContactsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
@@ -36,11 +36,11 @@ class ContactsController extends AuthorizedController
     /**
      * Get a listing of the resource logs.
      *
-     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
+     * @param \Rinvex\Contacts\Models\Contact $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function logs(ContactContract $contact)
+    public function logs(Contact $contact)
     {
         return request()->ajax() && request()->wantsJson()
             ? app(LogsDataTable::class)->with(['resource' => $contact])->ajax()
@@ -50,11 +50,11 @@ class ContactsController extends AuthorizedController
     /**
      * Show the form for create/update of the given resource.
      *
-     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
+     * @param \Rinvex\Contacts\Models\Contact $contact
      *
      * @return \Illuminate\View\View
      */
-    public function form(ContactContract $contact)
+    public function form(Contact $contact)
     {
         $countries = collect(countries())->map(function ($country, $code) {
             return [
@@ -88,11 +88,11 @@ class ContactsController extends AuthorizedController
      * Update the given resource in storage.
      *
      * @param \Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest $request
-     * @param \Rinvex\Contacts\Contracts\ContactContract                  $contact
+     * @param \Rinvex\Contacts\Models\Contact                  $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function update(ContactFormRequest $request, ContactContract $contact)
+    public function update(ContactFormRequest $request, Contact $contact)
     {
         return $this->process($request, $contact);
     }
@@ -101,11 +101,11 @@ class ContactsController extends AuthorizedController
      * Process the form for store/update of the given resource.
      *
      * @param \Illuminate\Foundation\Http\FormRequest    $request
-     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
+     * @param \Rinvex\Contacts\Models\Contact $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    protected function process(FormRequest $request, ContactContract $contact)
+    protected function process(FormRequest $request, Contact $contact)
     {
         // Prepare required input fields
         $data = $request->validated();
@@ -122,11 +122,11 @@ class ContactsController extends AuthorizedController
     /**
      * Delete the given resource from storage.
      *
-     * @param \Rinvex\Contacts\Contracts\ContactContract $contact
+     * @param \Rinvex\Contacts\Models\Contact $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function delete(ContactContract $contact)
+    public function delete(Contact $contact)
     {
         $contact->delete();
 

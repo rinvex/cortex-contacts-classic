@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\Policies;
 
-use Rinvex\Fort\Contracts\UserContract;
-use Rinvex\Contacts\Contracts\ContactContract;
+use Rinvex\Fort\Models\User;
+use Rinvex\Contacts\Models\Contact;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ContactPolicy
@@ -16,11 +16,11 @@ class ContactPolicy
      * Determine whether the user can list contacts.
      *
      * @param string                              $ability
-     * @param \Rinvex\Fort\Contracts\UserContract $user
+     * @param \Rinvex\Fort\Models\User $user
      *
      * @return bool
      */
-    public function list($ability, UserContract $user): bool
+    public function list($ability, User $user): bool
     {
         return $user->allAbilities->pluck('slug')->contains($ability);
     }
@@ -29,11 +29,11 @@ class ContactPolicy
      * Determine whether the user can create contacts.
      *
      * @param string                              $ability
-     * @param \Rinvex\Fort\Contracts\UserContract $user
+     * @param \Rinvex\Fort\Models\User $user
      *
      * @return bool
      */
-    public function create($ability, UserContract $user): bool
+    public function create($ability, User $user): bool
     {
         return $user->allAbilities->pluck('slug')->contains($ability);
     }
@@ -42,12 +42,12 @@ class ContactPolicy
      * Determine whether the user can update the contact.
      *
      * @param string                                     $ability
-     * @param \Rinvex\Fort\Contracts\UserContract        $user
-     * @param \Rinvex\Contacts\Contracts\ContactContract $resource
+     * @param \Rinvex\Fort\Models\User        $user
+     * @param \Rinvex\Contacts\Models\Contact $resource
      *
      * @return bool
      */
-    public function update($ability, UserContract $user, ContactContract $resource): bool
+    public function update($ability, User $user, Contact $resource): bool
     {
         return $user->allAbilities->pluck('slug')->contains($ability);   // User can update contacts
     }
@@ -56,12 +56,12 @@ class ContactPolicy
      * Determine whether the user can delete the contact.
      *
      * @param string                                     $ability
-     * @param \Rinvex\Fort\Contracts\UserContract        $user
-     * @param \Rinvex\Contacts\Contracts\ContactContract $resource
+     * @param \Rinvex\Fort\Models\User        $user
+     * @param \Rinvex\Contacts\Models\Contact $resource
      *
      * @return bool
      */
-    public function delete($ability, UserContract $user, ContactContract $resource): bool
+    public function delete($ability, User $user, Contact $resource): bool
     {
         return $user->allAbilities->pluck('slug')->contains($ability);   // User can delete contacts
     }

@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Cortex\Contacts\Transformers\Adminarea;
 
 use League\Fractal\TransformerAbstract;
-use Rinvex\Contacts\Contracts\ContactContract;
+use Rinvex\Contacts\Models\Contact;
 
 class ContactTransformer extends TransformerAbstract
 {
     /**
      * @return array
      */
-    public function transform(ContactContract $contact): array
+    public function transform(Contact $contact): array
     {
         return [
             'id' => (int) $contact->getKey(),
