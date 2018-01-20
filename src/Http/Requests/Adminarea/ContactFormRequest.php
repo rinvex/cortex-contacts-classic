@@ -13,7 +13,7 @@ class ContactFormRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -38,7 +38,7 @@ class ContactFormRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         $contact = $this->route('contact') ?? app('rinvex.contacts.contact');
         $contact->updateRulesUniques();

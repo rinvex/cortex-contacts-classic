@@ -12,7 +12,7 @@ class ContactTransformer extends TransformerAbstract
     /**
      * @return array
      */
-    public function transform(ContactContract $contact)
+    public function transform(ContactContract $contact): array
     {
         return [
             'id' => (int) $contact->getKey(),
