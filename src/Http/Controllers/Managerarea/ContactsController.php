@@ -38,7 +38,7 @@ class ContactsController extends AuthorizedController
      *
      * @param \Rinvex\Contacts\Contracts\ContactContract $contact
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function logs(ContactContract $contact)
     {
@@ -52,7 +52,7 @@ class ContactsController extends AuthorizedController
      *
      * @param \Rinvex\Contacts\Contracts\ContactContract $contact
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function form(ContactContract $contact)
     {
@@ -77,7 +77,7 @@ class ContactsController extends AuthorizedController
      *
      * @param \Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function store(ContactFormRequest $request)
     {
@@ -90,7 +90,7 @@ class ContactsController extends AuthorizedController
      * @param \Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest $request
      * @param \Rinvex\Contacts\Contracts\ContactContract                    $contact
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function update(ContactFormRequest $request, ContactContract $contact)
     {
@@ -103,7 +103,7 @@ class ContactsController extends AuthorizedController
      * @param \Illuminate\Foundation\Http\FormRequest    $request
      * @param \Rinvex\Contacts\Contracts\ContactContract $contact
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     protected function process(FormRequest $request, ContactContract $contact)
     {
@@ -124,7 +124,7 @@ class ContactsController extends AuthorizedController
      *
      * @param \Rinvex\Contacts\Contracts\ContactContract $contact
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function delete(ContactContract $contact)
     {
