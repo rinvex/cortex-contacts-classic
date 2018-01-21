@@ -15,7 +15,7 @@ class ContactPolicy
     /**
      * Determine whether the user can list contacts.
      *
-     * @param string                              $ability
+     * @param string                   $ability
      * @param \Rinvex\Fort\Models\User $user
      *
      * @return bool
@@ -28,7 +28,7 @@ class ContactPolicy
     /**
      * Determine whether the user can create contacts.
      *
-     * @param string                              $ability
+     * @param string                   $ability
      * @param \Rinvex\Fort\Models\User $user
      *
      * @return bool
@@ -41,7 +41,7 @@ class ContactPolicy
     /**
      * Determine whether the user can update the contact.
      *
-     * @param string                                     $ability
+     * @param string                          $ability
      * @param \Rinvex\Fort\Models\User        $user
      * @param \Rinvex\Contacts\Models\Contact $resource
      *
@@ -55,7 +55,7 @@ class ContactPolicy
     /**
      * Determine whether the user can delete the contact.
      *
-     * @param string                                     $ability
+     * @param string                          $ability
      * @param \Rinvex\Fort\Models\User        $user
      * @param \Rinvex\Contacts\Models\Contact $resource
      *

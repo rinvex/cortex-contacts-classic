@@ -88,7 +88,7 @@ class ContactsController extends AuthorizedController
      * Update the given resource in storage.
      *
      * @param \Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest $request
-     * @param \Rinvex\Contacts\Models\Contact                    $contact
+     * @param \Rinvex\Contacts\Models\Contact                               $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -100,8 +100,8 @@ class ContactsController extends AuthorizedController
     /**
      * Process the form for store/update of the given resource.
      *
-     * @param \Illuminate\Foundation\Http\FormRequest    $request
-     * @param \Rinvex\Contacts\Models\Contact $contact
+     * @param \Illuminate\Foundation\Http\FormRequest $request
+     * @param \Rinvex\Contacts\Models\Contact         $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
