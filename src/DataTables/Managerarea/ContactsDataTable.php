@@ -6,7 +6,6 @@ namespace Cortex\Contacts\DataTables\Managerarea;
 
 use Rinvex\Contacts\Models\Contact;
 use Cortex\Foundation\DataTables\AbstractDataTable;
-use Cortex\Contacts\Transformers\Managerarea\ContactTransformer;
 
 class ContactsDataTable extends AbstractDataTable
 {
@@ -14,11 +13,6 @@ class ContactsDataTable extends AbstractDataTable
      * {@inheritdoc}
      */
     protected $model = Contact::class;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected $transformer = ContactTransformer::class;
 
     /**
      * Get columns.
