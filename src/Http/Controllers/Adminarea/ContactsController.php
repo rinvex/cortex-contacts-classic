@@ -40,11 +40,14 @@ class ContactsController extends AuthorizedController
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function logs(Contact $contact)
+    public function logs(Contact $contact, LogsDataTable $logsDataTable)
     {
-        return request()->ajax() && request()->wantsJson()
-            ? app(LogsDataTable::class)->with(['resource' => $contact])->ajax()
-            : intend(['url' => route('adminarea.contacts.edit', ['contact' => $contact]).'#logs-tab']);
+        return $logsDataTable->with([
+            'resource' => $contact,
+            'tabs' => 'adminarea.contacts.tabs',
+            'phrase' => trans('cortex/contacts::common.contacts'),
+            'id' => "adminarea-contacts-{$contact->getKey()}-logs-table",
+        ])->render('cortex/foundation::adminarea.pages.datatable-logs');
     }
 
     /**

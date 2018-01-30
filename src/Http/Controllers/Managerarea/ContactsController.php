@@ -40,11 +40,14 @@ class ContactsController extends AuthorizedController
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function logs(Contact $contact)
+    public function logs(Contact $contact, LogsDataTable $logsDataTable)
     {
-        return request()->ajax() && request()->wantsJson()
-            ? app(LogsDataTable::class)->with(['resource' => $contact])->ajax()
-            : intend(['url' => route('adminarea.contacts.edit', ['contact' => $contact]).'#logs-tab']);
+        return $logsDataTable->with([
+            'resource' => $contact,
+            'tabs' => 'managerarea.contacts.tabs',
+            'phrase' => trans('cortex/contacts::common.contacts'),
+            'id' => "managerarea-contacts-{$contact->getKey()}-logs-table",
+        ])->render('cortex/tenants::managerarea.pages.datatable-logs');
     }
 
     /**
@@ -67,9 +70,8 @@ class ContactsController extends AuthorizedController
         $sources = app('rinvex.contacts.contact')->distinct()->get(['source'])->pluck('source', 'source')->toArray();
         $methods = app('rinvex.contacts.contact')->distinct()->get(['method'])->pluck('method', 'method')->toArray();
         $genders = ['m' => trans('cortex/contacts::common.male'), 'f' => trans('cortex/contacts::common.female')];
-        $logs = app(LogsDataTable::class)->with(['id' => "managerarea-contacts-{$contact->getKey()}-logs-table"])->html()->minifiedAjax(route('managerarea.contacts.logs', ['contact' => $contact]));
 
-        return view('cortex/contacts::managerarea.pages.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods', 'logs'));
+        return view('cortex/contacts::managerarea.pages.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods'));
     }
 
     /**
