@@ -69,7 +69,7 @@ class ContactsController extends AuthorizedController
         $languages = collect(languages())->pluck('name', 'iso_639_1');
         $sources = app('rinvex.contacts.contact')->distinct()->get(['source'])->pluck('source', 'source')->toArray();
         $methods = app('rinvex.contacts.contact')->distinct()->get(['method'])->pluck('method', 'method')->toArray();
-        $genders = ['m' => trans('cortex/contacts::common.male'), 'f' => trans('cortex/contacts::common.female')];
+        $genders = ['male' => trans('cortex/contacts::common.male'), 'female' => trans('cortex/contacts::common.female')];
         $logs = app(LogsDataTable::class)->with(['id' => "adminarea-contacts-{$contact->getKey()}-logs-table"])->html()->minifiedAjax(route('adminarea.contacts.logs', ['contact' => $contact]));
 
         return view('cortex/contacts::adminarea.pages.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods', 'logs'));
