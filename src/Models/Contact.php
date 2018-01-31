@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cortex\Contacts\Models;
 
 use Rinvex\Tenants\Traits\Tenantable;
+use Cortex\Foundation\Traits\Auditable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Contacts\Models\Contact as BaseContact;
 
@@ -81,6 +82,7 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  */
 class Contact extends BaseContact
 {
+    use Auditable;
     use Tenantable;
     use LogsActivity;
 
