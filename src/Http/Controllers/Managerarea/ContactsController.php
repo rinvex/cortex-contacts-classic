@@ -16,7 +16,7 @@ class ContactsController extends AuthorizedController
     /**
      * {@inheritdoc}
      */
-    protected $resource = 'contacts';
+    protected $resource = 'contact';
 
     /**
      * Display a listing of the resource.
