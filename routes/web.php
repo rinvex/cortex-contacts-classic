@@ -12,9 +12,9 @@ Route::domain(domain())->group(function () {
         // Contacts Routes
         Route::name('contacts.')->prefix('contacts')->group(function () {
             Route::get('/')->name('index')->uses('ContactsController@index');
-            Route::get('create')->name('create')->uses('ContactsController@form');
+            Route::get('create')->name('create')->uses('ContactsController@create');
             Route::post('create')->name('store')->uses('ContactsController@store');
-            Route::get('{contact}')->name('edit')->uses('ContactsController@form');
+            Route::get('{contact}')->name('edit')->uses('ContactsController@edit');
             Route::put('{contact}')->name('update')->uses('ContactsController@update');
             Route::get('{contact}/logs')->name('logs')->uses('ContactsController@logs');
             Route::delete('{contact}')->name('destroy')->uses('ContactsController@destroy');
@@ -35,9 +35,9 @@ Route::domain('{subdomain}.'.domain())->group(function () {
             // Contacts Routes
             Route::name('contacts.')->prefix('contacts')->group(function () {
                 Route::get('/')->name('index')->uses('ContactsController@index');
-                Route::get('create')->name('create')->uses('ContactsController@form');
+                Route::get('create')->name('create')->uses('ContactsController@create');
                 Route::post('create')->name('store')->uses('ContactsController@store');
-                Route::get('{contact}')->name('edit')->uses('ContactsController@form');
+                Route::get('{contact}')->name('edit')->uses('ContactsController@edit');
                 Route::put('{contact}')->name('update')->uses('ContactsController@update');
                 Route::get('{contact}/logs')->name('logs')->uses('ContactsController@logs');
                 Route::delete('{contact}')->name('destroy')->uses('ContactsController@destroy');

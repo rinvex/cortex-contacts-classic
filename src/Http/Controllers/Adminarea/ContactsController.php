@@ -57,7 +57,31 @@ class ContactsController extends AuthorizedController
      *
      * @return \Illuminate\View\View
      */
-    public function form(Contact $contact)
+    public function create(Contact $contact)
+    {
+        return $this->form($contact);
+    }
+
+    /**
+     * Edit given contact.
+     *
+     * @param \Cortex\Contacts\Models\Contact $contact
+     *
+     * @return \Illuminate\View\View
+     */
+    public function edit(Contact $contact)
+    {
+        return $this->form($contact);
+    }
+
+    /**
+     * Show contact create/edit form.
+     *
+     * @param \Cortex\Contacts\Models\Contact $contact
+     *
+     * @return \Illuminate\View\View
+     */
+    protected function form(Contact $contact)
     {
         $countries = collect(countries())->map(function ($country, $code) {
             return [
