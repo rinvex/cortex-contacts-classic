@@ -19,7 +19,7 @@ class ContactsController extends AuthorizedController
     protected $resource = 'contact';
 
     /**
-     * Display a listing of the resource.
+     * List all contacts.
      *
      * @param \Cortex\Contacts\DataTables\Managerarea\ContactsDataTable $contactsDataTable
      *
@@ -34,9 +34,10 @@ class ContactsController extends AuthorizedController
     }
 
     /**
-     * Get a listing of the resource logs.
+     * List contact logs.
      *
-     * @param \Rinvex\Contacts\Models\Contact $contact
+     * @param \Cortex\Contacts\Models\Contact             $contact
+     * @param \Cortex\Foundation\DataTables\LogsDataTable $logsDataTable
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -51,9 +52,9 @@ class ContactsController extends AuthorizedController
     }
 
     /**
-     * Show the form for create/update of the given resource.
+     * Create new contact.
      *
-     * @param \Rinvex\Contacts\Models\Contact $contact
+     * @param \Cortex\Contacts\Models\Contact $contact
      *
      * @return \Illuminate\View\View
      */
@@ -99,22 +100,23 @@ class ContactsController extends AuthorizedController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store new contact.
      *
      * @param \Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest $request
+     * @param \Cortex\Contacts\Models\Contact                             $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function store(ContactFormRequest $request)
+    public function store(ContactFormRequest $request, Contact $contact)
     {
-        return $this->process($request, app('rinvex.contacts.contact'));
+        return $this->process($request, $contact);
     }
 
     /**
-     * Update the given resource in storage.
+     * Update given contact.
      *
      * @param \Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest $request
-     * @param \Rinvex\Contacts\Models\Contact                               $contact
+     * @param \Cortex\Contacts\Models\Contact                             $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -124,10 +126,10 @@ class ContactsController extends AuthorizedController
     }
 
     /**
-     * Process the form for store/update of the given resource.
+     * Process stored/updated contact.
      *
      * @param \Illuminate\Foundation\Http\FormRequest $request
-     * @param \Rinvex\Contacts\Models\Contact         $contact
+     * @param \Cortex\Contacts\Models\Contact         $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -146,9 +148,9 @@ class ContactsController extends AuthorizedController
     }
 
     /**
-     * Delete the given resource from storage.
+     * Destroy given contact.
      *
-     * @param \Rinvex\Contacts\Models\Contact $contact
+     * @param \Cortex\Contacts\Models\Contact $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
