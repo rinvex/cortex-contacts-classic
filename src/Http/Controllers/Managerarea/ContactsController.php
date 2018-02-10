@@ -117,7 +117,7 @@ class ContactsController extends AuthorizedController
 
         return intend([
             'url' => route('managerarea.contacts.index'),
-            'with' => ['success' => trans('cortex/contacts::messages.contact.saved', ['slug' => $contact->slug])],
+            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => 'contact', 'id' => $contact->slug])],
         ]);
     }
 
@@ -134,7 +134,7 @@ class ContactsController extends AuthorizedController
 
         return intend([
             'url' => route('managerarea.contacts.index'),
-            'with' => ['warning' => trans('cortex/contacts::messages.contact.deleted', ['slug' => $contact->slug])],
+            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => 'contact', 'id' => $contact->slug])],
         ]);
     }
 }
