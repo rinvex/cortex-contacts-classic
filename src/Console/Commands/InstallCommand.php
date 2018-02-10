@@ -32,7 +32,7 @@ class InstallCommand extends Command
         $this->warn($this->description);
 
         $this->call('cortex:migrate:contacts', ['--force' => $this->option('force')]);
-        $this->call('cortex:seed:contacts');
         $this->call('cortex:publish:contacts', ['--force' => $this->option('force')]);
+        $this->call('cortex:seed:contacts');
     }
 }
