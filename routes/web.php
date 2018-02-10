@@ -17,7 +17,7 @@ Route::domain(domain())->group(function () {
             Route::get('{contact}')->name('edit')->uses('ContactsController@form');
             Route::put('{contact}')->name('update')->uses('ContactsController@update');
             Route::get('{contact}/logs')->name('logs')->uses('ContactsController@logs');
-            Route::delete('{contact}')->name('delete')->uses('ContactsController@delete');
+            Route::delete('{contact}')->name('destroy')->uses('ContactsController@destroy');
         });
 
     });
@@ -40,7 +40,7 @@ Route::domain('{subdomain}.'.domain())->group(function () {
                 Route::get('{contact}')->name('edit')->uses('ContactsController@form');
                 Route::put('{contact}')->name('update')->uses('ContactsController@update');
                 Route::get('{contact}/logs')->name('logs')->uses('ContactsController@logs');
-                Route::delete('{contact}')->name('delete')->uses('ContactsController@delete');
+                Route::delete('{contact}')->name('destroy')->uses('ContactsController@destroy');
             });
         });
 });

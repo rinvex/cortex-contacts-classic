@@ -128,7 +128,7 @@ class ContactsController extends AuthorizedController
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function delete(Contact $contact)
+    public function destroy(Contact $contact)
     {
         $contact->delete();
 
