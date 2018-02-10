@@ -98,30 +98,7 @@ class Contact extends BaseContact
      *
      * @var array
      */
-    protected static $logAttributes = [
-        'entity_id',
-        'entity_type',
-        'source',
-        'method',
-        'name_prefix',
-        'first_name',
-        'middle_name',
-        'last_name',
-        'name_suffix',
-        'title',
-        'email',
-        'phone',
-        'fax',
-        'skype',
-        'twitter',
-        'facebook',
-        'google_plus',
-        'linkedin',
-        'country_code',
-        'language_code',
-        'birthday',
-        'gender',
-    ];
+    protected static $logFillable = true;
 
     /**
      * The attributes that are ignored on change.
