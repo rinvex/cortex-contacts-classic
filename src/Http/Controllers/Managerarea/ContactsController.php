@@ -103,7 +103,7 @@ class ContactsController extends AuthorizedController
      * Store new contact.
      *
      * @param \Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest $request
-     * @param \Cortex\Contacts\Models\Contact                             $contact
+     * @param \Cortex\Contacts\Models\Contact                               $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -116,7 +116,7 @@ class ContactsController extends AuthorizedController
      * Update given contact.
      *
      * @param \Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest $request
-     * @param \Cortex\Contacts\Models\Contact                             $contact
+     * @param \Cortex\Contacts\Models\Contact                               $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
