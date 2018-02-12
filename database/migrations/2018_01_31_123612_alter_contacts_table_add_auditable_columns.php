@@ -16,7 +16,7 @@ class AlterContactsTableAddAuditableColumns extends Migration
     public function up()
     {
         Schema::table(config('rinvex.contacts.tables.contacts'), function (Blueprint $table) {
-            $table->auditable(true);
+            $table->auditable();
         });
     }
 
