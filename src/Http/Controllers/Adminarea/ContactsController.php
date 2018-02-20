@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\Http\Controllers\Adminarea;
 
-use Rinvex\Contacts\Models\Contact;
+use Cortex\Contacts\Models\Contact;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Contacts\DataTables\Adminarea\ContactsDataTable;

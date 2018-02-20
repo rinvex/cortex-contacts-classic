@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Rinvex\Contacts\Models\Contact;
+use Cortex\Contacts\Models\Contact;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
 // Adminarea breadcrumbs

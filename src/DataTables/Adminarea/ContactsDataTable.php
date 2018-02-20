@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\DataTables\Adminarea;
 
-use Rinvex\Contacts\Models\Contact;
+use Cortex\Contacts\Models\Contact;
 use Cortex\Foundation\DataTables\AbstractDataTable;
 
 class ContactsDataTable extends AbstractDataTable
