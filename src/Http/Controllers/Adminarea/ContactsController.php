@@ -16,7 +16,7 @@ class ContactsController extends AuthorizedController
     /**
      * {@inheritdoc}
      */
-    protected $resource = 'contact';
+    protected $resource = Contact::class;
 
     /**
      * List all contacts.
