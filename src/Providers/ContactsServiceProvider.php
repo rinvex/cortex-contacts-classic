@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Cortex\Contacts\Providers;
 
 use Illuminate\Routing\Router;
-use Rinvex\Contacts\Models\Contact;
 use Illuminate\Support\ServiceProvider;
 use Cortex\Contacts\Console\Commands\SeedCommand;
 use Cortex\Contacts\Console\Commands\InstallCommand;
@@ -53,7 +52,7 @@ class ContactsServiceProvider extends ServiceProvider
     {
         // Bind route models and constrains
         $router->pattern('contact', '[0-9]+');
-        $router->model('contact', Contact::class);
+        $router->model('contact', config('rinvex.contacts.models.contact'));
 
         // Map relations
         Relation::morphMap([
