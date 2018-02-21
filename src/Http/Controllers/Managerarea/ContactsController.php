@@ -30,7 +30,7 @@ class ContactsController extends AuthorizedController
         return $contactsDataTable->with([
             'id' => 'managerarea-contacts-index-table',
             'phrase' => trans('cortex/contacts::common.contacts'),
-        ])->render('cortex/tenants::managerarea.pages.datatable');
+        ])->render('cortex/foundation::managerarea.pages.datatable');
     }
 
     /**
@@ -48,7 +48,7 @@ class ContactsController extends AuthorizedController
             'tabs' => 'managerarea.contacts.tabs',
             'phrase' => trans('cortex/contacts::common.contacts'),
             'id' => "managerarea-contacts-{$contact->getKey()}-logs-table",
-        ])->render('cortex/tenants::managerarea.pages.datatable-logs');
+        ])->render('cortex/foundation::managerarea.pages.datatable-logs');
     }
 
     /**
