@@ -19,13 +19,13 @@ Menu::register('managerarea.sidebar', function (MenuGenerator $menu, Contact $co
 });
 
 Menu::register('adminarea.contacts.tabs', function (MenuGenerator $menu, Contact $contact) {
-    $menu->route(['adminarea.contacts.create'], trans('cortex/contacts::common.details'))->ifCan('create-contacts')->if(! $contact->exists);
+    $menu->route(['adminarea.contacts.create'], trans('cortex/contacts::common.details'))->ifCan('create', $contact)->if(! $contact->exists);
     $menu->route(['adminarea.contacts.edit', ['contact' => $contact]], trans('cortex/contacts::common.details'))->ifCan('update', $contact)->if($contact->exists);
     $menu->route(['adminarea.contacts.logs', ['contact' => $contact]], trans('cortex/contacts::common.logs'))->ifCan('audit', $contact)->if($contact->exists);
 });
 
 Menu::register('managerarea.contacts.tabs', function (MenuGenerator $menu, Contact $contact) {
-    $menu->route(['managerarea.contacts.create'], trans('cortex/contacts::common.details'))->ifCan('create-contacts')->if(! $contact->exists);
+    $menu->route(['managerarea.contacts.create'], trans('cortex/contacts::common.details'))->ifCan('create', $contact)->if(! $contact->exists);
     $menu->route(['managerarea.contacts.edit', ['contact' => $contact]], trans('cortex/contacts::common.details'))->ifCan('update', $contact)->if($contact->exists);
     $menu->route(['managerarea.contacts.logs', ['contact' => $contact]], trans('cortex/contacts::common.logs'))->ifCan('audit', $contact)->if($contact->exists);
 });
