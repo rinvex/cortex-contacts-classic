@@ -60,19 +60,15 @@
 
                                 </div>
 
-                            </div>
-
-                            <div class="row">
-
                                 <div class="col-md-4">
 
-                                    {{-- Title --}}
-                                    <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                                        {{ Form::label('title', trans('cortex/contacts::common.title'), ['class' => 'control-label']) }}
-                                        {{ Form::text('title', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.title')]) }}
+                                    {{-- Email --}}
+                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                        {{ Form::label('email', trans('cortex/contacts::common.email'), ['class' => 'control-label']) }}
+                                        {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.email'), 'required' => 'required']) }}
 
-                                        @if ($errors->has('title'))
-                                            <span class="help-block">{{ $errors->first('title') }}</span>
+                                        @if ($errors->has('email'))
+                                            <span class="help-block">{{ $errors->first('email') }}</span>
                                         @endif
                                     </div>
 
@@ -97,16 +93,15 @@
 
                             <div class="row">
 
-
                                 <div class="col-md-4">
 
-                                    {{-- Email --}}
-                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                        {{ Form::label('email', trans('cortex/contacts::common.email'), ['class' => 'control-label']) }}
-                                        {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.email'), 'required' => 'required']) }}
+                                    {{-- Title --}}
+                                    <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                                        {{ Form::label('title', trans('cortex/contacts::common.title'), ['class' => 'control-label']) }}
+                                        {{ Form::text('title', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.title')]) }}
 
-                                        @if ($errors->has('email'))
-                                            <span class="help-block">{{ $errors->first('email') }}</span>
+                                        @if ($errors->has('title'))
+                                            <span class="help-block">{{ $errors->first('title') }}</span>
                                         @endif
                                     </div>
 
