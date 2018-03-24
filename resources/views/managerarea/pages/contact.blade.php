@@ -3,7 +3,7 @@
 
 {{-- Page Title --}}
 @section('title')
-    {{ config('app.name') }} » {{ trans('cortex/foundation::common.managerarea') }} » {{ trans('cortex/contacts::common.contacts') }} » {{ $contact->exists ? $contact->name : trans('cortex/contacts::common.create_contact') }}
+    {{ config('app.name') }} » {{ trans('cortex/foundation::common.managerarea') }} » {{ trans('cortex/contacts::common.contacts') }} » {{ $contact->exists ? $contact->full_name : trans('cortex/contacts::common.create_contact') }}
 @endsection
 
 @push('inline-scripts')
@@ -31,7 +31,7 @@
         <section class="content">
 
             <div class="nav-tabs-custom">
-                @if($contact->exists && $currentUser->can('delete', $contact)) <div class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-modal-action="{{ route('managerarea.contacts.destroy', ['contact' => $contact]) }}" data-modal-title="{!! trans('cortex/foundation::messages.delete_confirmation_title') !!}" data-modal-body="{!! trans('cortex/foundation::messages.delete_confirmation_body', ['type' => 'contact', 'name' => $contact->name]) !!}" title="{{ trans('cortex/foundation::common.delete') }}" class="btn btn-default" style="margin: 4px"><i class="fa fa-trash text-danger"></i></a></div> @endif
+                @if($contact->exists && $currentUser->can('delete', $contact)) <div class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-modal-action="{{ route('managerarea.contacts.destroy', ['contact' => $contact]) }}" data-modal-title="{!! trans('cortex/foundation::messages.delete_confirmation_title') !!}" data-modal-body="{!! trans('cortex/foundation::messages.delete_confirmation_body', ['type' => 'contact', 'name' => $contact->full_name]) !!}" title="{{ trans('cortex/foundation::common.delete') }}" class="btn btn-default" style="margin: 4px"><i class="fa fa-trash text-danger"></i></a></div> @endif
                 {!! Menu::render('managerarea.contacts.tabs', 'nav-tab') !!}
 
                 <div class="tab-content">
@@ -48,41 +48,13 @@
 
                                 <div class="col-md-4">
 
-                                    {{-- First Name --}}
-                                    <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                                        {{ Form::label('first_name', trans('cortex/contacts::common.first_name'), ['class' => 'control-label']) }}
-                                        {{ Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.first_name'), 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                    {{-- Full Name --}}
+                                    <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
+                                        {{ Form::label('full_name', trans('cortex/contacts::common.full_name'), ['class' => 'control-label']) }}
+                                        {{ Form::text('full_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.full_name'), 'required' => 'required', 'autofocus' => 'autofocus']) }}
 
-                                        @if ($errors->has('first_name'))
-                                            <span class="help-block">{{ $errors->first('first_name') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-4">
-
-                                    {{-- Middle Name --}}
-                                    <div class="form-group{{ $errors->has('middle_name') ? ' has-error' : '' }}">
-                                        {{ Form::label('middle_name', trans('cortex/contacts::common.middle_name'), ['class' => 'control-label']) }}
-                                        {{ Form::text('middle_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.middle_name'), 'required' => 'required']) }}
-
-                                        @if ($errors->has('middle_name'))
-                                            <span class="help-block">{{ $errors->first('middle_name') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-4">
-
-                                    {{-- Last Name --}}
-                                    <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                                        {{ Form::label('last_name', trans('cortex/contacts::common.last_name'), ['class' => 'control-label']) }}
-                                        {{ Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.last_name'), 'required' => 'required']) }}
-
-                                        @if ($errors->has('last_name'))
-                                            <span class="help-block">{{ $errors->first('last_name') }}</span>
+                                        @if ($errors->has('full_name'))
+                                            <span class="help-block">{{ $errors->first('full_name') }}</span>
                                         @endif
                                     </div>
 
@@ -101,34 +73,6 @@
 
                                         @if ($errors->has('title'))
                                             <span class="help-block">{{ $errors->first('title') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-2">
-
-                                    {{-- Name Prefix --}}
-                                    <div class="form-group{{ $errors->has('name_prefix') ? ' has-error' : '' }}">
-                                        {{ Form::label('name_prefix', trans('cortex/contacts::common.name_prefix'), ['class' => 'control-label']) }}
-                                        {{ Form::text('name_prefix', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.name_prefix')]) }}
-
-                                        @if ($errors->has('name_prefix'))
-                                            <span class="help-block">{{ $errors->first('name_prefix') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-2">
-
-                                    {{-- Name Suffix --}}
-                                    <div class="form-group{{ $errors->has('name_suffix') ? ' has-error' : '' }}">
-                                        {{ Form::label('name_suffix', trans('cortex/contacts::common.name_suffix'), ['class' => 'control-label']) }}
-                                        {{ Form::text('name_suffix', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.name_suffix')]) }}
-
-                                        @if ($errors->has('name_suffix'))
-                                            <span class="help-block">{{ $errors->first('name_suffix') }}</span>
                                         @endif
                                     </div>
 

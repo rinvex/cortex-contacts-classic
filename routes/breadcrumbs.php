@@ -29,12 +29,12 @@ Breadcrumbs::register('adminarea.contacts.create', function (BreadcrumbsGenerato
 
 Breadcrumbs::register('adminarea.contacts.edit', function (BreadcrumbsGenerator $breadcrumbs, Contact $contact) {
     $breadcrumbs->parent('adminarea.contacts.index');
-    $breadcrumbs->push($contact->name, route('adminarea.contacts.edit', ['contact' => $contact]));
+    $breadcrumbs->push($contact->full_name, route('adminarea.contacts.edit', ['contact' => $contact]));
 });
 
 Breadcrumbs::register('adminarea.contacts.logs', function (BreadcrumbsGenerator $breadcrumbs, Contact $contact) {
     $breadcrumbs->parent('adminarea.contacts.index');
-    $breadcrumbs->push($contact->name, route('adminarea.contacts.edit', ['contact' => $contact]));
+    $breadcrumbs->push($contact->full_name, route('adminarea.contacts.edit', ['contact' => $contact]));
     $breadcrumbs->push(trans('cortex/contacts::common.logs'), route('adminarea.contacts.logs', ['contact' => $contact]));
 });
 
@@ -62,11 +62,11 @@ Breadcrumbs::register('managerarea.contacts.create', function (BreadcrumbsGenera
 
 Breadcrumbs::register('managerarea.contacts.edit', function (BreadcrumbsGenerator $breadcrumbs, Contact $contact) {
     $breadcrumbs->parent('managerarea.contacts.index');
-    $breadcrumbs->push($contact->name, route('managerarea.contacts.edit', ['contact' => $contact]));
+    $breadcrumbs->push($contact->full_name, route('managerarea.contacts.edit', ['contact' => $contact]));
 });
 
 Breadcrumbs::register('managerarea.contacts.logs', function (BreadcrumbsGenerator $breadcrumbs, Contact $contact) {
     $breadcrumbs->parent('managerarea.contacts.index');
-    $breadcrumbs->push($contact->name, route('managerarea.contacts.edit', ['contact' => $contact]));
+    $breadcrumbs->push($contact->full_name, route('managerarea.contacts.edit', ['contact' => $contact]));
     $breadcrumbs->push(trans('cortex/contacts::common.logs'), route('managerarea.contacts.logs', ['contact' => $contact]));
 });

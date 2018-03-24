@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 return [
 
-    'first_name' => 'First Name',
-    'middle_name' => 'Middle Name',
-    'last_name' => 'Last Name',
+    'full_name' => 'Full Name',
     'email' => 'Email',
     'phone' => 'Phone',
     'male' => 'Male',
@@ -17,8 +15,6 @@ return [
     'language' => 'Language',
     'source' => 'Source',
     'method' => 'Method',
-    'name_prefix' => 'Name Prefix',
-    'name_suffix' => 'Name Suffix',
     'title' => 'Title',
     'skype' => 'Skype',
     'twitter' => 'Twitter',

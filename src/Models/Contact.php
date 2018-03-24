@@ -17,11 +17,7 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @property string                                                                          $entity_type
  * @property string                                                                          $source
  * @property string                                                                          $method
- * @property string                                                                          $name_prefix
- * @property string                                                                          $first_name
- * @property string                                                                          $middle_name
- * @property string                                                                          $last_name
- * @property string                                                                          $name_suffix
+ * @property string                                                                          $full_name
  * @property string                                                                          $title
  * @property string                                                                          $email
  * @property string                                                                          $phone
@@ -56,17 +52,13 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereEntityType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereFacebook($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereFax($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereFullName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereGender($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereGooglePlus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereLanguageCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereLastName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereLinkedin($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereMethod($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereMiddleName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereNamePrefix($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereNameSuffix($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereSkype($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereSource($value)
