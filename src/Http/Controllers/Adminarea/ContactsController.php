@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Cortex\Contacts\Http\Controllers\Adminarea;
 
 use Cortex\Contacts\Models\Contact;
+use Cortex\Foundation\DataTables\ImportLogsDataTable;
+use Cortex\Foundation\Http\Requests\ImportFormRequest;
+use Cortex\Foundation\Importers\DefaultImporter;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Contacts\DataTables\Adminarea\ContactsDataTable;
@@ -49,6 +52,53 @@ class ContactsController extends AuthorizedController
             'phrase' => trans('cortex/contacts::common.contacts'),
             'id' => "adminarea-contacts-{$contact->getKey()}-logs-table",
         ])->render('cortex/foundation::adminarea.pages.datatable-logs');
+    }
+
+    /**
+     * Import contacts.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function import()
+    {
+        return view('cortex/foundation::adminarea.pages.import', [
+            'id' => 'adminarea-contacts-import',
+            'tabs' => 'adminarea.contacts.tabs',
+            'url' => route('adminarea.contacts.hoard'),
+            'phrase' => trans('cortex/contacts::common.contacts'),
+        ]);
+    }
+
+    /**
+     * Hoard contacts.
+     *
+     * @param \Cortex\Foundation\Http\Requests\ImportFormRequest $request
+     * @param \Cortex\Foundation\Importers\DefaultImporter       $importer
+     *
+     * @return void
+     */
+    public function hoard(ImportFormRequest $request, DefaultImporter $importer)
+    {
+        // Handle the import
+        $importer->config['resource'] = $this->resource;
+        $importer->handleImport();
+    }
+
+    /**
+     * List contact import logs.
+     *
+     * @param \Cortex\Foundation\DataTables\ImportLogsDataTable $importLogsDatatable
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function importLogs(ImportLogsDataTable $importLogsDatatable)
+    {
+        return $importLogsDatatable->with([
+            'resource' => 'contact',
+            'tabs' => 'adminarea.contacts.tabs',
+            'id' => 'adminarea-contacts-import-logs-table',
+            'phrase' => trans('cortex/contacts::common.contacts'),
+        ])->render('cortex/foundation::adminarea.pages.datatable-import-logs');
     }
 
     /**

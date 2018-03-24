@@ -37,6 +37,8 @@ return [
     'select_country' => 'Select Country',
     'select_source' => 'Select Source',
     'select_method' => 'Select Method',
+    'file' => 'File',
+    'import' => 'Import',
 
     // Contacts
     'contacts' => 'Contacts',
