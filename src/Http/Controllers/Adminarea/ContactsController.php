@@ -141,12 +141,14 @@ class ContactsController extends AuthorizedController
                 'emoji' => $country['emoji'],
             ];
         })->values();
+
+        $tags = app('rinvex.tags.tag')->pluck('title', 'id');
         $languages = collect(languages())->pluck('name', 'iso_639_1');
         $sources = app('rinvex.contacts.contact')->distinct()->get(['source'])->pluck('source', 'source')->toArray();
         $methods = app('rinvex.contacts.contact')->distinct()->get(['method'])->pluck('method', 'method')->toArray();
         $genders = ['male' => trans('cortex/contacts::common.male'), 'female' => trans('cortex/contacts::common.female')];
 
-        return view('cortex/contacts::adminarea.pages.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods'));
+        return view('cortex/contacts::adminarea.pages.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods', 'tags'));
     }
 
     /**

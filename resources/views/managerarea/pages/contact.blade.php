@@ -262,6 +262,25 @@
 
                                 </div>
 
+                                <div class="col-md-4">
+
+                                    {{-- Tags --}}
+                                    <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
+                                        {{ Form::label('tags[]', trans('cortex/contacts::common.tags'), ['class' => 'control-label']) }}
+                                        {{ Form::hidden('tags', '') }}
+                                        {{ Form::select('tags[]', $tags, null, ['class' => 'form-control select2', 'multiple' => 'multiple', 'data-width' => '100%', 'data-tags' => 'true']) }}
+
+                                        @if ($errors->has('tags'))
+                                            <span class="help-block">{{ $errors->first('tags') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
                                 <div class="col-md-2">
 
                                     {{-- Source --}}

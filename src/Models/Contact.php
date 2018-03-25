@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\Models;
 
+use Rinvex\Tags\Traits\Taggable;
 use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -74,9 +75,37 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  */
 class Contact extends BaseContact
 {
+    use Taggable;
     use Auditable;
     use Tenantable;
     use LogsActivity;
+
+    /**
+     * The default rules that the model will validate against.
+     *
+     * @var array
+     */
+    protected $rules = [
+        'entity_id' => 'required|integer',
+        'entity_type' => 'required|string|max:150',
+        'source' => 'required|string|max:150',
+        'method' => 'nullable|string|max:150',
+        'full_name' => 'required|string|max:150',
+        'title' => 'nullable|string|max:150',
+        'email' => 'nullable|email|min:3|max:150',
+        'phone' => 'nullable|numeric|phone',
+        'fax' => 'nullable|string|max:150',
+        'skype' => 'nullable|string|max:150',
+        'twitter' => 'nullable|string|max:150',
+        'facebook' => 'nullable|string|max:150',
+        'google_plus' => 'nullable|string|max:150',
+        'linkedin' => 'nullable|string|max:150',
+        'country_code' => 'nullable|alpha|size:2|country',
+        'language_code' => 'nullable|alpha|size:2|language',
+        'birthday' => 'nullable|date_format:Y-m-d',
+        'gender' => 'nullable|string|in:male,female',
+        'tags' => 'nullable|array',
+    ];
 
     /**
      * Indicates whether to log only dirty attributes or all.

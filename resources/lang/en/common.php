@@ -35,6 +35,7 @@ return [
     'select_method' => 'Select Method',
     'file' => 'File',
     'import' => 'Import',
+    'tags' => 'Tags',
 
     // Contacts
     'contacts' => 'Contacts',
