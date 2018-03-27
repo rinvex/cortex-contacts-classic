@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cortex\Contacts\Providers;
 
 use Illuminate\Routing\Router;
+use Cortex\Contacts\Models\Contact;
 use Illuminate\Support\ServiceProvider;
 use Cortex\Contacts\Console\Commands\SeedCommand;
 use Cortex\Contacts\Console\Commands\InstallCommand;
@@ -39,6 +40,10 @@ class ContactsServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // Bind eloquent models to IoC container
+        $this->app['config']['rinvex.contacts.models.contact'] === Contact::class
+        || $this->app->alias('rinvex.contacts.contact', Contact::class);
+
         // Register console commands
         ! $this->app->runningInConsole() || $this->registerCommands();
     }
