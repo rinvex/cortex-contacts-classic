@@ -14,6 +14,7 @@ class CortexContactsSeeder extends Seeder
     public function run()
     {
         Bouncer::allow('admin')->to('list', config('rinvex.contacts.models.contact'));
+        Bouncer::allow('admin')->to('import', config('rinvex.contacts.models.contact'));
         Bouncer::allow('admin')->to('create', config('rinvex.contacts.models.contact'));
         Bouncer::allow('admin')->to('update', config('rinvex.contacts.models.contact'));
         Bouncer::allow('admin')->to('delete', config('rinvex.contacts.models.contact'));
