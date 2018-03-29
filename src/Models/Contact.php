@@ -37,7 +37,6 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Foundation\Models\Log[]   $activity
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Contacts\Models\Contact[] $backRelatives
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent                              $entity
- * @property-read string                                                                     $name
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Contacts\Models\Contact[] $relatives
  * @property \Illuminate\Database\Eloquent\Collection|\Cortex\Tenants\Models\Tenant[]        $tenants
  *
