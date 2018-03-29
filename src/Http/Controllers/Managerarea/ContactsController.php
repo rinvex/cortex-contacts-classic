@@ -50,7 +50,7 @@ class ContactsController extends AuthorizedController
             'resource' => $contact,
             'tabs' => 'managerarea.contacts.tabs',
             'phrase' => trans('cortex/contacts::common.contacts'),
-            'id' => "managerarea-contacts-{$contact->getKey()}-logs-table",
+            'id' => "managerarea-contacts-{$contact->getRouteKey()}-logs-table",
         ])->render('cortex/foundation::managerarea.pages.datatable-logs');
     }
 

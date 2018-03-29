@@ -7,7 +7,7 @@
 @endsection
 
 @push('inline-scripts')
-    {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest::class)->selector("#managerarea-contacts-create-form, #managerarea-contacts-{$contact->getKey()}-update-form") !!}
+    {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest::class)->selector("#managerarea-contacts-create-form, #managerarea-contacts-{$contact->getRouteKey()}-update-form") !!}
 
     <script>
         window.countries = {!! $countries !!};
@@ -39,7 +39,7 @@
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($contact->exists)
-                            {{ Form::model($contact, ['url' => route('managerarea.contacts.update', ['contact' => $contact]), 'method' => 'put', 'id' => "managerarea-contacts-{$contact->getKey()}-update-form"]) }}
+                            {{ Form::model($contact, ['url' => route('managerarea.contacts.update', ['contact' => $contact]), 'method' => 'put', 'id' => "managerarea-contacts-{$contact->getRouteKey()}-update-form"]) }}
                         @else
                             {{ Form::model($contact, ['url' => route('managerarea.contacts.store'), 'id' => 'managerarea-contacts-create-form']) }}
                         @endif

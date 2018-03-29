@@ -56,7 +56,7 @@ class ContactsServiceProvider extends ServiceProvider
     public function boot(Router $router): void
     {
         // Bind route models and constrains
-        $router->pattern('contact', '[0-9]+');
+        $router->pattern('contact', '[a-zA-Z0-9]+');
         $router->model('contact', config('rinvex.contacts.models.contact'));
 
         // Map relations
