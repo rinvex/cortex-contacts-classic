@@ -6,6 +6,7 @@ namespace Cortex\Contacts\DataTables\Adminarea;
 
 use Cortex\Contacts\Models\Contact;
 use Cortex\Foundation\DataTables\AbstractDataTable;
+use Cortex\Contacts\Transformers\Adminarea\ContactTransformer;
 
 class ContactsDataTable extends AbstractDataTable
 {
@@ -15,6 +16,11 @@ class ContactsDataTable extends AbstractDataTable
     protected $model = Contact::class;
 
     /**
+     * {@inheritdoc}
+     */
+    protected $transformer = ContactTransformer::class;
+
+    /**
      * Get columns.
      *
      * @return array
@@ -22,8 +28,8 @@ class ContactsDataTable extends AbstractDataTable
     protected function getColumns(): array
     {
         $link = config('cortex.foundation.route.locale_prefix')
-            ? '"<a href=\""+routes.route(\'adminarea.contacts.edit\', {contact: hashids.encode(full.id), locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
-            : '"<a href=\""+routes.route(\'adminarea.contacts.edit\', {contact: hashids.encode(full.id)})+"\">"+data+"</a>"';
+            ? '"<a href=\""+routes.route(\'adminarea.contacts.edit\', {contact: full.id, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
+            : '"<a href=\""+routes.route(\'adminarea.contacts.edit\', {contact: full.id})+"\">"+data+"</a>"';
 
         return [
             'full_name' => ['title' => trans('cortex/contacts::common.full_name'), 'render' => $link, 'responsivePriority' => 0],
