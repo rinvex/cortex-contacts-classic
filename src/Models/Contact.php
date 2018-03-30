@@ -6,8 +6,8 @@ namespace Cortex\Contacts\Models;
 
 use Rinvex\Tags\Traits\Taggable;
 use Rinvex\Tenants\Traits\Tenantable;
-use Rinvex\Support\Traits\HashidsTrait;
 use Cortex\Foundation\Traits\Auditable;
+use Rinvex\Support\Traits\HashidsTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Contacts\Models\Contact as BaseContact;
 
