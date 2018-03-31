@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cortex\Contacts\DataTables\Adminarea;
 
 use Cortex\Contacts\Models\Contact;
+use Illuminate\Database\Eloquent\Builder;
 use Cortex\Foundation\DataTables\AbstractDataTable;
 use Cortex\Contacts\Transformers\Adminarea\ContactTransformer;
 
@@ -19,6 +20,25 @@ class ContactsDataTable extends AbstractDataTable
      * {@inheritdoc}
      */
     protected $transformer = ContactTransformer::class;
+
+    /**
+     * Display ajax response.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ajax()
+    {
+        return datatables($this->query())
+            ->setTransformer($this->transformer)
+            ->filterColumn('country_code', function (Builder $builder, $keyword) {
+                $countryCode = collect(countries())->search(function($country) use ($keyword) {
+                    return mb_strpos($country['name'], $keyword) !== false || mb_strpos($country['emoji'], $keyword) !== false;
+                });
+
+                ! $countryCode || $builder->where('country_code', $countryCode);
+            })
+            ->make(true);
+    }
 
     /**
      * Get columns.
