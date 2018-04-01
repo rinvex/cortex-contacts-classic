@@ -17,7 +17,7 @@ class ContactTransformer extends TransformerAbstract
      */
     public function transform(Contact $contact): array
     {
-        return $this->escapeRow([
+        return $this->escape([
             'id' => (string) $contact->getRouteKey(),
             'full_name' => (string) $contact->full_name,
             'email' => (string) $contact->email,
