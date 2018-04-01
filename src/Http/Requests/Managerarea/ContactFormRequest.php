@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\Http\Requests\Managerarea;
 
+use Rinvex\Support\Traits\Escaper;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ContactFormRequest extends FormRequest
 {
+    use Escaper;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -31,6 +34,19 @@ class ContactFormRequest extends FormRequest
         $data['entity_type'] = $this->user($this->route('guard'))->getMorphClass();
 
         $this->replace($data);
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param \Illuminate\Validation\Validator $validator
+     *
+     * @return void
+     */
+    public function withValidator($validator): void
+    {
+        // Sanitize input data before submission
+        $this->replace($this->escape($this->all()));
     }
 
     /**
