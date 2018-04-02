@@ -55,7 +55,7 @@ class ContactsDataTable extends AbstractDataTable
             'full_name' => ['title' => trans('cortex/contacts::common.full_name'), 'render' => $link, 'responsivePriority' => 0],
             'email' => ['title' => trans('cortex/contacts::common.email')],
             'phone' => ['title' => trans('cortex/contacts::common.phone')],
-            'country_code' => ['title' => trans('cortex/contacts::common.country')],
+            'country_code' => ['title' => trans('cortex/contacts::common.country'), 'render' => 'full.country_emoji+" "+data'],
             'language_code' => ['title' => trans('cortex/contacts::common.language'), 'visible' => false],
             'source' => ['title' => trans('cortex/contacts::common.source'), 'visible' => false],
             'method' => ['title' => trans('cortex/contacts::common.method'), 'visible' => false],

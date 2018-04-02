@@ -17,13 +17,17 @@ class ContactTransformer extends TransformerAbstract
      */
     public function transform(Contact $contact): array
     {
+        $country = $contact->country_code ? country($contact->country_code) : null;
+        $language = $contact->language_code ? language($contact->language_code) : null;
+
         return $this->escape([
             'id' => (string) $contact->getRouteKey(),
             'full_name' => (string) $contact->full_name,
             'email' => (string) $contact->email,
             'phone' => (string) $contact->phone,
-            'country_code' => (string) $contact->country_code ? country($contact->country_code)->getName() : null,
-            'language_code' => (string) $contact->language_code ? language($contact->language_code)->getName() : null,
+            'country_code' => (string) optional($country)->getName(),
+            'country_emoji' => (string) optional($country)->getEmoji(),
+            'language_code' => (string) optional($language)->getName(),
             'source' => (string) $contact->source,
             'method' => (bool) $contact->method,
             'created_at' => (string) $contact->created_at,
