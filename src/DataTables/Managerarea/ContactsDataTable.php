@@ -59,8 +59,8 @@ class ContactsDataTable extends AbstractDataTable
             'language_code' => ['title' => trans('cortex/contacts::common.language'), 'visible' => false],
             'source' => ['title' => trans('cortex/contacts::common.source'), 'visible' => false],
             'method' => ['title' => trans('cortex/contacts::common.method'), 'visible' => false],
-            'created_at' => ['title' => trans('cortex/contacts::common.created_at'), 'render' => "moment(data).format('MMM Do, YYYY')"],
-            'updated_at' => ['title' => trans('cortex/contacts::common.updated_at'), 'render' => "moment(data).format('MMM Do, YYYY')"],
+            'created_at' => ['title' => trans('cortex/contacts::common.created_at'), 'render' => "moment(data).format('MMMM Do YYYY, hh:mm:ss A')"],
+            'updated_at' => ['title' => trans('cortex/contacts::common.updated_at'), 'render' => "moment(data).format('MMMM Do YYYY, hh:mm:ss A')"],
         ];
     }
 }
