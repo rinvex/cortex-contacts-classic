@@ -7,7 +7,7 @@ use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
 // Adminarea breadcrumbs
 Breadcrumbs::register('adminarea.contacts.index', function (BreadcrumbsGenerator $breadcrumbs) {
-    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/foundation::common.adminarea'), route('adminarea.home'));
+    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.config('app.name'), route('adminarea.home'));
     $breadcrumbs->push(trans('cortex/contacts::common.contacts'), route('adminarea.contacts.index'));
 });
 
@@ -40,7 +40,7 @@ Breadcrumbs::register('adminarea.contacts.logs', function (BreadcrumbsGenerator 
 
 // Managerarea breadcrumbs
 Breadcrumbs::register('managerarea.contacts.index', function (BreadcrumbsGenerator $breadcrumbs) {
-    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/foundation::common.managerarea'), route('managerarea.home'));
+    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.config('rinvex.tenants.active')->name, route('managerarea.home'));
     $breadcrumbs->push(trans('cortex/contacts::common.contacts'), route('managerarea.contacts.index'));
 });
 
