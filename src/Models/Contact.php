@@ -101,7 +101,7 @@ class Contact extends BaseContact
         'facebook' => 'nullable|string|max:150',
         'google_plus' => 'nullable|string|max:150',
         'linkedin' => 'nullable|string|max:150',
-        'country_code' => 'nullable|required_with:phone|alpha|size:2|country',
+        'country_code' => 'nullable|alpha|size:2|country',
         'language_code' => 'nullable|alpha|size:2|language',
         'birthday' => 'nullable|date_format:Y-m-d',
         'gender' => 'nullable|string|in:male,female',
