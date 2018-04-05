@@ -94,7 +94,7 @@ class Contact extends BaseContact
         'full_name' => 'required|string|max:150',
         'title' => 'nullable|string|max:150',
         'email' => 'nullable|email|min:3|max:150',
-        'phone' => 'nullable|numeric|phone:country_code',
+        'phone' => 'nullable|phone:AUTO',
         'fax' => 'nullable|string|max:150',
         'skype' => 'nullable|string|max:150',
         'twitter' => 'nullable|string|max:150',
