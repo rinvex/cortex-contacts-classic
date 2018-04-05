@@ -36,6 +36,7 @@ return [
     'file' => 'File',
     'import' => 'Import',
     'tags' => 'Tags',
+    'national_id' => 'National Id',
 
     // Contacts
     'contacts' => 'Contacts',

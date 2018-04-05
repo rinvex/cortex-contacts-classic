@@ -282,6 +282,20 @@
 
                             <div class="row">
 
+                                <div class="col-md-4">
+
+                                    {{-- National Id --}}
+                                    <div class="form-group{{ $errors->has('national_id') ? ' has-error' : '' }}">
+                                        {{ Form::label('national_id', trans('cortex/contacts::common.national_id'), ['class' => 'control-label']) }}
+                                        {{ Form::text('national_id', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.national_id')]) }}
+
+                                        @if ($errors->has('national_id'))
+                                            <span class="help-block">{{ $errors->first('national_id') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
                                 <div class="col-md-2">
 
                                     {{-- Source --}}
