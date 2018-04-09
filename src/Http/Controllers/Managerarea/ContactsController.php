@@ -91,7 +91,7 @@ class ContactsController extends AuthorizedController
     public function importLogs(ImportLogsDataTable $importLogsDatatable)
     {
         return $importLogsDatatable->with([
-            'resource' => 'contact',
+            'resource' => trans('cortex/contacts::common.contact'),
             'tabs' => 'adminarea.contacts.tabs',
             'id' => 'adminarea-contacts-import-logs-table',
         ])->render('cortex/foundation::adminarea.pages.datatable-logs');
@@ -189,7 +189,7 @@ class ContactsController extends AuthorizedController
 
         return intend([
             'url' => route('managerarea.contacts.index'),
-            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => 'contact', 'identifier' => $contact->full_name])],
+            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => trans('cortex/contacts::common.contact'), 'identifier' => $contact->full_name])],
         ]);
     }
 
@@ -206,7 +206,7 @@ class ContactsController extends AuthorizedController
 
         return intend([
             'url' => route('managerarea.contacts.index'),
-            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => 'contact', 'identifier' => $contact->full_name])],
+            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => trans('cortex/contacts::common.contact'), 'identifier' => $contact->full_name])],
         ]);
     }
 }
