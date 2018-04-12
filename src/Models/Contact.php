@@ -17,8 +17,6 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @property int                                                                             $id
  * @property int                                                                             $entity_id
  * @property string                                                                          $entity_type
- * @property string                                                                          $source
- * @property string                                                                          $method
  * @property string                                                                          $full_name
  * @property string                                                                          $title
  * @property string                                                                          $email
@@ -33,6 +31,11 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @property string                                                                          $language_code
  * @property string                                                                          $birthday
  * @property string                                                                          $gender
+ * @property string                                                                          $national_id_type
+ * @property string                                                                          $national_id
+ * @property string                                                                          $source
+ * @property string                                                                          $method
+ * @property string                                                                          $notes
  * @property \Carbon\Carbon|null                                                             $created_at
  * @property \Carbon\Carbon|null                                                             $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Foundation\Models\Log[]   $activity
@@ -41,31 +44,34 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Contacts\Models\Contact[] $relatives
  * @property \Illuminate\Database\Eloquent\Collection|\Cortex\Tenants\Models\Tenant[]        $tenants
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact country($countryCode)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact language($languageCode)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact method($method)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact source($source)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereBirthday($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereCountryCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereEntityId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereEntityType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereFacebook($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereFax($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereFullName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereGender($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereGooglePlus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereLanguageCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereLinkedin($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereMethod($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereSkype($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereSource($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereTwitter($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact country($countryCode)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact language($languageCode)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact method($method)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact source($source)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereBirthday($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereCountryCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereEntityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereEntityType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereFacebook($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereFax($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereFullName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereGooglePlus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereLanguageCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereLinkedin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereNationalId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereNationalIdType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereMethod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereSkype($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereSource($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereTwitter($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact withAllTenants($tenants, $group = null)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact withAnyTenants($tenants, $group = null)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact withTenants($tenants, $group = null)
@@ -89,8 +95,6 @@ class Contact extends BaseContact
     protected $rules = [
         'entity_id' => 'required|integer',
         'entity_type' => 'required|string|max:150',
-        'source' => 'required|string|max:150',
-        'method' => 'nullable|string|max:150',
         'full_name' => 'required|string|max:150',
         'title' => 'nullable|string|max:150',
         'email' => 'nullable|email|min:3|max:150',
@@ -105,6 +109,11 @@ class Contact extends BaseContact
         'language_code' => 'nullable|alpha|size:2|language',
         'birthday' => 'nullable|date_format:Y-m-d',
         'gender' => 'nullable|string|in:male,female',
+        'national_id_type' => 'nullable|string|in:identification,passport,other',
+        'national_id' => 'nullable|string|max:150',
+        'source' => 'nullable|string|max:150',
+        'method' => 'nullable|string|max:150',
+        'notes' => 'nullable|string|max:10000',
         'tags' => 'nullable|array',
     ];
 

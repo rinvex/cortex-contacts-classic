@@ -14,7 +14,7 @@ return [
     'country' => 'Country',
     'language' => 'Language',
     'source' => 'Source',
-    'method' => 'Method',
+    'communication_method' => 'Communication Method',
     'title' => 'Title',
     'skype' => 'Skype',
     'twitter' => 'Twitter',
@@ -36,7 +36,12 @@ return [
     'file' => 'File',
     'import' => 'Import',
     'tags' => 'Tags',
+    'notes' => 'Notes',
+    'other' => 'Other',
+    'identification' => 'Identification',
+    'passport' => 'Passport',
     'national_id' => 'National Id',
+    'national_id_type' => 'National Id Type',
 
     // Contacts
     'contacts' => 'Contacts',

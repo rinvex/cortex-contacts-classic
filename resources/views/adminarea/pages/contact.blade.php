@@ -284,6 +284,21 @@
 
                                 <div class="col-md-4">
 
+                                    {{-- National Id Type --}}
+                                    <div class="form-group{{ $errors->has('national_id_type') ? ' has-error' : '' }}">
+                                        {{ Form::label('national_id_type', trans('cortex/contacts::common.national_id_type'), ['class' => 'control-label']) }}
+                                        {{ Form::hidden('national_id_type', '') }}
+                                        {{ Form::select('national_id_type', ['identification' => trans('cortex/contacts::common.identification'), 'passport' => trans('cortex/contacts::common.passport'), 'other' => trans('cortex/contacts::common.other')], null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.national_id_type'), 'data-allow-clear' => 'true', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
+
+                                        @if ($errors->has('national_id_type'))
+                                            <span class="help-block">{{ $errors->first('national_id_type') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
                                     {{-- National Id --}}
                                     <div class="form-group{{ $errors->has('national_id') ? ' has-error' : '' }}">
                                         {{ Form::label('national_id', trans('cortex/contacts::common.national_id'), ['class' => 'control-label']) }}
@@ -315,12 +330,30 @@
 
                                     {{-- Method --}}
                                     <div class="form-group{{ $errors->has('method') ? ' has-error' : '' }}">
-                                        {{ Form::label('method', trans('cortex/contacts::common.method'), ['class' => 'control-label']) }}
+                                        {{ Form::label('method', trans('cortex/contacts::common.communication_method'), ['class' => 'control-label']) }}
                                         {{ Form::hidden('method', '') }}
                                         {{ Form::select('method', $methods, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_method'), 'data-tags' => 'true', 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('method'))
                                             <span class="help-block">{{ $errors->first('method') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+
+                                    {{-- Notes --}}
+                                    <div class="form-group{{ $errors->has('notes') ? ' has-error' : '' }}">
+                                        {{ Form::label('notes', trans('cortex/contacts::common.notes'), ['class' => 'control-label']) }}
+                                        {{ Form::textarea('notes', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.notes'), 'rows' => 3]) }}
+
+                                        @if ($errors->has('notes'))
+                                            <span class="help-block">{{ $errors->first('notes') }}</span>
                                         @endif
                                     </div>
 
