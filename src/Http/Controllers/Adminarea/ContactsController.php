@@ -32,7 +32,7 @@ class ContactsController extends AuthorizedController
     {
         return $contactsDataTable->with([
             'id' => 'adminarea-contacts-index-table',
-        ])->render('cortex/foundation::adminarea.pages.datatable');
+        ])->render('cortex/foundation::adminarea.pages.datatable-index');
     }
 
     /**
@@ -49,7 +49,7 @@ class ContactsController extends AuthorizedController
             'resource' => $contact,
             'tabs' => 'adminarea.contacts.tabs',
             'id' => "adminarea-contacts-{$contact->getRouteKey()}-logs-table",
-        ])->render('cortex/foundation::adminarea.pages.datatable-logs');
+        ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
     /**
@@ -94,7 +94,7 @@ class ContactsController extends AuthorizedController
             'resource' => trans('cortex/contacts::common.contact'),
             'tabs' => 'adminarea.contacts.tabs',
             'id' => 'adminarea-contacts-import-logs-table',
-        ])->render('cortex/foundation::adminarea.pages.datatable-logs');
+        ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
     /**
