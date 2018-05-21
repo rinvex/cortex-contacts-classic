@@ -301,7 +301,7 @@
 
                                     {{-- Method --}}
                                     <div class="form-group{{ $errors->has('method') ? ' has-error' : '' }}">
-                                        {{ Form::label('method', trans('cortex/contacts::common.method'), ['class' => 'control-label']) }}
+                                        {{ Form::label('method', trans('cortex/contacts::common.communication_method'), ['class' => 'control-label']) }}
                                         {{ Form::hidden('method', '') }}
                                         {{ Form::select('method', $methods, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_method'), 'data-tags' => 'true', 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 

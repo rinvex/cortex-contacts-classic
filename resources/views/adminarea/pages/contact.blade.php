@@ -80,7 +80,7 @@
                                     <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                                         {{ Form::label('gender', trans('cortex/contacts::common.gender'), ['class' => 'control-label']) }}
                                         {{ Form::hidden('gender', '') }}
-                                        {{ Form::select('gender', $genders, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_gender'), 'data-allow-clear' => 'true', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
+                                        {{ Form::select('gender', $genders, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_gender'), 'data-allow-clear' => 'true', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%', 'required' => 'required']) }}
 
                                         @if ($errors->has('gender'))
                                             <span class="help-block">{{ $errors->first('gender') }}</span>
@@ -176,7 +176,7 @@
                                     <div class="form-group{{ $errors->has('country_code') ? ' has-error' : '' }}">
                                         {{ Form::label('country_code', trans('cortex/contacts::common.country'), ['class' => 'control-label']) }}
                                         {{ Form::hidden('country_code', '') }}
-                                        {{ Form::select('country_code', [], null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_country'), 'required' => 'required', 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
+                                        {{ Form::select('country_code', [], null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_country'), 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('country_code'))
                                             <span class="help-block">{{ $errors->first('country_code') }}</span>
