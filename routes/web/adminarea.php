@@ -12,7 +12,8 @@ Route::domain(domain())->group(function () {
              Route::name('contacts.')->prefix('contacts')->group(function () {
                  Route::get('/')->name('index')->uses('ContactsController@index');
                  Route::get('import')->name('import')->uses('ContactsController@import');
-                 Route::post('import')->name('hoard')->uses('ContactsController@hoard');
+                 Route::post('import')->name('stash')->uses('ContactsController@stash');
+                 Route::post('hoard')->name('hoard')->uses('ContactsController@hoard');
                  Route::get('import/logs')->name('import.logs')->uses('ContactsController@importLogs');
                  Route::get('create')->name('create')->uses('ContactsController@create');
                  Route::post('create')->name('store')->uses('ContactsController@store');

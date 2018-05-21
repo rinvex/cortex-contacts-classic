@@ -33,7 +33,7 @@ return [
     'select_country' => 'Select Country',
     'select_source' => 'Select Source',
     'select_method' => 'Select Method',
-    'file' => 'File',
+    'records' => 'Records',
     'import' => 'Import',
     'tags' => 'Tags',
     'notes' => 'Notes',
@@ -42,6 +42,8 @@ return [
     'passport' => 'Passport',
     'national_id' => 'National Id',
     'national_id_type' => 'National Id Type',
+    'contact' => 'Contact',
+    'status' => 'Status',
 
     // Contacts
     'contacts' => 'Contacts',

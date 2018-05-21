@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Cortex\Contacts\Http\Controllers\Adminarea;
 
 use Cortex\Contacts\Models\Contact;
+use Cortex\Foundation\DataTables\ImportRecordsDataTable;
+use Cortex\Foundation\Models\ImportRecord;
+use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Importers\DefaultImporter;
@@ -13,6 +16,7 @@ use Cortex\Foundation\Http\Requests\ImportFormRequest;
 use Cortex\Contacts\DataTables\Adminarea\ContactsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest;
+use Vinkla\Hashids\Facades\Hashids;
 
 class ContactsController extends AuthorizedController
 {
@@ -55,30 +59,65 @@ class ContactsController extends AuthorizedController
     /**
      * Import contacts.
      *
+     * @param \Cortex\Contacts\Models\Contact                      $contact
+     * @param \Cortex\Foundation\DataTables\ImportRecordsDataTable $importRecordsDataTable
+     *
      * @return \Illuminate\View\View
      */
-    public function import()
+    public function import(Contact $contact, ImportRecordsDataTable $importRecordsDataTable)
     {
-        return view('cortex/foundation::adminarea.pages.import', [
-            'id' => 'adminarea-contacts-import',
+        return $importRecordsDataTable->with([
+            'resource' => $contact,
             'tabs' => 'adminarea.contacts.tabs',
-            'url' => route('adminarea.contacts.hoard'),
-        ]);
+            'url' => route('adminarea.contacts.stash'),
+            'id' => "adminarea-contacts-{$contact->getRouteKey()}-import-table",
+        ])->render('cortex/foundation::adminarea.pages.datatable-dropzone');
     }
 
     /**
-     * Hoard contacts.
+     * Stash contacts.
      *
      * @param \Cortex\Foundation\Http\Requests\ImportFormRequest $request
      * @param \Cortex\Foundation\Importers\DefaultImporter       $importer
      *
      * @return void
      */
-    public function hoard(ImportFormRequest $request, DefaultImporter $importer)
+    public function stash(ImportFormRequest $request, Contact $contact, DefaultImporter $importer)
     {
         // Handle the import
-        $importer->config['resource'] = $this->resource;
+        $importer->config['resource'] = $contact;
         $importer->handleImport();
+    }
+
+    /**
+     * Hoard contacts.
+     *
+     * @param \Cortex\Foundation\Http\Requests\ImportFormRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function hoard(ImportFormRequest $request)
+    {
+        foreach ((array) $request->get('selected_ids') as $recordId) {
+            $record = app('cortex.foundation.import_record')->find($recordId);
+
+            try {
+                $fillable = collect($record['data'])->intersectByKeys(array_flip(app('rinvex.contacts.contact')->getFillable()))->toArray();
+
+                tap(app('rinvex.contacts.contact')->firstOrNew($fillable), function ($instance) use ($record) {
+                    $instance->save() && $record->delete();
+                });
+            } catch (Exception $exception) {
+                $record->notes = $exception->getMessage().(method_exists($exception, 'getMessageBag') ? "\n".json_encode($exception->getMessageBag())."\n\n" : '');
+                $record->status = 'fail';
+                $record->save();
+            }
+        }
+
+        return intend([
+            'back' => true,
+            'with' => ['success' => trans('cortex/foundation::messages.import_complete')],
+        ]);
     }
 
     /**
