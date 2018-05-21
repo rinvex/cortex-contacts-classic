@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\Http\Controllers\Managerarea;
 
-use Cortex\Contacts\Models\Contact;
-use Cortex\Foundation\DataTables\ImportRecordsDataTable;
 use Exception;
+use Cortex\Contacts\Models\Contact;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Importers\DefaultImporter;
 use Cortex\Foundation\DataTables\ImportLogsDataTable;
 use Cortex\Foundation\Http\Requests\ImportFormRequest;
+use Cortex\Foundation\DataTables\ImportRecordsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Contacts\DataTables\Managerarea\ContactsDataTable;
 use Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest;
