@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\Http\Controllers\Adminarea;
 
-use Cortex\Contacts\Models\Contact;
-use Cortex\Foundation\DataTables\ImportRecordsDataTable;
-use Cortex\Foundation\Models\ImportRecord;
 use Exception;
+use Cortex\Contacts\Models\Contact;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Importers\DefaultImporter;
 use Cortex\Foundation\DataTables\ImportLogsDataTable;
 use Cortex\Foundation\Http\Requests\ImportFormRequest;
+use Cortex\Foundation\DataTables\ImportRecordsDataTable;
 use Cortex\Contacts\DataTables\Adminarea\ContactsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest;
-use Vinkla\Hashids\Facades\Hashids;
 
 class ContactsController extends AuthorizedController
 {
