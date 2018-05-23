@@ -42,10 +42,10 @@ return [
     'passport' => 'Passport',
     'national_id' => 'National Id',
     'national_id_type' => 'National Id Type',
-    'contact' => 'Contact',
     'status' => 'Status',
 
     // Contacts
+    'contact' => 'Contact',
     'contacts' => 'Contacts',
     'create_contact' => 'Create New Contact',
 
