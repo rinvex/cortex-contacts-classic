@@ -21,6 +21,7 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @property string                                                                          $family_name
  * @property string                                                                          $full_name
  * @property string                                                                          $title
+ * @property string                                                                          $organization
  * @property string                                                                          $email
  * @property string                                                                          $phone
  * @property string                                                                          $fax
@@ -69,6 +70,7 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereNationalIdType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereMethod($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereOrganization($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereSkype($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereSource($value)
@@ -101,6 +103,7 @@ class Contact extends BaseContact
         'given_name' => 'required|string|max:150',
         'family_name' => 'nullable|string|max:150',
         'title' => 'nullable|string|max:150',
+        'organization' => 'nullable|string|max:150',
         'email' => 'required|email|min:3|max:150',
         'phone' => 'nullable|phone:AUTO',
         'fax' => 'nullable|string|max:150',

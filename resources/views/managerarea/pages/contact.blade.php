@@ -123,6 +123,20 @@
 
                                 <div class="col-md-4">
 
+                                    {{-- Organization --}}
+                                    <div class="form-group{{ $errors->has('organization') ? ' has-error' : '' }}">
+                                        {{ Form::label('organization', trans('cortex/contacts::common.organization'), ['class' => 'control-label']) }}
+                                        {{ Form::text('organization', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.organization')]) }}
+
+                                        @if ($errors->has('organization'))
+                                            <span class="help-block">{{ $errors->first('organization') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
                                     {{-- Phone --}}
                                     <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                                         {{ Form::label('phone', trans('cortex/contacts::common.phone'), ['class' => 'control-label']) }}

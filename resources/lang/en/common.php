@@ -17,6 +17,7 @@ return [
     'source' => 'Source',
     'communication_method' => 'Communication Method',
     'title' => 'Title',
+    'organization' => 'Trganization',
     'skype' => 'Skype',
     'twitter' => 'Twitter',
     'facebook' => 'Facebook',
