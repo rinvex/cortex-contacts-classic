@@ -88,21 +88,6 @@
 
                                 </div>
 
-                                <div class="col-md-4">
-
-                                    {{-- Gender --}}
-                                    <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                                        {{ Form::label('gender', trans('cortex/contacts::common.gender'), ['class' => 'control-label']) }}
-                                        {{ Form::hidden('gender', '') }}
-                                        {{ Form::select('gender', $genders, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_gender'), 'data-allow-clear' => 'true', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
-
-                                        @if ($errors->has('gender'))
-                                            <span class="help-block">{{ $errors->first('gender') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
                             </div>
 
                             <div class="row">
@@ -150,15 +135,51 @@
 
                                 </div>
 
+                            </div>
+
+                            <div class="row">
+
+
                                 <div class="col-md-4">
 
-                                    {{-- Fax --}}
-                                    <div class="form-group{{ $errors->has('fax') ? ' has-error' : '' }}">
-                                        {{ Form::label('fax', trans('cortex/contacts::common.fax'), ['class' => 'control-label']) }}
-                                        {{ Form::number('fax', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.fax')]) }}
+                                    {{-- Country Code --}}
+                                    <div class="form-group{{ $errors->has('country_code') ? ' has-error' : '' }}">
+                                        {{ Form::label('country_code', trans('cortex/contacts::common.country'), ['class' => 'control-label']) }}
+                                        {{ Form::hidden('country_code', '') }}
+                                        {{ Form::select('country_code', [], null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_country'), 'required' => 'required', 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
-                                        @if ($errors->has('fax'))
-                                            <span class="help-block">{{ $errors->first('fax') }}</span>
+                                        @if ($errors->has('country_code'))
+                                            <span class="help-block">{{ $errors->first('country_code') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    {{-- Language Code --}}
+                                    <div class="form-group{{ $errors->has('language_code') ? ' has-error' : '' }}">
+                                        {{ Form::label('language_code', trans('cortex/contacts::common.language'), ['class' => 'control-label']) }}
+                                        {{ Form::hidden('language_code', '') }}
+                                        {{ Form::select('language_code', $languages, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_language'), 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
+
+                                        @if ($errors->has('language_code'))
+                                            <span class="help-block">{{ $errors->first('language_code') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    {{-- Tags --}}
+                                    <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
+                                        {{ Form::label('tags[]', trans('cortex/contacts::common.tags'), ['class' => 'control-label']) }}
+                                        {{ Form::hidden('tags', '') }}
+                                        {{ Form::select('tags[]', $tags, null, ['class' => 'form-control select2', 'multiple' => 'multiple', 'data-width' => '100%', 'data-tags' => 'true']) }}
+
+                                        @if ($errors->has('tags'))
+                                            <span class="help-block">{{ $errors->first('tags') }}</span>
                                         @endif
                                     </div>
 
@@ -185,14 +206,14 @@
 
                                 <div class="col-md-4">
 
-                                    {{-- Language Code --}}
-                                    <div class="form-group{{ $errors->has('language_code') ? ' has-error' : '' }}">
-                                        {{ Form::label('language_code', trans('cortex/contacts::common.language'), ['class' => 'control-label']) }}
-                                        {{ Form::hidden('language_code', '') }}
-                                        {{ Form::select('language_code', $languages, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_language'), 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
+                                    {{-- Gender --}}
+                                    <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                                        {{ Form::label('gender', trans('cortex/contacts::common.gender'), ['class' => 'control-label']) }}
+                                        {{ Form::hidden('gender', '') }}
+                                        {{ Form::select('gender', $genders, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_gender'), 'data-allow-clear' => 'true', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
 
-                                        @if ($errors->has('language_code'))
-                                            <span class="help-block">{{ $errors->first('language_code') }}</span>
+                                        @if ($errors->has('gender'))
+                                            <span class="help-block">{{ $errors->first('gender') }}</span>
                                         @endif
                                     </div>
 
@@ -200,14 +221,13 @@
 
                                 <div class="col-md-4">
 
-                                    {{-- Country Code --}}
-                                    <div class="form-group{{ $errors->has('country_code') ? ' has-error' : '' }}">
-                                        {{ Form::label('country_code', trans('cortex/contacts::common.country'), ['class' => 'control-label']) }}
-                                        {{ Form::hidden('country_code', '') }}
-                                        {{ Form::select('country_code', [], null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_country'), 'required' => 'required', 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
+                                    {{-- Fax --}}
+                                    <div class="form-group{{ $errors->has('fax') ? ' has-error' : '' }}">
+                                        {{ Form::label('fax', trans('cortex/contacts::common.fax'), ['class' => 'control-label']) }}
+                                        {{ Form::number('fax', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.fax')]) }}
 
-                                        @if ($errors->has('country_code'))
-                                            <span class="help-block">{{ $errors->first('country_code') }}</span>
+                                        @if ($errors->has('fax'))
+                                            <span class="help-block">{{ $errors->first('fax') }}</span>
                                         @endif
                                     </div>
 
@@ -219,27 +239,13 @@
 
                                 <div class="col-md-4">
 
-                                    {{-- Skype --}}
-                                    <div class="form-group{{ $errors->has('skype') ? ' has-error' : '' }}">
-                                        {{ Form::label('skype', trans('cortex/contacts::common.skype'), ['class' => 'control-label']) }}
-                                        {{ Form::text('skype', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.skype')]) }}
-
-                                        @if ($errors->has('skype'))
-                                            <span class="help-block">{{ $errors->first('skype') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-4">
-
                                     {{-- Twitter --}}
-                                    <div class="form-group{{ $errors->has('twitter') ? ' has-error' : '' }}">
-                                        {{ Form::label('twitter', trans('cortex/contacts::common.twitter'), ['class' => 'control-label']) }}
-                                        {{ Form::text('twitter', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.twitter')]) }}
+                                    <div class="form-group{{ $errors->has('social.twitter') ? ' has-error' : '' }}">
+                                        {{ Form::label('social[twitter]', trans('cortex/contacts::common.twitter'), ['class' => 'control-label']) }}
+                                        {{ Form::text('social[twitter]', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.twitter')]) }}
 
-                                        @if ($errors->has('twitter'))
-                                            <span class="help-block">{{ $errors->first('twitter') }}</span>
+                                        @if ($errors->has('social.twitter'))
+                                            <span class="help-block">{{ $errors->first('social.twitter') }}</span>
                                         @endif
                                     </div>
 
@@ -248,30 +254,12 @@
                                 <div class="col-md-4">
 
                                     {{-- Facebook --}}
-                                    <div class="form-group{{ $errors->has('facebook') ? ' has-error' : '' }}">
+                                    <div class="form-group{{ $errors->has('social.facebook') ? ' has-error' : '' }}">
                                         {{ Form::label('facebook', trans('cortex/contacts::common.facebook'), ['class' => 'control-label']) }}
                                         {{ Form::text('facebook', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.facebook')]) }}
 
-                                        @if ($errors->has('facebook'))
-                                            <span class="help-block">{{ $errors->first('facebook') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-md-4">
-
-                                    {{-- Google Plus --}}
-                                    <div class="form-group{{ $errors->has('google_plus') ? ' has-error' : '' }}">
-                                        {{ Form::label('google_plus', trans('cortex/contacts::common.google_plus'), ['class' => 'control-label']) }}
-                                        {{ Form::text('google_plus', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.google_plus')]) }}
-
-                                        @if ($errors->has('google_plus'))
-                                            <span class="help-block">{{ $errors->first('google_plus') }}</span>
+                                        @if ($errors->has('social.facebook'))
+                                            <span class="help-block">{{ $errors->first('social.facebook') }}</span>
                                         @endif
                                     </div>
 
@@ -280,27 +268,12 @@
                                 <div class="col-md-4">
 
                                     {{-- Linkedin --}}
-                                    <div class="form-group{{ $errors->has('linkedin') ? ' has-error' : '' }}">
-                                        {{ Form::label('linkedin', trans('cortex/contacts::common.linkedin'), ['class' => 'control-label']) }}
-                                        {{ Form::text('linkedin', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.linkedin')]) }}
+                                    <div class="form-group{{ $errors->has('social.linkedin') ? ' has-error' : '' }}">
+                                        {{ Form::label('social[linkedin]', trans('cortex/contacts::common.linkedin'), ['class' => 'control-label']) }}
+                                        {{ Form::text('social[linkedin]', null, ['class' => 'form-control', 'placeholder' => trans('cortex/contacts::common.linkedin')]) }}
 
-                                        @if ($errors->has('linkedin'))
-                                            <span class="help-block">{{ $errors->first('linkedin') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-4">
-
-                                    {{-- Tags --}}
-                                    <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
-                                        {{ Form::label('tags[]', trans('cortex/contacts::common.tags'), ['class' => 'control-label']) }}
-                                        {{ Form::hidden('tags', '') }}
-                                        {{ Form::select('tags[]', $tags, null, ['class' => 'form-control select2', 'multiple' => 'multiple', 'data-width' => '100%', 'data-tags' => 'true']) }}
-
-                                        @if ($errors->has('tags'))
-                                            <span class="help-block">{{ $errors->first('tags') }}</span>
+                                        @if ($errors->has('social.linkedin'))
+                                            <span class="help-block">{{ $errors->first('social.linkedin') }}</span>
                                         @endif
                                     </div>
 

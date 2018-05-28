@@ -9,6 +9,7 @@ use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Rinvex\Support\Traits\HasSocialAttributes;
 use Rinvex\Contacts\Models\Contact as BaseContact;
 
 /**
@@ -25,15 +26,11 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @property string                                                                          $email
  * @property string                                                                          $phone
  * @property string                                                                          $fax
- * @property string                                                                          $skype
- * @property string                                                                          $twitter
- * @property string                                                                          $facebook
- * @property string                                                                          $google_plus
- * @property string                                                                          $linkedin
  * @property string                                                                          $country_code
  * @property string                                                                          $language_code
  * @property string                                                                          $birthday
  * @property string                                                                          $gender
+ * @property array                                                                           $social
  * @property string                                                                          $national_id_type
  * @property string                                                                          $national_id
  * @property string                                                                          $source
@@ -57,25 +54,21 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereEntityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereEntityType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereFacebook($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereFax($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereFamilyName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereGivenName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereGender($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereGooglePlus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereLanguageCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereLinkedin($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereNationalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereNationalIdType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereMethod($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereNotes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereOrganization($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereSkype($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereSocial($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereSource($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereTwitter($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact withAllTenants($tenants, $group = null)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Contacts\Models\Contact withAnyTenants($tenants, $group = null)
@@ -91,6 +84,60 @@ class Contact extends BaseContact
     use Tenantable;
     use HashidsTrait;
     use LogsActivity;
+    use HasSocialAttributes;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected $fillable = [
+        'entity_id',
+        'entity_type',
+        'source',
+        'method',
+        'given_name',
+        'family_name',
+        'title',
+        'organization',
+        'email',
+        'phone',
+        'fax',
+        'country_code',
+        'language_code',
+        'birthday',
+        'gender',
+        'social',
+        'national_id_type',
+        'national_id',
+        'source',
+        'method',
+        'notes',
+    ];
+
+    /**
+     * {@inheritdoc}
+     */
+    protected $casts = [
+        'entity_id' => 'integer',
+        'entity_type' => 'string',
+        'given_name' => 'string',
+        'family_name' => 'string',
+        'title' => 'string',
+        'organization' => 'string',
+        'email' => 'string',
+        'phone' => 'string',
+        'fax' => 'string',
+        'country_code' => 'string',
+        'language_code' => 'string',
+        'birthday' => 'string',
+        'gender' => 'string',
+        'social' => 'array',
+        'national_id_type' => 'string',
+        'national_id' => 'string',
+        'source' => 'string',
+        'method' => 'string',
+        'notes' => 'string',
+        'deleted_at' => 'datetime',
+    ];
 
     /**
      * The default rules that the model will validate against.
@@ -107,15 +154,11 @@ class Contact extends BaseContact
         'email' => 'required|email|min:3|max:150',
         'phone' => 'nullable|phone:AUTO',
         'fax' => 'nullable|string|max:150',
-        'skype' => 'nullable|string|max:150',
-        'twitter' => 'nullable|string|max:150',
-        'facebook' => 'nullable|string|max:150',
-        'google_plus' => 'nullable|string|max:150',
-        'linkedin' => 'nullable|string|max:150',
         'country_code' => 'nullable|alpha|size:2|country',
         'language_code' => 'nullable|alpha|size:2|language',
         'birthday' => 'nullable|date_format:Y-m-d',
-        'gender' => 'required|in:male,female',
+        'gender' => 'nullable|in:male,female',
+        'social' => 'nullable|array',
         'national_id_type' => 'nullable|in:identification,passport,other',
         'national_id' => 'nullable|string|max:150',
         'source' => 'nullable|string|max:150',
