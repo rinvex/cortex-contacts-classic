@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 return [
 
-    'full_name' => 'Full Name',
+    'given_name' => 'Given Name',
+    'family_name' => 'Family Name',
     'email' => 'Email',
     'phone' => 'Phone',
     'male' => 'Male',

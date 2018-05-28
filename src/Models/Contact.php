@@ -17,6 +17,8 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @property int                                                                             $id
  * @property int                                                                             $entity_id
  * @property string                                                                          $entity_type
+ * @property string                                                                          $given_name
+ * @property string                                                                          $family_name
  * @property string                                                                          $full_name
  * @property string                                                                          $title
  * @property string                                                                          $email
@@ -56,7 +58,8 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereEntityType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereFacebook($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereFax($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereFullName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereFamilyName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereGivenName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereGender($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereGooglePlus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact whereId($value)
@@ -95,7 +98,8 @@ class Contact extends BaseContact
     protected $rules = [
         'entity_id' => 'required|integer',
         'entity_type' => 'required|string|max:150',
-        'full_name' => 'required|string|max:150',
+        'given_name' => 'required|string|max:150',
+        'family_name' => 'nullable|string|max:150',
         'title' => 'nullable|string|max:150',
         'email' => 'required|email|min:3|max:150',
         'phone' => 'nullable|phone:AUTO',
