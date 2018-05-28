@@ -26,6 +26,7 @@ class ContactTransformer extends TransformerAbstract
             'family_name' => (string) $contact->family_name,
             'email' => (string) $contact->email,
             'phone' => (string) $contact->phone,
+            'title' => (string) $contact->title,
             'organization' => (string) $contact->organization,
             'country_code' => (string) optional($country)->getName(),
             'country_emoji' => (string) optional($country)->getEmoji(),
