@@ -111,6 +111,7 @@ class Contact extends BaseContact
         'source',
         'method',
         'notes',
+        'tags',
     ];
 
     /**
