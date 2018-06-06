@@ -7,7 +7,7 @@
 @endsection
 
 @push('inline-scripts')
-    {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest::class)->selector("#adminarea-contacts-create-form, #adminarea-contacts-{$contact->getRouteKey()}-update-form") !!}
+    {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest::class)->selector("#adminarea-contacts-create-form, #adminarea-contacts-{$contact->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
 
     <script>
         window.countries = {!! $countries !!};
@@ -155,7 +155,7 @@
                                     {{-- Country Code --}}
                                     <div class="form-group{{ $errors->has('country_code') ? ' has-error' : '' }}">
                                         {{ Form::label('country_code', trans('cortex/contacts::common.country'), ['class' => 'control-label']) }}
-                                        {{ Form::hidden('country_code', '') }}
+                                        {{ Form::hidden('country_code', '', ['class' => 'skip-validation']) }}
                                         {{ Form::select('country_code', [], null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_country'), 'required' => 'required', 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('country_code'))
@@ -170,7 +170,7 @@
                                     {{-- Language Code --}}
                                     <div class="form-group{{ $errors->has('language_code') ? ' has-error' : '' }}">
                                         {{ Form::label('language_code', trans('cortex/contacts::common.language'), ['class' => 'control-label']) }}
-                                        {{ Form::hidden('language_code', '') }}
+                                        {{ Form::hidden('language_code', '', ['class' => 'skip-validation']) }}
                                         {{ Form::select('language_code', $languages, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_language'), 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('language_code'))
@@ -185,7 +185,7 @@
                                     {{-- Tags --}}
                                     <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
                                         {{ Form::label('tags[]', trans('cortex/contacts::common.tags'), ['class' => 'control-label']) }}
-                                        {{ Form::hidden('tags', '') }}
+                                        {{ Form::hidden('tags', '', ['class' => 'skip-validation']) }}
                                         {{ Form::select('tags[]', $tags, null, ['class' => 'form-control select2', 'multiple' => 'multiple', 'data-width' => '100%', 'data-tags' => 'true']) }}
 
                                         @if ($errors->has('tags'))
@@ -219,7 +219,7 @@
                                     {{-- Gender --}}
                                     <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                                         {{ Form::label('gender', trans('cortex/contacts::common.gender'), ['class' => 'control-label']) }}
-                                        {{ Form::hidden('gender', '') }}
+                                        {{ Form::hidden('gender', '', ['class' => 'skip-validation']) }}
                                         {{ Form::select('gender', $genders, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_gender'), 'data-allow-clear' => 'true', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('gender'))
@@ -298,7 +298,7 @@
                                     {{-- Source --}}
                                     <div class="form-group{{ $errors->has('source') ? ' has-error' : '' }}">
                                         {{ Form::label('source', trans('cortex/contacts::common.source'), ['class' => 'control-label']) }}
-                                        {{ Form::hidden('source', '') }}
+                                        {{ Form::hidden('source', '', ['class' => 'skip-validation']) }}
                                         {{ Form::select('source', $sources, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_source'), 'data-tags' => 'true', 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('source'))
@@ -313,7 +313,7 @@
                                     {{-- Method --}}
                                     <div class="form-group{{ $errors->has('method') ? ' has-error' : '' }}">
                                         {{ Form::label('method', trans('cortex/contacts::common.communication_method'), ['class' => 'control-label']) }}
-                                        {{ Form::hidden('method', '') }}
+                                        {{ Form::hidden('method', '', ['class' => 'skip-validation']) }}
                                         {{ Form::select('method', $methods, null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/contacts::common.select_method'), 'data-tags' => 'true', 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('method'))
