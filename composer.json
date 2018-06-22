@@ -79,6 +79,11 @@
             "Cortex\\Contacts\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Cortex\\Contacts\\Tests\\": "tests"
+        }
+    },
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
