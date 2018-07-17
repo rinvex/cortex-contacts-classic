@@ -159,7 +159,7 @@ class Contact extends BaseContact
         'language_code' => 'nullable|alpha|size:2|language',
         'birthday' => 'nullable|date_format:Y-m-d',
         'gender' => 'nullable|in:male,female',
-        'social' => 'nullable|array',
+        'social' => 'nullable',
         'national_id_type' => 'nullable|in:identification,passport,other',
         'national_id' => 'nullable|string|max:150',
         'source' => 'nullable|string|max:150',
