@@ -235,6 +235,8 @@ class ContactsController extends AuthorizedController
      *
      * @param \Cortex\Contacts\Models\Contact $contact
      *
+     * @throws \Exception
+     *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function destroy(Contact $contact)

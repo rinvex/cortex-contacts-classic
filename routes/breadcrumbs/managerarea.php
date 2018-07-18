@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Cortex\Contacts\Models\Contact;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
 Breadcrumbs::register('managerarea.contacts.index', function (BreadcrumbsGenerator $breadcrumbs) {
