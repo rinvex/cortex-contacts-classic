@@ -17,8 +17,9 @@ Route::domain(domain())->group(function () {
                  Route::get('import/logs')->name('import.logs')->uses('ContactsController@importLogs');
                  Route::get('create')->name('create')->uses('ContactsController@create');
                  Route::post('create')->name('store')->uses('ContactsController@store');
-                 Route::get('{contact}')->name('edit')->uses('ContactsController@edit');
-                 Route::put('{contact}')->name('update')->uses('ContactsController@update');
+                 Route::get('{contact}')->name('show')->uses('ContactsController@show');
+                 Route::get('{contact}/edit')->name('edit')->uses('ContactsController@edit');
+                 Route::put('{contact}/edit')->name('update')->uses('ContactsController@update');
                  Route::get('{contact}/logs')->name('logs')->uses('ContactsController@logs');
                  Route::delete('{contact}')->name('destroy')->uses('ContactsController@destroy');
              });
