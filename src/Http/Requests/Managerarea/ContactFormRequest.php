@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Contacts\Http\Requests\Adminarea;
+namespace Cortex\Contacts\Http\Requests\Managerarea;
 
 use Rinvex\Support\Traits\Escaper;
 use Illuminate\Foundation\Http\FormRequest;

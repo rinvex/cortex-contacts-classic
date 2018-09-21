@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Contacts\Http\Controllers\Adminarea;
+namespace Cortex\Contacts\Http\Controllers\Managerarea;
 
 use Exception;
 use Cortex\Contacts\Models\Contact;
@@ -12,9 +12,9 @@ use Cortex\Foundation\Importers\DefaultImporter;
 use Cortex\Foundation\DataTables\ImportLogsDataTable;
 use Cortex\Foundation\Http\Requests\ImportFormRequest;
 use Cortex\Foundation\DataTables\ImportRecordsDataTable;
-use Cortex\Contacts\DataTables\Adminarea\ContactsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
-use Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest;
+use Cortex\Contacts\DataTables\Managerarea\ContactsDataTable;
+use Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest;
 
 class ContactsController extends AuthorizedController
 {
@@ -26,15 +26,15 @@ class ContactsController extends AuthorizedController
     /**
      * List all contacts.
      *
-     * @param \Cortex\Contacts\DataTables\Adminarea\ContactsDataTable $contactsDataTable
+     * @param \Cortex\Contacts\DataTables\Managerarea\ContactsDataTable $contactsDataTable
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
     public function index(ContactsDataTable $contactsDataTable)
     {
         return $contactsDataTable->with([
-            'id' => 'adminarea-contacts-index-table',
-        ])->render('cortex/foundation::adminarea.pages.datatable-index');
+            'id' => 'managerarea-contacts-index-table',
+        ])->render('cortex/foundation::managerarea.pages.datatable-index');
     }
 
     /**
@@ -49,9 +49,9 @@ class ContactsController extends AuthorizedController
     {
         return $logsDataTable->with([
             'resource' => $contact,
-            'tabs' => 'adminarea.contacts.tabs',
-            'id' => "adminarea-contacts-{$contact->getRouteKey()}-logs-table",
-        ])->render('cortex/foundation::adminarea.pages.datatable-tab');
+            'tabs' => 'managerarea.contacts.tabs',
+            'id' => "managerarea-contacts-{$contact->getRouteKey()}-logs-table",
+        ])->render('cortex/foundation::managerarea.pages.datatable-tab');
     }
 
     /**
@@ -66,10 +66,10 @@ class ContactsController extends AuthorizedController
     {
         return $importRecordsDataTable->with([
             'resource' => $contact,
-            'tabs' => 'adminarea.contacts.tabs',
-            'url' => route('adminarea.contacts.stash'),
-            'id' => "adminarea-contacts-{$contact->getRouteKey()}-import-table",
-        ])->render('cortex/foundation::adminarea.pages.datatable-dropzone');
+            'tabs' => 'managerarea.contacts.tabs',
+            'url' => route('managerarea.contacts.stash'),
+            'id' => "managerarea-contacts-{$contact->getRouteKey()}-import-table",
+        ])->render('cortex/foundation::managerarea.pages.datatable-dropzone');
     }
 
     /**
@@ -80,10 +80,10 @@ class ContactsController extends AuthorizedController
      *
      * @return void
      */
-    public function stash(ImportFormRequest $request, Contact $contact, DefaultImporter $importer)
+    public function stash(ImportFormRequest $request, DefaultImporter $importer)
     {
         // Handle the import
-        $importer->config['resource'] = $contact;
+        $importer->config['resource'] = $this->resource;
         $importer->handleImport();
     }
 
@@ -129,9 +129,9 @@ class ContactsController extends AuthorizedController
     {
         return $importLogsDatatable->with([
             'resource' => trans('cortex/contacts::common.contact'),
-            'tabs' => 'adminarea.contacts.tabs',
-            'id' => 'adminarea-contacts-import-logs-table',
-        ])->render('cortex/foundation::adminarea.pages.datatable-tab');
+            'tabs' => 'managerarea.contacts.tabs',
+            'id' => 'managerarea-contacts-import-logs-table',
+        ])->render('cortex/foundation::managerarea.pages.datatable-tab');
     }
 
     /**
@@ -174,21 +174,19 @@ class ContactsController extends AuthorizedController
                 'emoji' => $country['emoji'],
             ];
         })->values();
-
-        $tags = app('rinvex.tags.tag')->pluck('name', 'id');
         $languages = collect(languages())->pluck('name', 'iso_639_1');
         $sources = app('rinvex.contacts.contact')->distinct()->get(['source'])->pluck('source', 'source')->toArray();
         $methods = app('rinvex.contacts.contact')->distinct()->get(['method'])->pluck('method', 'method')->toArray();
         $genders = ['male' => trans('cortex/contacts::common.male'), 'female' => trans('cortex/contacts::common.female')];
 
-        return view('cortex/contacts::adminarea.pages.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods', 'tags'));
+        return view('cortex/contacts::managerarea.pages.contact', compact('contact', 'genders', 'countries', 'languages', 'sources', 'methods'));
     }
 
     /**
      * Store new contact.
      *
-     * @param \Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest $request
-     * @param \Cortex\Contacts\Models\Contact                             $contact
+     * @param \Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest $request
+     * @param \Cortex\Contacts\Models\Contact                               $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -200,8 +198,8 @@ class ContactsController extends AuthorizedController
     /**
      * Update given contact.
      *
-     * @param \Cortex\Contacts\Http\Requests\Adminarea\ContactFormRequest $request
-     * @param \Cortex\Contacts\Models\Contact                             $contact
+     * @param \Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest $request
+     * @param \Cortex\Contacts\Models\Contact                               $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -227,7 +225,7 @@ class ContactsController extends AuthorizedController
         $contact->fill($data)->save();
 
         return intend([
-            'url' => route('adminarea.contacts.index'),
+            'url' => route('managerarea.contacts.index'),
             'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => trans('cortex/contacts::common.contact'), 'identifier' => $contact->full_name])],
         ]);
     }
@@ -246,7 +244,7 @@ class ContactsController extends AuthorizedController
         $contact->delete();
 
         return intend([
-            'url' => route('adminarea.contacts.index'),
+            'url' => route('managerarea.contacts.index'),
             'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => trans('cortex/contacts::common.contact'), 'identifier' => $contact->full_name])],
         ]);
     }

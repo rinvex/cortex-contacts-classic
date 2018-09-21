@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Contacts\DataTables\Adminarea;
+namespace Cortex\Contacts\DataTables\Managerarea;
 
 use Cortex\Contacts\Models\Contact;
 use Illuminate\Database\Eloquent\Builder;
 use Cortex\Foundation\DataTables\AbstractDataTable;
-use Cortex\Contacts\Transformers\Adminarea\ContactTransformer;
+use Cortex\Contacts\Transformers\Managerarea\ContactTransformer;
 
 class ContactsDataTable extends AbstractDataTable
 {
@@ -55,8 +55,8 @@ class ContactsDataTable extends AbstractDataTable
     protected function getColumns(): array
     {
         $link = config('cortex.foundation.route.locale_prefix')
-            ? '"<a href=\""+routes.route(\'adminarea.contacts.edit\', {contact: full.id, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
-            : '"<a href=\""+routes.route(\'adminarea.contacts.edit\', {contact: full.id})+"\">"+data+"</a>"';
+            ? '"<a href=\""+routes.route(\'managerarea.contacts.edit\', {contact: full.id, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
+            : '"<a href=\""+routes.route(\'managerarea.contacts.edit\', {contact: full.id})+"\">"+data+"</a>"';
 
         return [
             'given_name' => ['title' => trans('cortex/contacts::common.given_name'), 'render' => $link, 'responsivePriority' => 0],

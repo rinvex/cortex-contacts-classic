@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Contacts\Transformers\Adminarea;
+namespace Cortex\Contacts\Transformers\Managerarea;
 
 use Rinvex\Support\Traits\Escaper;
 use Cortex\Contacts\Models\Contact;

@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Cortex\Contacts\Console\Commands;
 
-use Illuminate\Console\Command;
+use Rinvex\Contacts\Console\Commands\PublishCommand as BasePublishCommand;
 
-class PublishCommand extends Command
+class PublishCommand extends BasePublishCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'cortex:publish:contacts';
+    protected $signature = 'cortex:publish:contacts {--force : Overwrite any existing files.}';
 
     /**
      * The console command description.
@@ -27,11 +27,12 @@ class PublishCommand extends Command
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
-        $this->warn('Publish cortex/contacts:');
-        $this->call('vendor:publish', ['--tag' => 'rinvex-contacts-config']);
-        $this->call('vendor:publish', ['--tag' => 'cortex-contacts-views']);
-        $this->call('vendor:publish', ['--tag' => 'cortex-contacts-lang']);
+        parent::handle();
+
+        $this->call('vendor:publish', ['--tag' => 'cortex-contacts-lang', '--force' => $this->option('force')]);
+        $this->call('vendor:publish', ['--tag' => 'cortex-contacts-views', '--force' => $this->option('force')]);
+        $this->call('vendor:publish', ['--tag' => 'cortex-contacts-migrations', '--force' => $this->option('force')]);
     }
 }
