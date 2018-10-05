@@ -1,7 +1,7 @@
 {
     "name": "cortex/contacts",
-    "type": "cortex-module",
     "description": "Cortex Contacts is a frontend layer for the polymorphic contact management system. You can add contacts to any eloquent model with ease.",
+    "type": "cortex-module",
     "keywords": [
         "model",
         "rinvex",
@@ -49,16 +49,16 @@
         "Illuminate/http": "~5.7.0",
         "Illuminate/routing": "~5.7.0",
         "Illuminate/support": "~5.7.0",
-        "cortex/foundation": "dev-develop",
+        "cortex/foundation": "^1.0.0",
         "davejamesmiller/laravel-breadcrumbs": "^5.1.0",
         "laravelcollective/html": "~5.7.0",
         "league/fractal": "^0.17.0",
         "proengsoft/laravel-jsvalidation": "^2.3.0",
-        "rinvex/composer": "dev-develop",
-        "rinvex/contacts": "dev-develop",
-        "rinvex/menus": "dev-develop",
-        "rinvex/support": "dev-develop",
-        "rinvex/tenants": "dev-develop",
+        "rinvex/laravel-composer": "^1.0.0",
+        "rinvex/laravel-contacts": "^1.0.0",
+        "rinvex/laravel-menus": "^1.0.0",
+        "rinvex/laravel-support": "^1.0.0",
+        "rinvex/laravel-tenants": "^1.0.0",
         "silber/bouncer": "v1.0.0-rc.3",
         "spatie/laravel-activitylog": "^2.8.0",
         "spatie/laravel-schemaless-attributes": "~1.1.0",
@@ -68,7 +68,7 @@
         "yajra/laravel-datatables-oracle": "^8.8.0"
     },
     "require-dev": {
-        "codedungeon/phpunit-result-printer": "^0.20.0",
+        "codedungeon/phpunit-result-printer": "^0.22.0",
         "phpunit/phpunit": "^7.0.0"
     },
     "autoload": {
@@ -84,15 +84,15 @@
             "Cortex\\Contacts\\Tests\\": "tests"
         }
     },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
     "config": {
-        "preferred-install": "dist",
         "sort-packages": true,
+        "preferred-install": "dist",
         "optimize-autoloader": true
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        },
         "laravel": {
             "providers": [
                 "Cortex\\Contacts\\Providers\\ContactsServiceProvider"
