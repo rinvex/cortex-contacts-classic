@@ -15,10 +15,10 @@ Route::domain(domain())->group(function () {
                  Route::post('import')->name('stash')->uses('ContactsController@stash');
                  Route::post('hoard')->name('hoard')->uses('ContactsController@hoard');
                  Route::get('import/logs')->name('import.logs')->uses('ContactsController@importLogs');
-                 Route::get('create')->name('create')->uses('ContactsController@create');
+                 Route::get('create')->name('create')->uses('ContactsController@form');
                  Route::post('create')->name('store')->uses('ContactsController@store');
                  Route::get('{contact}')->name('show')->uses('ContactsController@show');
-                 Route::get('{contact}/edit')->name('edit')->uses('ContactsController@edit');
+                 Route::get('{contact}/edit')->name('edit')->uses('ContactsController@form');
                  Route::put('{contact}/edit')->name('update')->uses('ContactsController@update');
                  Route::get('{contact}/logs')->name('logs')->uses('ContactsController@logs');
                  Route::delete('{contact}')->name('destroy')->uses('ContactsController@destroy');
