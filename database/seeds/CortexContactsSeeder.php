@@ -13,11 +13,17 @@ class CortexContactsSeeder extends Seeder
      */
     public function run()
     {
-        Bouncer::allow('admin')->to('list', config('rinvex.contacts.models.contact'));
-        Bouncer::allow('admin')->to('import', config('rinvex.contacts.models.contact'));
-        Bouncer::allow('admin')->to('create', config('rinvex.contacts.models.contact'));
-        Bouncer::allow('admin')->to('update', config('rinvex.contacts.models.contact'));
-        Bouncer::allow('admin')->to('delete', config('rinvex.contacts.models.contact'));
-        Bouncer::allow('admin')->to('audit', config('rinvex.contacts.models.contact'));
+        $abilities = [
+            ['name' => 'list', 'title' => 'List contacts', 'entity_type' => 'contact'],
+            ['name' => 'import', 'title' => 'Import contacts', 'entity_type' => 'contact'],
+            ['name' => 'create', 'title' => 'Create contacts', 'entity_type' => 'contact'],
+            ['name' => 'update', 'title' => 'Update contacts', 'entity_type' => 'contact'],
+            ['name' => 'delete', 'title' => 'Delete contacts', 'entity_type' => 'contact'],
+            ['name' => 'audit', 'title' => 'Audit contacts', 'entity_type' => 'contact'],
+        ];
+
+        collect($abilities)->each(function (array $ability) {
+            app('cortex.auth.ability')->create($ability);
+        });
     }
 }
