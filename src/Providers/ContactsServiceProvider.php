@@ -7,6 +7,7 @@ namespace Cortex\Contacts\Providers;
 use Illuminate\Routing\Router;
 use Cortex\Contacts\Models\Contact;
 use Illuminate\Support\ServiceProvider;
+use Rinvex\Support\Traits\ConsoleTools;
 use Cortex\Contacts\Console\Commands\SeedCommand;
 use Cortex\Contacts\Console\Commands\InstallCommand;
 use Cortex\Contacts\Console\Commands\MigrateCommand;
@@ -16,6 +17,8 @@ use Cortex\Contacts\Console\Commands\RollbackCommand;
 
 class ContactsServiceProvider extends ServiceProvider
 {
+    use ConsoleTools;
+
     /**
      * The commands to be registered.
      *
@@ -45,7 +48,7 @@ class ContactsServiceProvider extends ServiceProvider
         || $this->app->alias('rinvex.contacts.contact', Contact::class);
 
         // Register console commands
-        ! $this->app->runningInConsole() || $this->registerCommands();
+        ! $this->app->runningInConsole() || $this->registersCommands();
     }
 
     /**
@@ -71,39 +74,13 @@ class ContactsServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../../routes/web/managerarea.php');
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'cortex/contacts');
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'cortex/contacts');
-        ! $this->app->runningInConsole() || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
         $this->app->runningInConsole() || $this->app->afterResolving('blade.compiler', function () {
             require __DIR__.'/../../routes/menus/adminarea.php';
         });
 
         // Publish Resources
-        ! $this->app->runningInConsole() || $this->publishResources();
-    }
-
-    /**
-     * Publish resources.
-     *
-     * @return void
-     */
-    protected function publishResources(): void
-    {
-        $this->publishes([realpath(__DIR__.'/../../database/migrations') => database_path('migrations')], 'cortex-contacts-migrations');
-        $this->publishes([realpath(__DIR__.'/../../resources/lang') => resource_path('lang/vendor/cortex/contacts')], 'cortex-contacts-lang');
-        $this->publishes([realpath(__DIR__.'/../../resources/views') => resource_path('views/vendor/cortex/contacts')], 'cortex-contacts-views');
-    }
-
-    /**
-     * Register console commands.
-     *
-     * @return void
-     */
-    protected function registerCommands(): void
-    {
-        // Register artisan commands
-        foreach ($this->commands as $key => $value) {
-            $this->app->singleton($value, $key);
-        }
-
-        $this->commands(array_values($this->commands));
+        ! $this->app->runningInConsole() || $this->publishesLang('cortex/contacts');
+        ! $this->app->runningInConsole() || $this->publishesViews('cortex/contacts');
+        ! $this->app->runningInConsole() || $this->publishesMigrations('cortex/contacts');
     }
 }
