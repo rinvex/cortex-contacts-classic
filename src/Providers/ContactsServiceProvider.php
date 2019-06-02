@@ -48,7 +48,7 @@ class ContactsServiceProvider extends ServiceProvider
         || $this->app->alias('rinvex.contacts.contact', Contact::class);
 
         // Register console commands
-        ! $this->app->runningInConsole() || $this->registersCommands();
+        ! $this->app->runningInConsole() || $this->registerCommands();
     }
 
     /**
