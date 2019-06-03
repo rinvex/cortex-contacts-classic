@@ -79,8 +79,8 @@ class ContactsServiceProvider extends ServiceProvider
         });
 
         // Publish Resources
-        ! $this->app->runningInConsole() || $this->publishesLang('cortex/contacts');
-        ! $this->app->runningInConsole() || $this->publishesViews('cortex/contacts');
-        ! $this->app->runningInConsole() || $this->publishesMigrations('cortex/contacts');
+        ! $this->app->runningInConsole() || $this->publishesLang('cortex/contacts', true);
+        ! $this->app->runningInConsole() || $this->publishesViews('cortex/contacts', true);
+        ! $this->app->runningInConsole() || $this->publishesMigrations('cortex/contacts', true);
     }
 }
