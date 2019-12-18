@@ -22,6 +22,7 @@ class ContactTransformer extends TransformerAbstract
 
         return $this->escape([
             'id' => (string) $contact->getRouteKey(),
+            'DT_RowId' => 'row_'.$contact->getRouteKey(),
             'given_name' => (string) $contact->given_name,
             'family_name' => (string) $contact->family_name,
             'email' => (string) $contact->email,
