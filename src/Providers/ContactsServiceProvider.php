@@ -44,6 +44,9 @@ class ContactsServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // Merge config
+        $this->mergeConfigFrom(realpath(__DIR__.'/../../config/config.php'), 'cortex.contacts');
+
         // Bind eloquent models to IoC container
         $this->app['config']['rinvex.contacts.models.contact'] === Contact::class
         || $this->app->alias('rinvex.contacts.contact', Contact::class);
@@ -83,5 +86,6 @@ class ContactsServiceProvider extends ServiceProvider
         ! $this->app->runningInConsole() || $this->publishesLang('cortex/contacts', true);
         ! $this->app->runningInConsole() || $this->publishesViews('cortex/contacts', true);
         ! $this->app->runningInConsole() || $this->publishesMigrations('cortex/contacts', true);
+        ! $this->app['config']['cortex.contacts.autoload_migrations'] || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
     }
 }
