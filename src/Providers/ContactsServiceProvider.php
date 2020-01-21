@@ -83,9 +83,9 @@ class ContactsServiceProvider extends ServiceProvider
         });
 
         // Publish Resources
-        ! $this->app->runningInConsole() || $this->publishesLang('cortex/contacts', true);
-        ! $this->app->runningInConsole() || $this->publishesViews('cortex/contacts', true);
-        ! $this->app->runningInConsole() || $this->publishesMigrations('cortex/contacts', true);
-        ! $this->app['config']['cortex.contacts.autoload_migrations'] || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+        $this->publishesLang('cortex/contacts', true);
+        $this->publishesViews('cortex/contacts', true);
+        $this->publishesMigrations('cortex/contacts', true);
+        ! $this->autoloadMigrations('cortex.contacts') || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
     }
 }
