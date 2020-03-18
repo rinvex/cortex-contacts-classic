@@ -13,6 +13,12 @@ class ContactTransformer extends TransformerAbstract
     use Escaper;
 
     /**
+     * Transform contact model.
+     *
+     * @param \Cortex\Contacts\Models\Contact $contact
+     *
+     * @throws \Exception
+     *
      * @return array
      */
     public function transform(Contact $contact): array
