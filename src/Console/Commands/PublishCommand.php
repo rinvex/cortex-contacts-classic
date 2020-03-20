@@ -13,7 +13,7 @@ class PublishCommand extends BasePublishCommand
      *
      * @var string
      */
-    protected $signature = 'cortex:publish:contacts {--force : Overwrite any existing files.} {--R|resource=all}';
+    protected $signature = 'cortex:publish:contacts {--f|force : Overwrite any existing files.} {--r|resource=all}';
 
     /**
      * The console command description.
