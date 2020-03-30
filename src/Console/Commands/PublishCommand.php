@@ -33,18 +33,18 @@ class PublishCommand extends BasePublishCommand
 
         switch ($this->option('resource')) {
             case 'lang':
-                $this->call('vendor:publish', ['--tag' => 'cortex-contacts-lang', '--force' => $this->option('force')]);
+                $this->call('vendor:publish', ['--tag' => 'cortex/contacts::lang', '--force' => $this->option('force')]);
                 break;
             case 'views':
-                $this->call('vendor:publish', ['--tag' => 'cortex-contacts-views', '--force' => $this->option('force')]);
+                $this->call('vendor:publish', ['--tag' => 'cortex/contacts::views', '--force' => $this->option('force')]);
                 break;
             case 'migrations':
-                $this->call('vendor:publish', ['--tag' => 'cortex-contacts-migrations', '--force' => $this->option('force')]);
+                $this->call('vendor:publish', ['--tag' => 'cortex/contacts::migrations', '--force' => $this->option('force')]);
                 break;
             default:
-                $this->call('vendor:publish', ['--tag' => 'cortex-contacts-lang', '--force' => $this->option('force')]);
-                $this->call('vendor:publish', ['--tag' => 'cortex-contacts-views', '--force' => $this->option('force')]);
-                $this->call('vendor:publish', ['--tag' => 'cortex-contacts-migrations', '--force' => $this->option('force')]);
+                $this->call('vendor:publish', ['--tag' => 'cortex/contacts::lang', '--force' => $this->option('force')]);
+                $this->call('vendor:publish', ['--tag' => 'cortex/contacts::views', '--force' => $this->option('force')]);
+                $this->call('vendor:publish', ['--tag' => 'cortex/contacts::migrations', '--force' => $this->option('force')]);
                 break;
         }
 
