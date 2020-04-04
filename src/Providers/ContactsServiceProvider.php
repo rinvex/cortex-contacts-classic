@@ -76,6 +76,7 @@ class ContactsServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../../routes/web/managerarea.php');
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'cortex/contacts');
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'cortex/contacts');
+        ! $this->autoloadMigrations('cortex/contacts') || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
 
         $this->app->runningInConsole() || $dispatcher->listen('accessarea.ready', function ($accessarea) {
             ! file_exists($menus = __DIR__."/../../routes/menus/{$accessarea}.php") || require $menus;
@@ -86,6 +87,5 @@ class ContactsServiceProvider extends ServiceProvider
         $this->publishesLang('cortex/contacts', true);
         $this->publishesViews('cortex/contacts', true);
         $this->publishesMigrations('cortex/contacts', true);
-        ! $this->autoloadMigrations('cortex.contacts') || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
     }
 }
