@@ -9,8 +9,10 @@ use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Cortex\Foundation\Events\CrudPerformed;
 use Rinvex\Support\Traits\HasSocialAttributes;
 use Rinvex\Contacts\Models\Contact as BaseContact;
+use Cortex\Foundation\Traits\FiresCustomModelEvent;
 
 /**
  * Cortex\Contacts\Models\Contact.
@@ -85,6 +87,7 @@ class Contact extends BaseContact
     use HashidsTrait;
     use LogsActivity;
     use HasSocialAttributes;
+    use FiresCustomModelEvent;
 
     /**
      * {@inheritdoc}
@@ -138,6 +141,18 @@ class Contact extends BaseContact
         'method' => 'string',
         'notes' => 'string',
         'deleted_at' => 'datetime',
+    ];
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => CrudPerformed::class,
+        'deleted' => CrudPerformed::class,
+        'restored' => CrudPerformed::class,
+        'updated' => CrudPerformed::class,
     ];
 
     /**
