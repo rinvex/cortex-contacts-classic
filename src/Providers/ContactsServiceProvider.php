@@ -72,8 +72,6 @@ class ContactsServiceProvider extends ServiceProvider
         ]);
 
         // Load resources
-        $this->loadRoutesFrom(__DIR__.'/../../routes/web/adminarea.php');
-        $this->loadRoutesFrom(__DIR__.'/../../routes/web/managerarea.php');
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'cortex/contacts');
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'cortex/contacts');
         ! $this->autoloadMigrations('cortex/contacts') || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
