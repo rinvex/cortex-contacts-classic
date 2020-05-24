@@ -33,7 +33,7 @@ class ContactsController extends AuthorizedController
     public function index(ContactsDataTable $contactsDataTable)
     {
         return $contactsDataTable->with([
-            'id' => 'adminarea-contacts-index-table',
+            'id' => 'adminarea-contacts-index',
         ])->render('cortex/foundation::adminarea.pages.datatable-index');
     }
 
@@ -50,7 +50,7 @@ class ContactsController extends AuthorizedController
         return $logsDataTable->with([
             'resource' => $contact,
             'tabs' => 'adminarea.contacts.tabs',
-            'id' => "adminarea-contacts-{$contact->getRouteKey()}-logs-table",
+            'id' => "adminarea-contacts-{$contact->getRouteKey()}-logs",
         ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
@@ -68,7 +68,7 @@ class ContactsController extends AuthorizedController
             'resource' => $contact,
             'tabs' => 'adminarea.contacts.tabs',
             'url' => route('adminarea.contacts.stash'),
-            'id' => "adminarea-contacts-{$contact->getRouteKey()}-import-table",
+            'id' => "adminarea-contacts-{$contact->getRouteKey()}-import",
         ])->render('cortex/foundation::adminarea.pages.datatable-dropzone');
     }
 
@@ -130,7 +130,7 @@ class ContactsController extends AuthorizedController
         return $importLogsDatatable->with([
             'resource' => trans('cortex/contacts::common.contact'),
             'tabs' => 'adminarea.contacts.tabs',
-            'id' => 'adminarea-contacts-import-logs-table',
+            'id' => 'adminarea-contacts-import-logs',
         ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
