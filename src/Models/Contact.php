@@ -8,11 +8,14 @@ use Rinvex\Tags\Traits\Taggable;
 use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
-use Cortex\Foundation\Events\CrudPerformed;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Support\Traits\HasSocialAttributes;
 use Rinvex\Contacts\Models\Contact as BaseContact;
 use Cortex\Foundation\Traits\FiresCustomModelEvent;
+use Cortex\Foundation\Events\ModelDeleted;
+use Cortex\Foundation\Events\ModelCreated;
+use Cortex\Foundation\Events\ModelUpdated;
+use Cortex\Foundation\Events\ModelRestored;
 
 /**
  * Cortex\Contacts\Models\Contact.
@@ -149,10 +152,10 @@ class Contact extends BaseContact
      * @var array
      */
     protected $dispatchesEvents = [
-        'created' => CrudPerformed::class,
-        'deleted' => CrudPerformed::class,
-        'restored' => CrudPerformed::class,
-        'updated' => CrudPerformed::class,
+        'created' => ModelCreated::class,
+        'deleted' => ModelDeleted::class,
+        'restored' => ModelRestored::class,
+        'updated' => ModelUpdated::class,
     ];
 
     /**
