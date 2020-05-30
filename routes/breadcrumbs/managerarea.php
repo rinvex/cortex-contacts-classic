@@ -29,11 +29,11 @@ Breadcrumbs::register('managerarea.contacts.create', function (BreadcrumbsGenera
 
 Breadcrumbs::register('managerarea.contacts.edit', function (BreadcrumbsGenerator $breadcrumbs, Contact $contact) {
     $breadcrumbs->parent('managerarea.contacts.index');
-    $breadcrumbs->push($contact->full_name, route('managerarea.contacts.edit', ['contact' => $contact]));
+    $breadcrumbs->push(strip_tags($contact->full_name), route('managerarea.contacts.edit', ['contact' => $contact]));
 });
 
 Breadcrumbs::register('managerarea.contacts.logs', function (BreadcrumbsGenerator $breadcrumbs, Contact $contact) {
     $breadcrumbs->parent('managerarea.contacts.index');
-    $breadcrumbs->push($contact->full_name, route('managerarea.contacts.edit', ['contact' => $contact]));
+    $breadcrumbs->push(strip_tags($contact->full_name), route('managerarea.contacts.edit', ['contact' => $contact]));
     $breadcrumbs->push(trans('cortex/contacts::common.logs'), route('managerarea.contacts.logs', ['contact' => $contact]));
 });

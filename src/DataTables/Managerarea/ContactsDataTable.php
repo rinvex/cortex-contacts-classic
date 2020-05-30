@@ -59,6 +59,7 @@ class ContactsDataTable extends AbstractDataTable
             : '"<a href=\""+routes.route(\'managerarea.contacts.edit\', {contact: full.id})+"\">"+data+"</a>"';
 
         return [
+            'id' => ['checkboxes' => '{"selectRow": true}', 'exportable' => false, 'printable' => false],
             'given_name' => ['title' => trans('cortex/contacts::common.given_name'), 'render' => $link, 'responsivePriority' => 0],
             'family_name' => ['title' => trans('cortex/contacts::common.family_name')],
             'email' => ['title' => trans('cortex/contacts::common.email')],

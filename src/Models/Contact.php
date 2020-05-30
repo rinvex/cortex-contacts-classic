@@ -8,9 +8,14 @@ use Rinvex\Tags\Traits\Taggable;
 use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
+use Cortex\Foundation\Events\ModelCreated;
+use Cortex\Foundation\Events\ModelDeleted;
+use Cortex\Foundation\Events\ModelUpdated;
+use Cortex\Foundation\Events\ModelRestored;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Support\Traits\HasSocialAttributes;
 use Rinvex\Contacts\Models\Contact as BaseContact;
+use Cortex\Foundation\Traits\FiresCustomModelEvent;
 
 /**
  * Cortex\Contacts\Models\Contact.
@@ -85,6 +90,7 @@ class Contact extends BaseContact
     use HashidsTrait;
     use LogsActivity;
     use HasSocialAttributes;
+    use FiresCustomModelEvent;
 
     /**
      * {@inheritdoc}
@@ -141,30 +147,42 @@ class Contact extends BaseContact
     ];
 
     /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => ModelCreated::class,
+        'deleted' => ModelDeleted::class,
+        'restored' => ModelRestored::class,
+        'updated' => ModelUpdated::class,
+    ];
+
+    /**
      * The default rules that the model will validate against.
      *
      * @var array
      */
     protected $rules = [
         'entity_id' => 'required|integer',
-        'entity_type' => 'required|string|max:150',
-        'given_name' => 'required|string|max:150',
-        'family_name' => 'nullable|string|max:150',
-        'title' => 'nullable|string|max:150',
-        'organization' => 'nullable|string|max:150',
+        'entity_type' => 'required|string|strip_tags|max:150',
+        'given_name' => 'required|string|strip_tags|max:150',
+        'family_name' => 'nullable|string|strip_tags|max:150',
+        'title' => 'nullable|string|strip_tags|max:150',
+        'organization' => 'nullable|string|strip_tags|max:150',
         'email' => 'required|email|min:3|max:150',
         'phone' => 'nullable|phone:AUTO',
-        'fax' => 'nullable|string|max:150',
+        'fax' => 'nullable|string|strip_tags|max:150',
         'country_code' => 'nullable|alpha|size:2|country',
         'language_code' => 'nullable|alpha|size:2|language',
         'birthday' => 'nullable|date_format:Y-m-d',
         'gender' => 'nullable|in:male,female',
         'social' => 'nullable',
         'national_id_type' => 'nullable|in:identification,passport,other',
-        'national_id' => 'nullable|string|max:150',
-        'source' => 'nullable|string|max:150',
-        'method' => 'nullable|string|max:150',
-        'notes' => 'nullable|string|max:10000',
+        'national_id' => 'nullable|string|strip_tags|max:150',
+        'source' => 'nullable|string|strip_tags|max:150',
+        'method' => 'nullable|string|strip_tags|max:150',
+        'notes' => 'nullable|string|strip_tags|max:10000',
         'tags' => 'nullable|array',
     ];
 
