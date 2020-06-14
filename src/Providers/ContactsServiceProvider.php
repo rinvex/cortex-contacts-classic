@@ -44,9 +44,6 @@ class ContactsServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Merge config
-        $this->mergeConfigFrom(realpath(__DIR__.'/../../config/config.php'), 'cortex.contacts');
-
         // Bind eloquent models to IoC container
         $this->app['config']['rinvex.contacts.models.contact'] === Contact::class
         || $this->app->alias('rinvex.contacts.contact', Contact::class);
@@ -70,20 +67,5 @@ class ContactsServiceProvider extends ServiceProvider
         Relation::morphMap([
             'contact' => config('rinvex.contacts.models.contact'),
         ]);
-
-        // Load resources
-        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'cortex/contacts');
-        $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'cortex/contacts');
-        ! $this->autoloadMigrations('cortex/contacts') || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
-
-        $this->app->runningInConsole() || $dispatcher->listen('accessarea.ready', function ($accessarea) {
-            ! file_exists($menus = __DIR__."/../../routes/menus/{$accessarea}.php") || require $menus;
-            ! file_exists($breadcrumbs = __DIR__."/../../routes/breadcrumbs/{$accessarea}.php") || require $breadcrumbs;
-        });
-
-        // Publish Resources
-        $this->publishesLang('cortex/contacts', true);
-        $this->publishesViews('cortex/contacts', true);
-        $this->publishesMigrations('cortex/contacts', true);
     }
 }
