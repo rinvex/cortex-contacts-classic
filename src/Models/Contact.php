@@ -93,60 +93,6 @@ class Contact extends BaseContact
     use FiresCustomModelEvent;
 
     /**
-     * {@inheritdoc}
-     */
-    protected $fillable = [
-        'entity_id',
-        'entity_type',
-        'source',
-        'method',
-        'given_name',
-        'family_name',
-        'title',
-        'organization',
-        'email',
-        'phone',
-        'fax',
-        'country_code',
-        'language_code',
-        'birthday',
-        'gender',
-        'social',
-        'national_id_type',
-        'national_id',
-        'source',
-        'method',
-        'notes',
-        'tags',
-    ];
-
-    /**
-     * {@inheritdoc}
-     */
-    protected $casts = [
-        'entity_id' => 'integer',
-        'entity_type' => 'string',
-        'given_name' => 'string',
-        'family_name' => 'string',
-        'title' => 'string',
-        'organization' => 'string',
-        'email' => 'string',
-        'phone' => 'string',
-        'fax' => 'string',
-        'country_code' => 'string',
-        'language_code' => 'string',
-        'birthday' => 'string',
-        'gender' => 'string',
-        'social' => 'array',
-        'national_id_type' => 'string',
-        'national_id' => 'string',
-        'source' => 'string',
-        'method' => 'string',
-        'notes' => 'string',
-        'deleted_at' => 'datetime',
-    ];
-
-    /**
      * The event map for the model.
      *
      * @var array
@@ -156,34 +102,6 @@ class Contact extends BaseContact
         'deleted' => ModelDeleted::class,
         'restored' => ModelRestored::class,
         'updated' => ModelUpdated::class,
-    ];
-
-    /**
-     * The default rules that the model will validate against.
-     *
-     * @var array
-     */
-    protected $rules = [
-        'entity_id' => 'required|integer',
-        'entity_type' => 'required|string|strip_tags|max:150',
-        'given_name' => 'required|string|strip_tags|max:150',
-        'family_name' => 'nullable|string|strip_tags|max:150',
-        'title' => 'nullable|string|strip_tags|max:150',
-        'organization' => 'nullable|string|strip_tags|max:150',
-        'email' => 'required|email|min:3|max:150',
-        'phone' => 'nullable|phone:AUTO',
-        'fax' => 'nullable|string|strip_tags|max:150',
-        'country_code' => 'nullable|alpha|size:2|country',
-        'language_code' => 'nullable|alpha|size:2|language',
-        'birthday' => 'nullable|date_format:Y-m-d',
-        'gender' => 'nullable|in:male,female',
-        'social' => 'nullable',
-        'national_id_type' => 'nullable|in:identification,passport,other',
-        'national_id' => 'nullable|string|strip_tags|max:150',
-        'source' => 'nullable|string|strip_tags|max:150',
-        'method' => 'nullable|string|strip_tags|max:150',
-        'notes' => 'nullable|string|strip_tags|max:10000',
-        'tags' => 'nullable|array',
     ];
 
     /**
@@ -210,4 +128,20 @@ class Contact extends BaseContact
         'updated_at',
         'deleted_at',
     ];
+
+    /**
+     * Create a new Eloquent model instance.
+     *
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->mergeFillable(['social', 'tags']);
+
+        $this->mergeCasts(['social' => 'array', 'tags' => 'array']);
+
+        $this->mergeRules(['tags' => 'nullable|array', 'social' => 'nullable|array']);
+    }
 }
