@@ -140,7 +140,7 @@ class Contact extends BaseContact
 
         $this->mergeFillable(['social', 'tags']);
 
-        $this->mergeCasts(['social' => 'array', 'tags' => 'array']);
+        $this->mergeCasts(['social' => 'array']);
 
         $this->mergeRules(['tags' => 'nullable|array', 'social' => 'nullable|array']);
     }
