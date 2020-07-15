@@ -29,7 +29,7 @@
         <section class="content">
 
             <div class="nav-tabs-custom">
-                @if($contact->exists && $currentUser->can('delete', $contact))
+                @if($contact->exists && app('request.user')->can('delete', $contact))
                     <div class="pull-right">
                         <a href="#" data-toggle="modal" data-target="#delete-confirmation"
                            data-modal-action="{{ route('adminarea.contacts.destroy', ['contact' => $contact]) }}"
