@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cortex\Contacts\Http\Controllers\Adminarea;
 
 use Exception;
+use Illuminate\Http\Request;
 use Cortex\Contacts\Models\Contact;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
@@ -135,13 +136,40 @@ class ContactsController extends AuthorizedController
     }
 
     /**
-     * Show contact create/edit form.
+     * Create new contact.
      *
+     * @param \Illuminate\Http\Request        $request
      * @param \Cortex\Contacts\Models\Contact $contact
      *
      * @return \Illuminate\View\View
      */
-    protected function form(Contact $contact)
+    public function create(Request $request, Contact $contact)
+    {
+        return $this->form($request, $contact);
+    }
+
+    /**
+     * Edit given contact.
+     *
+     * @param \Illuminate\Http\Request        $request
+     * @param \Cortex\Contacts\Models\Contact $contact
+     *
+     * @return \Illuminate\View\View
+     */
+    public function edit(Request $request, Contact $contact)
+    {
+        return $this->form($request, $contact);
+    }
+
+    /**
+     * Show contact create/edit form.
+     *
+     * @param \Illuminate\Http\Request        $request
+     * @param \Cortex\Contacts\Models\Contact $contact
+     *
+     * @return \Illuminate\View\View
+     */
+    protected function form(Request $request, Contact $contact)
     {
         $countries = collect(countries())->map(function ($country, $code) {
             return [
