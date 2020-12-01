@@ -7,7 +7,7 @@ namespace Cortex\Contacts\DataTables\Adminarea;
 use Cortex\Contacts\Models\Contact;
 use Illuminate\Database\Eloquent\Builder;
 use Cortex\Foundation\DataTables\AbstractDataTable;
-use Cortex\Contacts\Transformers\Adminarea\ContactTransformer;
+use Cortex\Contacts\Transformers\ContactTransformer;
 
 class ContactsDataTable extends AbstractDataTable
 {
