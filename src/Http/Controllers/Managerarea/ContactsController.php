@@ -35,6 +35,7 @@ class ContactsController extends AuthorizedController
     {
         return $contactsDataTable->with([
             'id' => 'managerarea-contacts-index',
+            'pusher' => ['entity' => 'contact', 'channel' => 'rinvex.contacts.contacts.index'],
         ])->render('cortex/foundation::managerarea.pages.datatable-index');
     }
 
