@@ -9,7 +9,7 @@ Route::domain(domain())->group(function () {
          ->prefix(config('cortex.foundation.route.locale_prefix') ? '{locale}/'.config('cortex.foundation.route.prefix.adminarea') : config('cortex.foundation.route.prefix.adminarea'))->group(function () {
 
         // Contacts Routes
-             Route::name('contacts.')->prefix('contacts')->group(function () {
+             Route::name('cortex.contacts.contacts.')->prefix('contacts')->group(function () {
                  Route::get('/')->name('index')->uses('ContactsController@index');
                  Route::get('import')->name('import')->uses('ContactsController@import');
                  Route::post('import')->name('stash')->uses('ContactsController@stash');
