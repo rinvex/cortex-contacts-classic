@@ -8,6 +8,10 @@ use Rinvex\Tags\Traits\Taggable;
 use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
+use Cortex\Contacts\Events\ContactCreated;
+use Cortex\Contacts\Events\ContactDeleted;
+use Cortex\Contacts\Events\ContactUpdated;
+use Cortex\Contacts\Events\ContactRestored;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Support\Traits\HasSocialAttributes;
 use Rinvex\Contacts\Models\Contact as BaseContact;
@@ -85,6 +89,18 @@ class Contact extends BaseContact
     use HashidsTrait;
     use LogsActivity;
     use HasSocialAttributes;
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => ContactCreated::class,
+        'updated' => ContactUpdated::class,
+        'deleted' => ContactDeleted::class,
+        'restored' => ContactRestored::class,
+    ];
 
     /**
      * Indicates whether to log only dirty attributes or all.
