@@ -7,7 +7,7 @@
 @endsection
 
 @push('inline-scripts')
-    {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest::class)->selector("#managerarea-contacts-create-form, #managerarea-contacts-{$contact->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
+    {!! JsValidator::formRequest(Cortex\Contacts\Http\Requests\Managerarea\ContactFormRequest::class)->selector("#managerarea-cortex-contacts-contacts-create-form, #managerarea-cortex-contacts-contacts-{$contact->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
 
     <script>
         window.countries = @json($countries);
@@ -29,10 +29,10 @@
         <section class="content">
 
             <div class="nav-tabs-custom">
-                @if($contact->exists && $currentUser->can('delete', $contact))
+                @if($contact->exists && app('request.user')->can('delete', $contact))
                     <div class="pull-right">
                         <a href="#" data-toggle="modal" data-target="#delete-confirmation"
-                           data-modal-action="{{ route('managerarea.contacts.destroy', ['contact' => $contact]) }}"
+                           data-modal-action="{{ route('managerarea.cortex.contacts.contacts.destroy', ['contact' => $contact]) }}"
                            data-modal-title="{{ trans('cortex/foundation::messages.delete_confirmation_title') }}"
                            data-modal-button="<a href='#' class='btn btn-danger' data-form='delete' data-token='{{ csrf_token() }}'><i class='fa fa-trash-o'></i> {{ trans('cortex/foundation::common.delete') }}</a>"
                            data-modal-body="{{ trans('cortex/foundation::messages.delete_confirmation_body', ['resource' => trans('cortex/contacts::common.contact'), 'identifier' => $contact->getRouteKey()]) }}"
@@ -40,16 +40,16 @@
                         </a>
                     </div>
                 @endif
-                {!! Menu::render('managerarea.contacts.tabs', 'nav-tab') !!}
+                {!! Menu::render('managerarea.cortex.contacts.contacts.tabs', 'nav-tab') !!}
 
                 <div class="tab-content">
 
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($contact->exists)
-                            {{ Form::model($contact, ['url' => route('managerarea.contacts.update', ['contact' => $contact]), 'method' => 'put', 'id' => "managerarea-contacts-{$contact->getRouteKey()}-update-form"]) }}
+                            {{ Form::model($contact, ['url' => route('managerarea.cortex.contacts.contacts.update', ['contact' => $contact]), 'method' => 'put', 'id' => "managerarea-cortex-contacts-contacts-{$contact->getRouteKey()}-update-form"]) }}
                         @else
-                            {{ Form::model($contact, ['url' => route('managerarea.contacts.store'), 'id' => 'managerarea-contacts-create-form']) }}
+                            {{ Form::model($contact, ['url' => route('managerarea.cortex.contacts.contacts.store'), 'id' => 'managerarea-cortex-contacts-contacts-create-form']) }}
                         @endif
 
                             <div class="row">
@@ -202,7 +202,7 @@
                                     {{-- Birthday --}}
                                     <div class="form-group has-feedback{{ $errors->has('birthday') ? ' has-error' : '' }}">
                                         {{ Form::label('birthday', trans('cortex/contacts::common.birthday'), ['class' => 'control-label']) }}
-                                        {{ Form::text('birthday', null, ['class' => 'form-control datepicker', 'data-locale' => '{"format": "YYYY-MM-DD"}', 'data-single-date-picker' => 'true', 'data-show-dropdowns' => 'true', 'data-auto-apply' => 'true', 'data-min-date' => '1900-01-01']) }}
+                                        {{ Form::date('birthday', null, ['class' => 'form-control datepicker', 'data-locale' => '{"format": "YYYY-MM-DD"}', 'data-single-date-picker' => 'true', 'data-show-dropdowns' => 'true', 'data-auto-apply' => 'true', 'data-min-date' => '1900-01-01']) }}
                                         <span class="fa fa-calendar form-control-feedback"></span>
 
                                         @if ($errors->has('birthday'))

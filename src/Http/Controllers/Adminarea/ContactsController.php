@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cortex\Contacts\Http\Controllers\Adminarea;
 
 use Exception;
+use Illuminate\Http\Request;
 use Cortex\Contacts\Models\Contact;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
@@ -33,7 +34,8 @@ class ContactsController extends AuthorizedController
     public function index(ContactsDataTable $contactsDataTable)
     {
         return $contactsDataTable->with([
-            'id' => 'adminarea-contacts-index',
+            'id' => 'adminarea-cortex-contacts-contacts-index',
+            'pusher' => ['entity' => 'contact', 'channel' => 'cortex.contacts.contacts.index'],
         ])->render('cortex/foundation::adminarea.pages.datatable-index');
     }
 
@@ -49,8 +51,8 @@ class ContactsController extends AuthorizedController
     {
         return $logsDataTable->with([
             'resource' => $contact,
-            'tabs' => 'adminarea.contacts.tabs',
-            'id' => "adminarea-contacts-{$contact->getRouteKey()}-logs",
+            'tabs' => 'adminarea.cortex.contacts.contacts.tabs',
+            'id' => "adminarea-cortex-contacts-contacts-{$contact->getRouteKey()}-logs",
         ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
@@ -66,9 +68,9 @@ class ContactsController extends AuthorizedController
     {
         return $importRecordsDataTable->with([
             'resource' => $contact,
-            'tabs' => 'adminarea.contacts.tabs',
-            'url' => route('adminarea.contacts.stash'),
-            'id' => "adminarea-contacts-{$contact->getRouteKey()}-import",
+            'tabs' => 'adminarea.cortex.contacts.contacts.tabs',
+            'url' => route('adminarea.cortex.contacts.contacts.stash'),
+            'id' => "adminarea-cortex-contacts-contacts-{$contact->getRouteKey()}-import",
         ])->render('cortex/foundation::adminarea.pages.datatable-dropzone');
     }
 
@@ -129,19 +131,46 @@ class ContactsController extends AuthorizedController
     {
         return $importLogsDatatable->with([
             'resource' => trans('cortex/contacts::common.contact'),
-            'tabs' => 'adminarea.contacts.tabs',
-            'id' => 'adminarea-contacts-import-logs',
+            'tabs' => 'adminarea.cortex.contacts.contacts.tabs',
+            'id' => 'adminarea-cortex-contacts-contacts-import-logs',
         ])->render('cortex/foundation::adminarea.pages.datatable-tab');
+    }
+
+    /**
+     * Create new contact.
+     *
+     * @param \Illuminate\Http\Request        $request
+     * @param \Cortex\Contacts\Models\Contact $contact
+     *
+     * @return \Illuminate\View\View
+     */
+    public function create(Request $request, Contact $contact)
+    {
+        return $this->form($request, $contact);
+    }
+
+    /**
+     * Edit given contact.
+     *
+     * @param \Illuminate\Http\Request        $request
+     * @param \Cortex\Contacts\Models\Contact $contact
+     *
+     * @return \Illuminate\View\View
+     */
+    public function edit(Request $request, Contact $contact)
+    {
+        return $this->form($request, $contact);
     }
 
     /**
      * Show contact create/edit form.
      *
+     * @param \Illuminate\Http\Request        $request
      * @param \Cortex\Contacts\Models\Contact $contact
      *
      * @return \Illuminate\View\View
      */
-    protected function form(Contact $contact)
+    protected function form(Request $request, Contact $contact)
     {
         $countries = collect(countries())->map(function ($country, $code) {
             return [
@@ -203,7 +232,7 @@ class ContactsController extends AuthorizedController
         $contact->fill($data)->save();
 
         return intend([
-            'url' => route('adminarea.contacts.index'),
+            'url' => route('adminarea.cortex.contacts.contacts.index'),
             'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => trans('cortex/contacts::common.contact'), 'identifier' => $contact->getRouteKey()])],
         ]);
     }
@@ -222,7 +251,7 @@ class ContactsController extends AuthorizedController
         $contact->delete();
 
         return intend([
-            'url' => route('adminarea.contacts.index'),
+            'url' => route('adminarea.cortex.contacts.contacts.index'),
             'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => trans('cortex/contacts::common.contact'), 'identifier' => $contact->getRouteKey()])],
         ]);
     }

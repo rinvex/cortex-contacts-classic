@@ -8,14 +8,13 @@ use Rinvex\Tags\Traits\Taggable;
 use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
-use Cortex\Foundation\Events\ModelCreated;
-use Cortex\Foundation\Events\ModelDeleted;
-use Cortex\Foundation\Events\ModelUpdated;
-use Cortex\Foundation\Events\ModelRestored;
+use Cortex\Contacts\Events\ContactCreated;
+use Cortex\Contacts\Events\ContactDeleted;
+use Cortex\Contacts\Events\ContactUpdated;
+use Cortex\Contacts\Events\ContactRestored;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Support\Traits\HasSocialAttributes;
 use Rinvex\Contacts\Models\Contact as BaseContact;
-use Cortex\Foundation\Traits\FiresCustomModelEvent;
 
 /**
  * Cortex\Contacts\Models\Contact.
@@ -90,7 +89,6 @@ class Contact extends BaseContact
     use HashidsTrait;
     use LogsActivity;
     use HasSocialAttributes;
-    use FiresCustomModelEvent;
 
     /**
      * The event map for the model.
@@ -98,10 +96,10 @@ class Contact extends BaseContact
      * @var array
      */
     protected $dispatchesEvents = [
-        'created' => ModelCreated::class,
-        'deleted' => ModelDeleted::class,
-        'restored' => ModelRestored::class,
-        'updated' => ModelUpdated::class,
+        'created' => ContactCreated::class,
+        'updated' => ContactUpdated::class,
+        'deleted' => ContactDeleted::class,
+        'restored' => ContactRestored::class,
     ];
 
     /**
@@ -140,7 +138,7 @@ class Contact extends BaseContact
 
         $this->mergeFillable(['social', 'tags']);
 
-        $this->mergeCasts(['social' => 'array', 'tags' => 'array']);
+        $this->mergeCasts(['social' => 'array']);
 
         $this->mergeRules(['tags' => 'nullable|array', 'social' => 'nullable|array']);
     }
