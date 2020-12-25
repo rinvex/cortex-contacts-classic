@@ -19,34 +19,34 @@ use Rinvex\Contacts\Models\Contact as BaseContact;
 /**
  * Cortex\Contacts\Models\Contact.
  *
- * @property int                                                                             $id
- * @property int                                                                             $entity_id
- * @property string                                                                          $entity_type
- * @property string                                                                          $given_name
- * @property string                                                                          $family_name
- * @property string                                                                          $full_name
- * @property string                                                                          $title
- * @property string                                                                          $organization
- * @property string                                                                          $email
- * @property string                                                                          $phone
- * @property string                                                                          $fax
- * @property string                                                                          $country_code
- * @property string                                                                          $language_code
- * @property string                                                                          $birthday
- * @property string                                                                          $gender
- * @property array                                                                           $social
- * @property string                                                                          $national_id_type
- * @property string                                                                          $national_id
- * @property string                                                                          $source
- * @property string                                                                          $method
- * @property string                                                                          $notes
- * @property \Carbon\Carbon|null                                                             $created_at
- * @property \Carbon\Carbon|null                                                             $updated_at
+ * @property int                 $id
+ * @property int                 $entity_id
+ * @property string              $entity_type
+ * @property string              $given_name
+ * @property string              $family_name
+ * @property string              $full_name
+ * @property string              $title
+ * @property string              $organization
+ * @property string              $email
+ * @property string              $phone
+ * @property string              $fax
+ * @property string              $country_code
+ * @property string              $language_code
+ * @property string              $birthday
+ * @property string              $gender
+ * @property array               $social
+ * @property string              $national_id_type
+ * @property string              $national_id
+ * @property string              $source
+ * @property string              $method
+ * @property string              $notes
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Foundation\Models\Log[]   $activity
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Contacts\Models\Contact[] $backRelatives
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent                              $entity
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Contacts\Models\Contact[] $relatives
- * @property \Illuminate\Database\Eloquent\Collection|\Cortex\Tenants\Models\Tenant[]        $tenants
+ * @property \Illuminate\Database\Eloquent\Collection|\Cortex\Tenants\Models\Tenant[] $tenants
  *
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact country($countryCode)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Contacts\Models\Contact language($languageCode)
