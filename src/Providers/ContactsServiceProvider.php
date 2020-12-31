@@ -15,9 +15,9 @@ use Cortex\Contacts\Console\Commands\InstallCommand;
 use Cortex\Contacts\Console\Commands\MigrateCommand;
 use Cortex\Contacts\Console\Commands\PublishCommand;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Cortex\Contacts\Console\Commands\RollbackCommand;
 use Cortex\Contacts\Console\Commands\ActivateCommand;
 use Cortex\Contacts\Console\Commands\AutoloadCommand;
+use Cortex\Contacts\Console\Commands\RollbackCommand;
 use Cortex\Contacts\Console\Commands\DeactivateCommand;
 
 class ContactsServiceProvider extends ServiceProvider
