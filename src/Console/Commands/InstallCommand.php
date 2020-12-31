@@ -35,6 +35,7 @@ class InstallCommand extends Command
         $this->call('cortex:migrate:contacts', ['--force' => $this->option('force')]);
         $this->call('cortex:seed:contacts');
 
-        $this->call('cortex:activate', ['--module' => 'cortex/contacts']);
+        $this->call('cortex:autoload:contacts', ['--force' => $this->option('force')]);
+        $this->call('cortex:activate:contacts', ['--force' => $this->option('force')]);
     }
 }
