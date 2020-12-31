@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Cortex\Contacts\Models\Contact;
-use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator;
+use Diglactic\Breadcrumbs\Breadcrumbs;
 
 Breadcrumbs::register('managerarea.cortex.contacts.contacts.index', function (Generator $breadcrumbs) {
     $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.app('request.tenant')->name, route('managerarea.home'));
