@@ -10,15 +10,11 @@ use Illuminate\Support\ServiceProvider;
 use Rinvex\Support\Traits\ConsoleTools;
 use Illuminate\Contracts\Events\Dispatcher;
 use Cortex\Contacts\Console\Commands\SeedCommand;
-use Cortex\Contacts\Console\Commands\UnloadCommand;
 use Cortex\Contacts\Console\Commands\InstallCommand;
 use Cortex\Contacts\Console\Commands\MigrateCommand;
 use Cortex\Contacts\Console\Commands\PublishCommand;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Cortex\Contacts\Console\Commands\ActivateCommand;
-use Cortex\Contacts\Console\Commands\AutoloadCommand;
 use Cortex\Contacts\Console\Commands\RollbackCommand;
-use Cortex\Contacts\Console\Commands\DeactivateCommand;
 
 class ContactsServiceProvider extends ServiceProvider
 {
@@ -30,11 +26,6 @@ class ContactsServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
-        ActivateCommand::class => 'command.cortex.contacts.activate',
-        DeactivateCommand::class => 'command.cortex.contacts.deactivate',
-        AutoloadCommand::class => 'command.cortex.contacts.autoload',
-        UnloadCommand::class => 'command.cortex.contacts.unload',
-
         SeedCommand::class => 'command.cortex.contacts.seed',
         InstallCommand::class => 'command.cortex.contacts.install',
         MigrateCommand::class => 'command.cortex.contacts.migrate',
