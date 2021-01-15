@@ -172,6 +172,10 @@ class ContactsController extends AuthorizedController
      */
     protected function form(Request $request, Contact $contact)
     {
+        if(! $contact->exists && $request->has('replicate') && $replicated = $contact->resolveRouteBinding($request->get('replicate'))){
+            $contact = $replicated->replicate();
+        }
+
         $countries = collect(countries())->map(function ($country, $code) {
             return [
                 'id' => $code,
