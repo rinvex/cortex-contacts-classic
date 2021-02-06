@@ -22,7 +22,7 @@ class ContactsController extends AuthorizedController
     /**
      * {@inheritdoc}
      */
-    protected $resource = Contact::class;
+    protected $resource = 'rinvex.contacts.models.contact';
 
     /**
      * List all contacts.
