@@ -59,7 +59,6 @@
         "rinvex/laravel-menus": "^5.0.0",
         "rinvex/laravel-support": "^5.0.0",
         "rinvex/laravel-tenants": "^6.0.0",
-        "rinvex/tmp-josephsilber-bouncer": "^1.0.0",
         "spatie/laravel-activitylog": "^3.16.0",
         "spatie/laravel-schemaless-attributes": "^1.8.0",
         "yajra/laravel-datatables-buttons": "^4.10.0",
