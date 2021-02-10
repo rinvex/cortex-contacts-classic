@@ -320,7 +320,7 @@
                                         {{ Form::button(trans('cortex/contacts::common.submit'), ['class' => 'btn btn-primary btn-flat', 'type' => 'submit']) }}
                                     </div>
 
-                                    @include('cortex/foundation::adminarea.partials.timestamps', ['model' => $contact])
+                                    @include('cortex/foundation::common.partials.timestamps', ['model' => $contact])
 
                                 </div>
 
