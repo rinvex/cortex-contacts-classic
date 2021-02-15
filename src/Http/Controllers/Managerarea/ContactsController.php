@@ -98,7 +98,7 @@ class ContactsController extends AuthorizedController
      */
     public function hoard(ImportFormRequest $request)
     {
-        foreach ((array) $request->get('selected_ids') as $recordId) {
+        foreach ((array) $request->input('selected_ids') as $recordId) {
             $record = app('cortex.foundation.import_record')->find($recordId);
 
             try {
@@ -172,7 +172,7 @@ class ContactsController extends AuthorizedController
      */
     protected function form(Request $request, Contact $contact)
     {
-        if (! $contact->exists && $request->has('replicate') && $replicated = $contact->resolveRouteBinding($request->get('replicate'))) {
+        if (! $contact->exists && $request->has('replicate') && $replicated = $contact->resolveRouteBinding($request->input('replicate'))) {
             $contact = $replicated->replicate();
         }
 
