@@ -6,9 +6,9 @@ use Rinvex\Menus\Models\MenuItem;
 use Cortex\Contacts\Models\Contact;
 use Rinvex\Menus\Models\MenuGenerator;
 
-Menu::register('adminarea.sidebar', function (MenuGenerator $menu, Contact $contact) {
-    $menu->findByTitleOrAdd(trans('cortex/foundation::common.crm'), 50, 'fa fa-briefcase', 'header', [], function (MenuItem $dropdown) use ($contact) {
-        $dropdown->route(['adminarea.cortex.contacts.contacts.index'], trans('cortex/contacts::common.contacts'), 10, 'fa fa-id-card-o')->ifCan('list', $contact)->activateOnRoute('adminarea.cortex.contacts.contacts');
+Menu::register('adminarea.sidebar', function (MenuGenerator $menu) {
+    $menu->findByTitleOrAdd(trans('cortex/foundation::common.crm'), 50, 'fa fa-briefcase', 'header', [], function (MenuItem $dropdown) {
+        $dropdown->route(['adminarea.cortex.contacts.contacts.index'], trans('cortex/contacts::common.contacts'), 10, 'fa fa-id-card-o')->ifCan('list', app('rinvex.contacts.contact'))->activateOnRoute('adminarea.cortex.contacts.contacts');
     });
 });
 
