@@ -7,7 +7,7 @@ namespace Cortex\Contacts\Http\Controllers\Managerarea;
 use Exception;
 use Illuminate\Http\Request;
 use Cortex\Contacts\Models\Contact;
-use Illuminate\Foundation\Http\FormRequest;
+use Cortex\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Importers\DefaultImporter;
 use Cortex\Foundation\DataTables\ImportLogsDataTable;
@@ -222,7 +222,7 @@ class ContactsController extends AuthorizedController
     /**
      * Process stored/updated contact.
      *
-     * @param \Illuminate\Foundation\Http\FormRequest $request
+     * @param \Cortex\Foundation\Http\FormRequest $request
      * @param \Cortex\Contacts\Models\Contact         $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
