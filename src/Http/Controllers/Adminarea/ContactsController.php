@@ -223,7 +223,7 @@ class ContactsController extends AuthorizedController
      * Process stored/updated contact.
      *
      * @param \Cortex\Foundation\Http\FormRequest $request
-     * @param \Cortex\Contacts\Models\Contact         $contact
+     * @param \Cortex\Contacts\Models\Contact     $contact
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
