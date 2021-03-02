@@ -9,29 +9,11 @@ use Cortex\Contacts\Models\Contact;
 use Illuminate\Support\ServiceProvider;
 use Rinvex\Support\Traits\ConsoleTools;
 use Illuminate\Contracts\Events\Dispatcher;
-use Cortex\Contacts\Console\Commands\SeedCommand;
-use Cortex\Contacts\Console\Commands\InstallCommand;
-use Cortex\Contacts\Console\Commands\MigrateCommand;
-use Cortex\Contacts\Console\Commands\PublishCommand;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Cortex\Contacts\Console\Commands\RollbackCommand;
 
 class ContactsServiceProvider extends ServiceProvider
 {
     use ConsoleTools;
-
-    /**
-     * The commands to be registered.
-     *
-     * @var array
-     */
-    protected $commands = [
-        SeedCommand::class => 'command.cortex.contacts.seed',
-        InstallCommand::class => 'command.cortex.contacts.install',
-        MigrateCommand::class => 'command.cortex.contacts.migrate',
-        PublishCommand::class => 'command.cortex.contacts.publish',
-        RollbackCommand::class => 'command.cortex.contacts.rollback',
-    ];
 
     /**
      * Register any application services.
@@ -47,9 +29,6 @@ class ContactsServiceProvider extends ServiceProvider
         // Bind eloquent models to IoC container
         $this->app['config']['rinvex.contacts.models.contact'] === Contact::class
         || $this->app->alias('rinvex.contacts.contact', Contact::class);
-
-        // Register console commands
-        $this->registerCommands($this->commands);
     }
 
     /**
