@@ -8,6 +8,7 @@ use Rinvex\Tags\Traits\Taggable;
 use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
+use Illuminate\Database\Eloquent\Builder;
 use Cortex\Contacts\Events\ContactCreated;
 use Cortex\Contacts\Events\ContactDeleted;
 use Cortex\Contacts\Events\ContactUpdated;
@@ -15,6 +16,7 @@ use Cortex\Contacts\Events\ContactRestored;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Support\Traits\HasSocialAttributes;
 use Rinvex\Contacts\Models\Contact as BaseContact;
+use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
 
 /**
  * Cortex\Contacts\Models\Contact.
@@ -138,8 +140,18 @@ class Contact extends BaseContact
 
         $this->mergeFillable(['social', 'tags']);
 
-        $this->mergeCasts(['social' => 'array']);
+        $this->mergeCasts(['social' => SchemalessAttributes::class]);
 
         $this->mergeRules(['tags' => 'nullable|array', 'social' => 'nullable|array']);
+    }
+
+    /**
+     * Scope with social schemaless attributes.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithSocial(): Builder
+    {
+        return $this->social->modelCast();
     }
 }
