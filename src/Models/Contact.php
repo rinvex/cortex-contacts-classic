@@ -136,13 +136,13 @@ class Contact extends BaseContact
      */
     public function __construct(array $attributes = [])
     {
-        parent::__construct($attributes);
-
         $this->mergeFillable(['social', 'tags']);
 
         $this->mergeCasts(['social' => SchemalessAttributes::class]);
 
         $this->mergeRules(['tags' => 'nullable|array', 'social' => 'nullable|array']);
+
+        parent::__construct($attributes);
     }
 
     /**
