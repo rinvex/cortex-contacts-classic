@@ -20,7 +20,7 @@ Route::domain('{subdomain}.'.domain())->group(function () {
                  Route::get('{contact}')->name('show')->uses('ContactsController@show');
                  Route::get('{contact}/edit')->name('edit')->uses('ContactsController@edit');
                  Route::put('{contact}/edit')->name('update')->uses('ContactsController@update');
-                 Route::get('{contact}/logs')->name('logs')->uses('ContactsController@logs');
+                 Route::match(['get', 'post'], '{contact}/logs')->name('logs')->uses('ContactsController@logs');
                  Route::delete('{contact}')->name('destroy')->uses('ContactsController@destroy');
              });
          });
